@@ -103,63 +103,84 @@ export const Calculator = () => {
         setWaitingForOperand(true);
     };
 
-    const buttonClass = (type: 'number' | 'operator' | 'function' | 'equals') => {
-        const base = "flex items-center justify-center text-xl font-medium rounded-full transition-all active:scale-95 ";
+    const buttonClass = (type: 'number' | 'operator' | 'function' | 'equals' | 'zero') => {
+        const base = "flex items-center justify-center text-xl md:text-2xl font-medium rounded-full transition-all active:scale-95 select-none ";
         switch (type) {
             case 'number':
-                return base + "bg-[#333333] hover:bg-[#444444] text-white";
+                return base + "bg-[#333333] hover:bg-[#444444] text-white w-full h-full aspect-square";
+            case 'zero':
+                return base + "bg-[#333333] hover:bg-[#444444] text-white w-full h-full aspect-[2/1] rounded-full pl-6 !justify-start";
             case 'operator':
-                return base + "bg-[#FF9F0A] hover:bg-[#FFB340] text-white";
+                return base + "bg-[#FF9F0A] hover:bg-[#FFB340] text-white w-full h-full aspect-square";
             case 'function':
-                return base + "bg-[#A5A5A5] hover:bg-[#B5B5B5] text-black";
+                return base + "bg-[#A5A5A5] hover:bg-[#B5B5B5] text-black w-full h-full aspect-square";
             case 'equals':
-                return base + "bg-[#FF9F0A] hover:bg-[#FFB340] text-white";
+                return base + "bg-[#FF9F0A] hover:bg-[#FFB340] text-white w-full h-full aspect-square";
         }
     };
 
     return (
-        <div className="w-full h-full bg-[#1C1C1C] flex flex-col p-4">
-            <div className="text-right text-gray-500 text-sm h-6 mb-1 truncate">
-                {history}
+        <div className="w-full h-full bg-black flex flex-col p-4 md:p-6 select-none">
+
+            {/* Display Area */}
+            <div className="flex-1 min-h-[120px] flex flex-col justify-end items-end mb-4 px-2">
+                <div className="text-right text-gray-500 text-lg h-8 mb-1 truncate w-full">
+                    {history}
+                </div>
+                <div className="text-right text-white text-6xl md:text-8xl font-light truncate w-full leading-none">
+                    {display.length > 9 ? parseFloat(display).toExponential(4) : display}
+                </div>
             </div>
-            <div className="text-right text-white text-5xl font-light mb-4 truncate min-h-[60px] flex items-center justify-end">
-                {display.length > 12 ? parseFloat(display).toExponential(6) : display}
-            </div>
-            <div className="grid grid-cols-5 gap-2 mb-2">
-                <button onClick={() => performScientific(Math.sin)} className={buttonClass('function') + " text-sm h-10"}>sin</button>
-                <button onClick={() => performScientific(Math.cos)} className={buttonClass('function') + " text-sm h-10"}>cos</button>
-                <button onClick={() => performScientific(Math.tan)} className={buttonClass('function') + " text-sm h-10"}>tan</button>
-                <button onClick={() => performScientific(Math.sqrt)} className={buttonClass('function') + " text-sm h-10"}>√</button>
-                <button onClick={() => performScientific(n => n * n)} className={buttonClass('function') + " text-sm h-10"}>x²</button>
-            </div>
-            <div className="grid grid-cols-4 gap-3 flex-1">
-                <button onClick={clear} className={buttonClass('function') + " h-16"}>AC</button>
-                <button onClick={toggleSign} className={buttonClass('function') + " h-16"}>±</button>
-                <button onClick={inputPercent} className={buttonClass('function') + " h-16"}>%</button>
-                <button onClick={() => performOperation('÷')} className={buttonClass('operator') + " h-16"}>÷</button>
-                <button onClick={() => inputDigit('7')} className={buttonClass('number') + " h-16"}>7</button>
-                <button onClick={() => inputDigit('8')} className={buttonClass('number') + " h-16"}>8</button>
-                <button onClick={() => inputDigit('9')} className={buttonClass('number') + " h-16"}>9</button>
-                <button onClick={() => performOperation('×')} className={buttonClass('operator') + " h-16"}>×</button>
-                <button onClick={() => inputDigit('4')} className={buttonClass('number') + " h-16"}>4</button>
-                <button onClick={() => inputDigit('5')} className={buttonClass('number') + " h-16"}>5</button>
-                <button onClick={() => inputDigit('6')} className={buttonClass('number') + " h-16"}>6</button>
-                <button onClick={() => performOperation('-')} className={buttonClass('operator') + " h-16"}>−</button>
-                <button onClick={() => inputDigit('1')} className={buttonClass('number') + " h-16"}>1</button>
-                <button onClick={() => inputDigit('2')} className={buttonClass('number') + " h-16"}>2</button>
-                <button onClick={() => inputDigit('3')} className={buttonClass('number') + " h-16"}>3</button>
-                <button onClick={() => performOperation('+')} className={buttonClass('operator') + " h-16"}>+</button>
-                <button onClick={() => inputDigit('0')} className={buttonClass('number') + " h-16 col-span-2"}>0</button>
-                <button onClick={inputDot} className={buttonClass('number') + " h-16"}>.</button>
-                <button onClick={performEquals} className={buttonClass('equals') + " h-16"}>=</button>
-            </div>
-            <div className="grid grid-cols-4 gap-3 mt-3">
-                <button onClick={clearEntry} className={buttonClass('function') + " h-10 text-sm"}>CE</button>
-                <button onClick={handleBackspace} className={buttonClass('function') + " h-10"} title="Backspace">
-                    <Delete size={18} />
-                </button>
-                <button onClick={() => performScientific(Math.log10)} className={buttonClass('function') + " h-10 text-sm"}>log</button>
-                <button onClick={() => performScientific(Math.log)} className={buttonClass('function') + " h-10 text-sm"}>ln</button>
+
+            {/* Buttons Container */}
+            <div className="w-full max-w-[400px] md:max-w-[500px] mx-auto flex flex-col justify-end flex-1">
+                {/* Scientific Keys - Hidden on Mobile */}
+                <div className="hidden md:grid grid-cols-5 gap-3 mb-3">
+                    <button onClick={() => performScientific(Math.sin)} className={buttonClass('function') + " !text-white !bg-[#2a2a2c] !text-base"}>sin</button>
+                    <button onClick={() => performScientific(Math.cos)} className={buttonClass('function') + " !text-white !bg-[#2a2a2c] !text-base"}>cos</button>
+                    <button onClick={() => performScientific(Math.tan)} className={buttonClass('function') + " !text-white !bg-[#2a2a2c] !text-base"}>tan</button>
+                    <button onClick={() => performScientific(Math.sqrt)} className={buttonClass('function') + " !text-white !bg-[#2a2a2c] !text-base"}>√</button>
+                    <button onClick={() => performScientific(n => n * n)} className={buttonClass('function') + " !text-white !bg-[#2a2a2c] !text-base"}>x²</button>
+                </div>
+
+                {/* Extra Functions Row (Mobile/Desktop) */}
+                <div className="grid grid-cols-4 gap-3 mb-3">
+                    <button onClick={clearEntry} className={buttonClass('function') + " !bg-[#3a3a3c] !text-white text-base"}>CE</button>
+                    <button onClick={handleBackspace} className={buttonClass('function') + " !bg-[#3a3a3c] !text-white"} title="Backspace">
+                        <Delete size={20} />
+                    </button>
+                    <button onClick={() => performScientific(Math.log10)} className={buttonClass('function') + " !bg-[#3a3a3c] !text-white text-base"}>log</button>
+                    <button onClick={() => performScientific(Math.log)} className={buttonClass('function') + " !bg-[#3a3a3c] !text-white text-base"}>ln</button>
+                </div>
+
+                {/* Main Keypad */}
+                <div className="grid grid-cols-4 gap-3 md:gap-4 w-full">
+                    <button onClick={clear} className={buttonClass('function')}>AC</button>
+                    <button onClick={toggleSign} className={buttonClass('function')}>±</button>
+                    <button onClick={inputPercent} className={buttonClass('function')}>%</button>
+                    <button onClick={() => performOperation('÷')} className={buttonClass('operator')}>÷</button>
+
+                    <button onClick={() => inputDigit('7')} className={buttonClass('number')}>7</button>
+                    <button onClick={() => inputDigit('8')} className={buttonClass('number')}>8</button>
+                    <button onClick={() => inputDigit('9')} className={buttonClass('number')}>9</button>
+                    <button onClick={() => performOperation('×')} className={buttonClass('operator')}>×</button>
+
+                    <button onClick={() => inputDigit('4')} className={buttonClass('number')}>4</button>
+                    <button onClick={() => inputDigit('5')} className={buttonClass('number')}>5</button>
+                    <button onClick={() => inputDigit('6')} className={buttonClass('number')}>6</button>
+                    <button onClick={() => performOperation('-')} className={buttonClass('operator')}>−</button>
+
+                    <button onClick={() => inputDigit('1')} className={buttonClass('number')}>1</button>
+                    <button onClick={() => inputDigit('2')} className={buttonClass('number')}>2</button>
+                    <button onClick={() => inputDigit('3')} className={buttonClass('number')}>3</button>
+                    <button onClick={() => performOperation('+')} className={buttonClass('operator')}>+</button>
+
+                    <div className="col-span-2">
+                        <button onClick={() => inputDigit('0')} className={buttonClass('zero')}>0</button>
+                    </div>
+                    <button onClick={inputDot} className={buttonClass('number')}>.</button>
+                    <button onClick={performEquals} className={buttonClass('equals')}>=</button>
+                </div>
             </div>
         </div>
     );

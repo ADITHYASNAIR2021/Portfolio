@@ -18,7 +18,10 @@ import { Photos } from '../apps/Photos';
 import { Calendar } from '../apps/Calendar';
 import { Mail } from '../apps/Mail';
 import { GitHub } from '../apps/GitHub';
-import { Mail as MailIcon, Github } from 'lucide-react';
+import { Messages } from '../apps/Messages';
+import { AppStore } from '../apps/AppStore';
+import { GameCenter } from '../apps/GameCenter';
+import { Mail as MailIcon, Github, MessageCircle, ShoppingBag, Gamepad2 } from 'lucide-react';
 
 import { useContextMenuStore } from '../../store/contextMenuStore';
 import { Play, X, Pin, Trash, Trash2 } from 'lucide-react';
@@ -189,12 +192,15 @@ export const Dock = () => {
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 px-4 pb-3 pt-3 h-20 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl flex items-end gap-3 shadow-2xl z-50">
             <DockIcon icon={Folder} label="Finder" gradient="bg-gradient-to-br from-blue-400 to-blue-600" onClick={() => openWindow('finder', 'Finder', <Finder />)} />
             <DockIcon icon={Rocket} label="Launchpad" onClick={() => openWindow('launchpad', 'Launchpad', <Launchpad />)} />
+            <DockIcon icon={ShoppingBag} label="App Store" gradient="bg-gradient-to-br from-blue-600 to-blue-700" onClick={() => openWindow('appstore', 'App Store', <AppStore />)} />
             <DockIcon icon={Compass} label="Safari" gradient="bg-gradient-to-br from-blue-500 to-cyan-500" onClick={() => openWindow('safari', 'Safari', <Safari />)} />
+            <DockIcon icon={MessageCircle} label="Messages" gradient="bg-gradient-to-br from-green-400 to-green-600" onClick={() => openWindow('messages', 'Messages', <Messages />)} />
             <DockIcon icon={MailIcon} label="Mail" gradient="bg-gradient-to-br from-blue-400 to-blue-600" onClick={() => openWindow('mail', 'Mail', <Mail />)} />
             <DockIcon icon={Music} label="Music" gradient="bg-gradient-to-br from-pink-500 to-red-500" onClick={() => openWindow('music', 'Music', <MusicApp />)} />
             <DockIcon icon={Map} label="Maps" gradient="bg-gradient-to-br from-green-400 to-teal-500" onClick={() => openWindow('maps', 'Maps', <Maps />)} />
             <DockIcon icon={StickyNote} label="Notes" gradient="bg-gradient-to-br from-yellow-400 to-orange-400" onClick={() => openWindow('notes', 'Notes', <Notes />)} />
             <DockIcon icon={Image} label="Photos" gradient="bg-gradient-to-br from-orange-400 to-pink-500" onClick={() => openWindow('photos', 'Photos', <Photos />)} />
+            <DockIcon icon={Gamepad2} label="Game Center" gradient="bg-gradient-to-br from-indigo-500 to-purple-500" onClick={() => openWindow('gamecenter', 'Game Center', <GameCenter />)} />
             <DockIcon icon={CalendarIcon} label="Calendar" gradient="bg-gradient-to-br from-red-500 to-red-600" onClick={() => openWindow('calendar', 'Calendar', <Calendar />)} />
             <DockIcon icon={Calculator} label="Calculator" gradient="bg-gradient-to-br from-orange-500 to-orange-600" onClick={() => openWindow('calculator', 'Calculator', <CalculatorApp />)} />
             <DockIcon icon={Terminal} label="Terminal" gradient="bg-gradient-to-br from-gray-700 to-gray-900" onClick={() => openWindow('terminal', 'Terminal', <TerminalApp />)} />

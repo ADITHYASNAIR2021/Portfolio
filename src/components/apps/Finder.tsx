@@ -280,9 +280,9 @@ export const Finder = () => {
     };
 
     return (
-        <div className="w-full h-full bg-[#f5f5f7] flex font-sans text-gray-900">
+        <div className="w-full h-full bg-[#f5f5f7] flex flex-col md:flex-row font-sans text-gray-900">
             {/* Sidebar */}
-            <div className="w-52 bg-[#e8e8ed]/80 backdrop-blur-sm border-r border-gray-300/50 flex flex-col pt-3 shrink-0">
+            <div className="w-full md:w-52 bg-[#e8e8ed]/80 backdrop-blur-sm border-b md:border-b-0 md:border-r border-gray-300/50 flex flex-col pt-3 shrink-0">
                 <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Favorites</div>
                 <div className="space-y-0.5 px-2">
                     {sidebarItems.map((item) => (
@@ -290,8 +290,8 @@ export const Finder = () => {
                             key={item.id}
                             onClick={() => setActiveSection(item.id)}
                             className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-colors ${activeSection === item.id
-                                    ? 'bg-blue-500 text-white'
-                                    : 'text-gray-700 hover:bg-gray-200/70'
+                                ? 'bg-blue-500 text-white'
+                                : 'text-gray-700 hover:bg-gray-200/70'
                                 }`}
                         >
                             {activeSection === item.id ? <FolderOpen size={14} /> : <Folder size={14} />}

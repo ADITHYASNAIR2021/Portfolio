@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useOSStore, WALLPAPERS } from '../../store/store';
-import { Monitor, Volume2, Image, Info, Search, Moon, Sun, Wifi, Bluetooth, LayoutDashboard, ToggleLeft, Battery } from 'lucide-react';
+import { Monitor, Volume2, Image, Info, Search, Moon, Sun, Wifi, Bluetooth, LayoutDashboard, ToggleLeft, Battery, LogOut, Lock } from 'lucide-react';
 
 export const Settings = () => {
     const {
@@ -15,7 +15,12 @@ export const Settings = () => {
         systemName
     } = useOSStore();
 
-    const [activeTab, setActiveTab] = useState('wallpaper');
+    const [activeTab, setActiveTab] = useState(() => {
+        if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+            return 'wallpaper';
+        }
+        return '';
+    });
     const [searchQuery, setSearchQuery] = useState('');
 
     const tabs = [
@@ -39,9 +44,14 @@ export const Settings = () => {
     ];
 
     return (
-        <div className="flex h-full bg-[#fbfbfb] dark:bg-[#1e1e1e] text-black dark:text-white font-sans text-sm selection:bg-blue-500/30">
+        <div className="flex flex-col md:flex-row h-full bg-[#fbfbfb] dark:bg-[#1e1e1e] text-black dark:text-white font-sans text-sm selection:bg-blue-500/30">
             {/* Sidebar */}
-            <div className="w-[260px] bg-[#f0f0f0]/80 dark:bg-[#2d2d2d]/80 backdrop-blur-xl border-r border-[#e5e5e5] dark:border-black/20 flex flex-col pt-3 pb-4">
+            <div className={`
+                w-full md:w-[260px] bg-[#f0f0f0]/80 dark:bg-[#2d2d2d]/80 backdrop-blur-xl 
+                border-b md:border-b-0 md:border-r border-[#e5e5e5] dark:border-black/20 
+                flex-col pt-3 pb-4 h-full
+                ${activeTab ? 'hidden md:flex' : 'flex'}
+            `}>
                 <div className="px-4 mb-4">
                     <div className="relative">
                         <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -71,7 +81,7 @@ export const Settings = () => {
                         <div
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`flex items-center gap-3 px-3 py-1.5 rounded-[6px] cursor-pointer transition-colors text-[13px] ${activeTab === tab.id
+                            className={`flex items-center gap-3 px-3 py-2.5 rounded-[6px] cursor-pointer transition-colors text-[13px] ${activeTab === tab.id
                                 ? 'bg-blue-500 text-white font-medium shadow-sm'
                                 : 'hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300'
                                 }`}
@@ -81,13 +91,37 @@ export const Settings = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* System Controls */}
+                <div className="px-3 mt-2 pt-2 border-t border-gray-200 dark:border-white/10 space-y-0.5">
+                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-[6px] text-[13px] hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors">
+                        <Moon size={18} /> Sleep
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-[6px] text-[13px] hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors">
+                        <Lock size={18} /> Lock Screen
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-[6px] text-[13px] hover:bg-black/5 dark:hover:bg-white/5 text-red-500 transition-colors">
+                        <LogOut size={18} /> Log Out...
+                    </button>
+                </div>
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto bg-[#fbfbfb] dark:bg-[#1e1e1e]">
-                <div className="p-10 max-w-4xl mx-auto space-y-8">
-                    {/* Header */}
-                    <div className="flex items-center gap-4 pb-6 border-b border-gray-200 dark:border-white/10">
+            <div className={`
+                flex-1 overflow-y-auto bg-[#fbfbfb] dark:bg-[#1e1e1e] h-full
+                ${!activeTab ? 'hidden md:block' : 'block'}
+            `}>
+                {/* Mobile Back Button */}
+                <div className="md:hidden p-4 border-b border-gray-200 dark:border-white/10 flex items-center gap-2">
+                    <button onClick={() => setActiveTab('')} className="text-blue-500 font-medium flex items-center gap-1">
+                        <span className="text-xl">‹</span> Settings
+                    </button>
+                    <span className="font-semibold mx-auto translate-x-[-20px]">{tabs.find(t => t.id === activeTab)?.label}</span>
+                </div>
+
+                <div className="p-4 md:p-10 max-w-4xl mx-auto space-y-8">
+                    {/* Desktop Header */}
+                    <div className="hidden md:flex items-center gap-4 pb-6 border-b border-gray-200 dark:border-white/10">
                         <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center shadow-inner">
                             {tabs.find(t => t.id === activeTab)?.icon && (() => {
                                 const Icon = tabs.find(t => t.id === activeTab)!.icon;

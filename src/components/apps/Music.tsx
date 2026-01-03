@@ -244,7 +244,7 @@ export const Music = () => {
                 <Music2 size={20} className="text-pink-500" />
                 <span className="font-bold text-lg ml-2">Music</span>
                 {isPlaying && (
-                    <div className="ml-auto px-2 py-1 rounded-full bg-pink-500/20 text-pink-500 text-xs font-bold animate-pulse">
+                    <div className="ml-auto px-2 py-1 rounded-full bg-pink-500/20 text-pink-500 text-[10px] md:text-xs font-bold animate-pulse">
                         Playing
                     </div>
                 )}
@@ -327,7 +327,7 @@ export const Music = () => {
             </div>
 
             {/* Now Playing Bar */}
-            <div className="h-24 bg-gradient-to-r from-[#1a1a2e] to-[#2a1a3e] border-t border-white/10 flex items-center px-6 shrink-0 z-20 relative">
+            <div className="h-auto md:h-24 bg-gradient-to-r from-[#1a1a2e] to-[#2a1a3e] border-t border-white/10 flex flex-col md:flex-row items-center px-4 py-4 md:py-0 md:px-6 shrink-0 z-20 relative">
                 {/* Song Info */}
                 <div className="flex items-center gap-4 w-1/4 min-w-0">
                     <img
@@ -394,7 +394,7 @@ export const Music = () => {
                 </div>
 
                 {/* Volume */}
-                <div className="flex items-center gap-2 w-1/4 justify-end">
+                <div className="absolute top-4 right-4 md:static flex items-center gap-2 md:w-1/4 justify-end">
                     <button
                         onClick={() => setIsMuted(!isMuted)}
                         className="text-gray-400 hover:text-white transition-colors"
@@ -411,7 +411,7 @@ export const Music = () => {
                             setVolume(parseFloat(e.target.value));
                             setIsMuted(false);
                         }}
-                        className="w-24 h-1 bg-white/20 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+                        className="hidden md:block w-24 h-1 bg-white/20 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
                         aria-label="Volume"
                     />
                 </div>

@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import * as Widgets from '../widgets/Widgets';
 import { ContextMenu } from './ContextMenu';
 import { useContextMenuStore } from '../../store/contextMenuStore';
-import { FolderPlus, Image as ImageIcon, LayoutGrid, Clipboard } from 'lucide-react';
+import { FolderPlus, Image as ImageIcon, LayoutGrid, Clipboard, LayoutTemplate } from 'lucide-react';
 import { DndContext, useDroppable, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { MobileHome } from '../mobile/iOSHome';
@@ -16,15 +16,42 @@ import { NotificationCenter } from './NotificationCenter';
 import { LockScreen } from './LockScreen';
 import { useSound } from '../../hooks/useSound';
 
-// Widget Container
-const WidgetArea = () => (
-    <div className="absolute top-12 right-4 flex flex-col gap-4 z-0 pointer-events-none [&>*]:pointer-events-auto">
-        <Widgets.ClockWidget />
-        <Widgets.WeatherWidget />
-        <Widgets.SystemWidget />
-        <Widgets.QuoteWidget />
-    </div>
-);
+import { useDraggable } from '@dnd-kit/core';
+import type { WidgetItem } from '../../store/store';
+
+// Draggable Widget Wrapper
+const DraggableWidget = ({ widget }: { widget: WidgetItem }) => {
+    const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+        id: widget.id,
+        data: { type: 'widget', position: widget.position }
+    });
+
+    const style: React.CSSProperties = {
+        transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+        position: 'absolute',
+        top: widget.position.y,
+        left: widget.position.x,
+        zIndex: isDragging ? 50 : 0,
+        opacity: isDragging ? 0.8 : 1,
+    };
+
+    const renderWidget = () => {
+        switch (widget.type) {
+            case 'clock': return <Widgets.ClockWidget />;
+            case 'weather': return <Widgets.WeatherWidget />;
+            case 'system': return <Widgets.SystemWidget />;
+            case 'quote': return <Widgets.QuoteWidget />;
+            case 'calculator': return <Widgets.CalculatorWidget />;
+            default: return null;
+        }
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="cursor-move">
+            {renderWidget()}
+        </div>
+    );
+};
 
 export const Desktop = ({ children }: { children: React.ReactNode }) => {
     const isMobile = useMobile();
@@ -40,7 +67,10 @@ export const Desktop = ({ children }: { children: React.ReactNode }) => {
         brightness,
         isSleeping,
         setSleeping,
-        isLocked
+        isLocked,
+        widgets,
+        addWidget,
+        updateWidgetPosition
     } = useOSStore();
 
     const { openMenu } = useContextMenuStore();
@@ -63,18 +93,26 @@ export const Desktop = ({ children }: { children: React.ReactNode }) => {
 
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, delta, over } = event;
-        const activeData = active.data.current as { position: { x: number, y: number } } | undefined;
+        const activeData = active.data.current as { type?: string; position: { x: number, y: number } } | undefined;
 
         if (over && over.id === 'trash-bin') {
+            if (activeData?.type === 'widget') {
+                return;
+            }
             moveToTrash(active.id as string);
-            playSwooshSound(); // Or a custom trash sound if available
+            playSwooshSound();
             return;
         }
 
         if (activeData && activeData.position) {
             const newX = activeData.position.x + delta.x;
             const newY = activeData.position.y + delta.y;
-            moveFile(active.id as string, 'desktop', { x: newX, y: newY });
+
+            if (activeData.type === 'widget') {
+                updateWidgetPosition(active.id as string, { x: newX, y: newY });
+            } else {
+                moveFile(active.id as string, 'desktop', { x: newX, y: newY });
+            }
             playSwooshSound();
         }
     };
@@ -159,6 +197,18 @@ export const Desktop = ({ children }: { children: React.ReactNode }) => {
                         ]
                     },
                     {
+                        id: 'add-widget',
+                        label: 'Add Widget',
+                        icon: <LayoutTemplate size={14} />,
+                        submenu: [
+                            { id: 'w-clock', label: 'Clock', action: () => addWidget({ id: `clock-${Date.now()}`, type: 'clock', position: { x: e.clientX, y: e.clientY } }) },
+                            { id: 'w-weather', label: 'Weather', action: () => addWidget({ id: `weather-${Date.now()}`, type: 'weather', position: { x: e.clientX, y: e.clientY } }) },
+                            { id: 'w-system', label: 'System Stats', action: () => addWidget({ id: `system-${Date.now()}`, type: 'system', position: { x: e.clientX, y: e.clientY } }) },
+                            { id: 'w-quote', label: 'Quote', action: () => addWidget({ id: `quote-${Date.now()}`, type: 'quote', position: { x: e.clientX, y: e.clientY } }) },
+                            { id: 'w-calc', label: 'Calculator', action: () => addWidget({ id: `calc-${Date.now()}`, type: 'calculator', position: { x: e.clientX, y: e.clientY } }) },
+                        ]
+                    },
+                    {
                         id: 'clean-up',
                         label: 'Clean Up By Name',
                         icon: <LayoutGrid size={14} />,
@@ -177,7 +227,14 @@ export const Desktop = ({ children }: { children: React.ReactNode }) => {
     };
 
     if (isMobile) {
-        return <MobileHome />;
+        return (
+            <div className="fixed inset-0 overflow-hidden bg-black">
+                <MobileHome />
+                <div className="relative z-50">
+                    {children}
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -196,7 +253,9 @@ export const Desktop = ({ children }: { children: React.ReactNode }) => {
                 <DesktopIcons />
 
                 {/* Widgets */}
-                <WidgetArea />
+                {widgets.map(widget => (
+                    <DraggableWidget key={widget.id} widget={widget} />
+                ))}
 
                 {/* Context Menu */}
                 <ContextMenu />

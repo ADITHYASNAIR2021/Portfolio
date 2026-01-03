@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Circle, CheckCircle2, Trash, List, Calendar, Star, Flag, ChevronRight } from 'lucide-react';
+import { Plus, Circle, CheckCircle2, Trash, List, Calendar, Star, Flag, ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface Reminder {
     id: string;
@@ -115,10 +115,24 @@ export const Reminders = () => {
         }).length;
     };
 
+    const [showSidebar, setShowSidebar] = useState(true);
+
+    const handleListSelect = (listName: string) => {
+        setSelectedList(listName);
+        setShowSidebar(false);
+    };
+
+    const handleBackToSidebar = () => {
+        setShowSidebar(true);
+    };
+
     return (
-        <div className="w-full h-full bg-[#f5f5f7] flex">
-            {/* Sidebar */}
-            <div className="w-64 bg-[#f5f5f7] border-r border-gray-200 flex flex-col p-4">
+        <div className="w-full h-full bg-[#f5f5f7] flex relative overflow-hidden">
+            {/* Sidebar (Full width on Mobile) */}
+            <div className={`
+                ${showSidebar ? 'flex' : 'hidden md:flex'}
+                w-full md:w-64 bg-[#f5f5f7] border-r border-gray-200 flex-col p-4 shrink-0 h-full overflow-y-auto
+            `}>
                 <div className="mb-6">
                     <input
                         type="text"
@@ -136,7 +150,7 @@ export const Reminders = () => {
                         return (
                             <button
                                 key={list.name}
-                                onClick={() => setSelectedList(list.name)}
+                                onClick={() => handleListSelect(list.name)}
                                 className={`p-3 rounded-xl text-left transition-all ${selectedList === list.name ? 'bg-white shadow-md' : 'hover:bg-white/50'
                                     }`}
                             >
@@ -158,7 +172,7 @@ export const Reminders = () => {
                         return (
                             <button
                                 key={list.name}
-                                onClick={() => setSelectedList(list.name)}
+                                onClick={() => handleListSelect(list.name)}
                                 className={`w-full p-2 rounded-lg flex items-center gap-3 transition-all ${selectedList === list.name ? 'bg-white shadow-sm' : 'hover:bg-white/50'
                                     }`}
                             >
@@ -177,27 +191,38 @@ export const Reminders = () => {
                 </button>
             </div>
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col bg-white">
+            {/* Main Content (Full width on Mobile) */}
+            <div className={`
+                 ${!showSidebar ? 'flex' : 'hidden md:flex'}
+                flex-1 flex-col bg-white h-full relative z-10
+            `}>
                 {/* Header */}
-                <div className="p-6 border-b border-gray-100">
-                    <h1 className="text-3xl font-bold text-gray-800">{selectedList}</h1>
-                    <div className="flex items-center gap-4 mt-2">
-                        <span className="text-sm text-gray-500">{filteredReminders.length} reminders</span>
-                        <label className="flex items-center gap-2 text-sm text-gray-500 cursor-pointer">
-                            <input
-                                type="checkbox"
-                                checked={showCompleted}
-                                onChange={(e) => setShowCompleted(e.target.checked)}
-                                className="rounded"
-                            />
-                            Show completed
-                        </label>
+                <div className="p-4 md:p-6 border-b border-gray-100">
+                    <div className="flex items-center gap-2 mb-2">
+                        <button onClick={handleBackToSidebar} className="md:hidden flex items-center gap-1 text-blue-500 font-medium">
+                            <ChevronLeft size={24} />
+                            Lists
+                        </button>
+                    </div>
+                    <div className="flex justify-between items-end">
+                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">{selectedList}</h1>
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm text-gray-500">{filteredReminders.length} reminders</span>
+                            <label className="flex items-center gap-2 text-sm text-gray-500 cursor-pointer hidden md:flex">
+                                <input
+                                    type="checkbox"
+                                    checked={showCompleted}
+                                    onChange={(e) => setShowCompleted(e.target.checked)}
+                                    className="rounded"
+                                />
+                                Show completed
+                            </label>
+                        </div>
                     </div>
                 </div>
 
                 {/* Reminders List */}
-                <div className="flex-1 overflow-auto p-6">
+                <div className="flex-1 overflow-auto p-4 md:p-6">
                     {filteredReminders.map(reminder => (
                         <div
                             key={reminder.id}
@@ -238,7 +263,7 @@ export const Reminders = () => {
                             </button>
                             <button
                                 onClick={() => deleteReminder(reminder.id)}
-                                className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600"
+                                className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600 md:block hidden"
                                 aria-label="Delete reminder"
                             >
                                 <Trash size={16} />

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { X, Minus, Plus } from 'lucide-react'; // Using icons for traffic lights hover state is optional, can just be colors
 import { useOSStore } from '../../store/store';
 
+import { useMobile } from '../../hooks/useMobile';
+
 interface WindowProps {
     id: string;
     title: string;
@@ -15,6 +17,7 @@ interface WindowProps {
 
 export const Window = ({ id, title, children, zIndex, isActive, isMinimized, isMaximized }: WindowProps) => {
     const { closeWindow, minimizeWindow, maximizeWindow, focusWindow } = useOSStore();
+    const isMobile = useMobile();
 
 
     // If we want constraints, we need to pass a ref from Desktop. For now, unconstrained or constrained to window.
@@ -25,19 +28,19 @@ export const Window = ({ id, title, children, zIndex, isActive, isMinimized, isM
         <motion.div
             initial={{ scale: 0.5, opacity: 0, y: 300 }}
             animate={{
-                scale: isMaximized ? 1 : 1,
+                scale: isMaximized || isMobile ? 1 : 1,
                 opacity: 1,
-                width: isMaximized ? '100vw' : '800px',
-                height: isMaximized ? 'calc(100vh - 2rem)' : '500px', // Minus MenuBar height roughly
-                x: isMaximized ? 0 : 0,
-                y: isMaximized ? 0 : 0, // In real implementation, these drive absolute position
-                top: isMaximized ? '2rem' : '100px', // 2rem is menu bar
-                left: isMaximized ? 0 : '100px',
-                borderRadius: isMaximized ? 0 : '12px'
+                width: isMaximized || isMobile ? '100vw' : '800px',
+                height: isMaximized || isMobile ? (isMobile ? '100vh' : 'calc(100vh - 2rem)') : '500px', // Full height for mobile
+                x: 0,
+                y: 0,
+                top: isMaximized || isMobile ? (isMobile ? 0 : '2rem') : '100px', // Top 0 for mobile
+                left: isMaximized || isMobile ? 0 : '100px',
+                borderRadius: isMaximized || isMobile ? 0 : '12px'
             }}
             exit={{ scale: 0.5, opacity: 0, y: 300 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-            drag={!isMaximized}
+            drag={!isMaximized && !isMobile}
             dragMomentum={false}
             onDragStart={() => focusWindow(id)}
             onMouseDown={() => focusWindow(id)}

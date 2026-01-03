@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Trash, Folder, FolderOpen, Search, MoreHorizontal } from 'lucide-react';
+import { Plus, Trash, Folder, FolderOpen, Search, MoreHorizontal, ChevronLeft } from 'lucide-react';
 
 interface Note {
     id: string;
@@ -47,6 +47,16 @@ export const Notes = () => {
     });
     const [search, setSearch] = useState('');
     const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
+    const [showMobileList, setShowMobileList] = useState(true);
+
+    const handleNoteSelect = (id: string) => {
+        setSelectedNoteId(id);
+        setShowMobileList(false);
+    };
+
+    const handleBackToList = () => {
+        setShowMobileList(true);
+    };
 
     // Save to localStorage whenever notes change
     useEffect(() => {
@@ -95,9 +105,10 @@ export const Notes = () => {
     };
 
     return (
-        <div className="w-full h-full flex bg-[#f5f5f7] text-gray-800 font-sans">
-            {/* Folders Sidebar */}
-            <div className="w-48 bg-[#e8e8ed]/80 backdrop-blur-sm border-r border-gray-300/50 flex flex-col pt-2 hidden md:flex">
+        <div className="w-full h-full flex bg-[#f5f5f7] text-gray-800 font-sans overflow-hidden relative">
+
+            {/* Folders Sidebar (Desktop Only) */}
+            <div className={`w-48 bg-[#e8e8ed]/80 backdrop-blur-sm border-r border-gray-300/50 flex flex-col pt-2 hidden md:flex shrink-0`}>
                 <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">iCloud</div>
                 <button
                     onClick={() => setSelectedFolder(null)}
@@ -124,9 +135,12 @@ export const Notes = () => {
                 ))}
             </div>
 
-            {/* Note List */}
-            <div className="w-72 bg-white border-r border-gray-200 flex flex-col">
-                <div className="h-12 border-b border-gray-100 flex items-center px-4 gap-2">
+            {/* Note List (Sidebar on Desktop, Full screen on Mobile) */}
+            <div className={`
+                ${showMobileList ? 'flex' : 'hidden md:flex'} 
+                w-full md:w-72 bg-white border-r border-gray-200 flex-col shrink-0 h-full
+            `}>
+                <div className="h-12 border-b border-gray-100 flex items-center px-4 gap-2 shrink-0">
                     <Search size={14} className="text-gray-400" />
                     <input
                         type="text"
@@ -145,13 +159,13 @@ export const Notes = () => {
                                 key={note.id}
                                 className={`p-4 border-b border-gray-100 cursor-pointer group ${selectedNoteId === note.id ? 'bg-yellow-50' : 'hover:bg-gray-50'
                                     }`}
-                                onClick={() => setSelectedNoteId(note.id)}
+                                onClick={() => handleNoteSelect(note.id)}
                             >
                                 <div className="flex justify-between items-start">
                                     <h4 className="font-semibold text-sm mb-1 truncate flex-1">{note.title}</h4>
                                     <button
                                         onClick={(e) => { e.stopPropagation(); deleteNote(note.id); }}
-                                        className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 rounded transition-all"
+                                        className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 rounded transition-all md:block hidden"
                                         aria-label="Delete note"
                                     >
                                         <Trash size={12} className="text-red-500" />
@@ -165,14 +179,29 @@ export const Notes = () => {
                         ))
                     )}
                 </div>
+                {/* Mobile FAB */}
+                <button
+                    onClick={addNote}
+                    className="md:hidden absolute bottom-6 right-6 w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-yellow-600 transition-all z-20"
+                    aria-label="Create new note"
+                >
+                    <Plus size={24} />
+                </button>
             </div>
 
-            {/* Editor */}
-            <div className="flex-1 flex flex-col bg-white">
-                <div className="h-12 border-b border-gray-100 flex items-center justify-between px-6">
+            {/* Editor (Main Content) */}
+            <div className={`
+                ${!showMobileList ? 'flex' : 'hidden md:flex'} 
+                flex-1 flex-col bg-white h-full relative z-10
+            `}>
+                <div className="h-12 border-b border-gray-100 flex items-center justify-between px-4 md:px-6 shrink-0">
                     <div className="flex items-center gap-2">
+                        <button onClick={handleBackToList} className="md:hidden flex items-center gap-1 text-yellow-500 font-medium text-sm pr-2">
+                            <ChevronLeft size={20} />
+                            Notes
+                        </button>
                         {activeNote && (
-                            <span className="text-xs text-gray-400 px-2 py-0.5 bg-gray-100 rounded">
+                            <span className="text-xs text-gray-400 px-2 py-0.5 bg-gray-100 rounded hidden md:inline-block">
                                 {activeNote.folder}
                             </span>
                         )}
@@ -183,11 +212,20 @@ export const Notes = () => {
                     <div className="flex gap-1">
                         <button
                             onClick={addNote}
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors hidden md:block"
                             aria-label="Create new note"
                         >
                             <Plus size={18} className="text-gray-600" />
                         </button>
+                        {activeNote && (
+                            <button
+                                onClick={() => deleteNote(activeNote.id)}
+                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors md:hidden"
+                                aria-label="Delete"
+                            >
+                                <Trash size={18} className="text-red-500" />
+                            </button>
+                        )}
                         <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="More options">
                             <MoreHorizontal size={18} className="text-gray-600" />
                         </button>
@@ -199,11 +237,11 @@ export const Notes = () => {
                             type="text"
                             value={activeNote.title}
                             onChange={(e) => updateNote(activeNote.id, { title: e.target.value })}
-                            className="px-8 pt-6 pb-2 text-2xl font-bold outline-none border-none bg-transparent"
+                            className="px-4 md:px-8 pt-6 pb-2 text-xl md:text-2xl font-bold outline-none border-none bg-transparent"
                             placeholder="Note title"
                         />
                         <textarea
-                            className="flex-1 px-8 pb-8 resize-none outline-none text-gray-700 leading-relaxed bg-transparent"
+                            className="flex-1 px-4 md:px-8 pb-8 resize-none outline-none text-gray-700 leading-relaxed bg-transparent text-base md:text-lg"
                             aria-label="Note content"
                             placeholder="Start typing..."
                             value={activeNote.content}
@@ -223,6 +261,14 @@ export const Notes = () => {
                     </div>
                 )}
             </div>
+
+            <button
+                onClick={addNote}
+                className="hidden md:flex absolute bottom-6 right-6 w-12 h-12 bg-yellow-500 text-white rounded-full items-center justify-center shadow-lg hover:bg-yellow-600 hover:scale-105 transition-all z-20"
+                aria-label="Create new note"
+            >
+                <Plus size={24} />
+            </button>
         </div>
     );
 };

@@ -23,6 +23,8 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 export const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const [showSidebar, setShowSidebar] = useState(false);
+    const [showEventDetails, setShowEventDetails] = useState(false);
 
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -77,10 +79,39 @@ export const Calendar = () => {
         calendarDays.push(i);
     }
 
+    const handleDateSelect = (date: Date) => {
+        setSelectedDate(date);
+        setShowEventDetails(true);
+    };
+
     return (
-        <div className="w-full h-full bg-white flex">
+        <div className="w-full h-full bg-white flex relative overflow-hidden">
+            {/* Sidebar Toggle (Mobile) */}
+            <div className="md:hidden absolute top-4 left-4 z-30">
+                <button
+                    onClick={() => setShowSidebar(true)}
+                    className="p-2 bg-gray-100 rounded-lg text-gray-600 shadow-sm"
+                    aria-label="Open sidebar"
+                >
+                    <ChevronRight className={showSidebar ? 'rotate-180' : ''} size={20} />
+                </button>
+            </div>
+
+            {/* Sidebar Overlay */}
+            {showSidebar && (
+                <div className="absolute inset-0 bg-black/20 z-40 md:hidden" onClick={() => setShowSidebar(false)} />
+            )}
+
             {/* Sidebar */}
-            <div className="w-64 bg-gray-50 border-r border-gray-200 p-4 flex flex-col">
+            <div className={`
+                absolute md:static top-0 left-0 h-full w-64 bg-gray-50 border-r border-gray-200 p-4 flex flex-col z-50 transform transition-transform duration-300 shadow-xl md:shadow-none
+                ${showSidebar ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+            `}>
+                <div className="flex justify-between items-center mb-4 md:hidden">
+                    <span className="font-bold text-lg">Calendar</span>
+                    <button onClick={() => setShowSidebar(false)} className="p-1" aria-label="Close sidebar"><ChevronLeft size={20} /></button>
+                </div>
+
                 <button
                     onClick={goToToday}
                     className="w-full mb-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors"
@@ -96,7 +127,7 @@ export const Calendar = () => {
                 </div>
 
                 {/* Upcoming Events */}
-                <div className="flex-1">
+                <div className="flex-1 overflow-y-auto">
                     <h3 className="font-semibold text-gray-800 mb-3">Upcoming Events</h3>
                     <div className="space-y-2">
                         {EVENTS.slice(0, 5).map(event => (
@@ -135,49 +166,51 @@ export const Calendar = () => {
             </div>
 
             {/* Main Calendar */}
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col min-w-0">
                 {/* Header */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-gray-200">
-                    <div className="flex items-center gap-4">
-                        <button onClick={prevMonth} className="p-2 hover:bg-gray-100 rounded-full" aria-label="Previous month">
-                            <ChevronLeft size={20} />
-                        </button>
-                        <button onClick={nextMonth} className="p-2 hover:bg-gray-100 rounded-full" aria-label="Next month">
-                            <ChevronRight size={20} />
-                        </button>
-                        <h2 className="text-xl font-semibold">
+                <div className="h-16 flex items-center justify-between px-4 md:px-6 border-b border-gray-200 pl-16 md:pl-6">
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <div className="flex bg-gray-100 rounded-lg p-1">
+                            <button onClick={prevMonth} className="p-2 hover:bg-white rounded-md shadow-sm transition-all" aria-label="Previous month">
+                                <ChevronLeft size={18} />
+                            </button>
+                            <button onClick={nextMonth} className="p-2 hover:bg-white rounded-md shadow-sm transition-all" aria-label="Next month">
+                                <ChevronRight size={18} />
+                            </button>
+                        </div>
+                        <h2 className="text-lg md:text-xl font-semibold truncate">
                             {MONTHS[month]} {year}
                         </h2>
                     </div>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg" aria-label="Add event">
+                    <button className="flex items-center gap-2 px-3 md:px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm md:text-base whitespace-nowrap" aria-label="Add event">
                         <Plus size={18} />
-                        Add Event
+                        <span className="hidden md:inline">Add Event</span>
                     </button>
                 </div>
 
                 {/* Days Header */}
                 <div className="grid grid-cols-7 border-b border-gray-200">
                     {DAYS.map(day => (
-                        <div key={day} className="py-3 text-center text-sm font-medium text-gray-500">
-                            {day}
+                        <div key={day} className="py-2 md:py-3 text-center text-xs md:text-sm font-medium text-gray-500">
+                            {day.slice(0, 3)}
                         </div>
                     ))}
                 </div>
 
                 {/* Calendar Grid */}
-                <div className="flex-1 grid grid-cols-7 auto-rows-fr">
+                <div className="flex-1 grid grid-cols-7 auto-rows-fr overflow-y-auto">
                     {calendarDays.map((day, index) => {
                         const dayEvents = day ? getEventsForDay(day) : [];
                         return (
                             <div
                                 key={index}
-                                className={`border-b border-r border-gray-100 p-1 min-h-[80px] cursor-pointer hover:bg-gray-50 transition-colors ${day === null ? 'bg-gray-50' : ''
+                                className={`border-b border-r border-gray-100 p-1 min-h-[60px] md:min-h-[80px] cursor-pointer hover:bg-gray-50 transition-colors ${day === null ? 'bg-gray-50' : ''
                                     }`}
-                                onClick={() => day && setSelectedDate(new Date(year, month, day))}
+                                onClick={() => day && handleDateSelect(new Date(year, month, day))}
                             >
                                 {day && (
                                     <>
-                                        <div className={`w-7 h-7 flex items-center justify-center rounded-full text-sm font-medium mb-1 ${isToday(day)
+                                        <div className={`w-6 h-6 md:w-7 md:h-7 flex items-center justify-center rounded-full text-xs md:text-sm font-medium mb-1 ${isToday(day)
                                             ? 'bg-red-500 text-white'
                                             : isSelected(day)
                                                 ? 'bg-blue-100 text-blue-600'
@@ -189,13 +222,18 @@ export const Calendar = () => {
                                             {dayEvents.slice(0, 2).map(event => (
                                                 <div
                                                     key={event.id}
-                                                    className={`text-xs px-1 py-0.5 rounded truncate text-white ${event.color}`}
+                                                    className={`text-[10px] px-1 py-0.5 rounded truncate text-white ${event.color} hidden md:block`}
                                                 >
                                                     {event.title}
                                                 </div>
                                             ))}
+                                            <div className="flex gap-1 flex-wrap md:hidden">
+                                                {dayEvents.map(event => (
+                                                    <div key={event.id} className={`w-1.5 h-1.5 rounded-full ${event.color}`} />
+                                                ))}
+                                            </div>
                                             {dayEvents.length > 2 && (
-                                                <div className="text-xs text-gray-400 px-1">
+                                                <div className="text-[10px] text-gray-400 px-1 hidden md:block">
                                                     +{dayEvents.length - 2} more
                                                 </div>
                                             )}
@@ -208,28 +246,45 @@ export const Calendar = () => {
                 </div>
             </div>
 
-            {/* Event Details Sidebar */}
+            {/* Event Details Sidebar / Overlay */}
             {selectedDate && (
-                <div className="w-72 border-l border-gray-200 p-4 bg-gray-50">
-                    <h3 className="font-semibold text-lg mb-2">
-                        {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-                    </h3>
-                    {selectedDateEvents.length > 0 ? (
-                        <div className="space-y-3">
-                            {selectedDateEvents.map(event => (
-                                <div key={event.id} className="bg-white rounded-lg p-3 shadow-sm border">
-                                    <div className="flex items-center gap-2">
-                                        <div className={`w-3 h-3 rounded-full ${event.color}`} />
-                                        <span className="font-medium">{event.title}</span>
-                                    </div>
-                                    <div className="text-sm text-gray-500 mt-1 capitalize">{event.type}</div>
-                                </div>
-                            ))}
+                <>
+                    {/* Mobile Overlay Background */}
+                    <div className={`fixed inset-0 bg-black/20 z-40 md:hidden ${showEventDetails ? 'block' : 'hidden'}`} onClick={() => setShowEventDetails(false)} />
+
+                    <div className={`
+                    absolute md:static top-0 right-0 h-full w-72 md:w-72 bg-gray-50 border-l border-gray-200 p-4 z-50 transform transition-transform duration-300 shadow-xl md:shadow-none
+                    ${showEventDetails ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
+                `}>
+                        <div className="flex justify-between items-center mb-4 md:hidden">
+                            <h3 className="font-semibold text-lg">Details</h3>
+                            <button onClick={() => setShowEventDetails(false)} className="p-1 bg-gray-200 rounded-full" aria-label="Close details"><ChevronRight size={18} /></button>
                         </div>
-                    ) : (
-                        <p className="text-gray-500 text-sm">No events scheduled</p>
-                    )}
-                </div>
+
+                        <h3 className="font-semibold text-lg mb-2 hidden md:block">
+                            {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+                        </h3>
+                        <h3 className="font-semibold text-lg mb-4 md:hidden">
+                            {selectedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                        </h3>
+
+                        {selectedDateEvents.length > 0 ? (
+                            <div className="space-y-3">
+                                {selectedDateEvents.map(event => (
+                                    <div key={event.id} className="bg-white rounded-lg p-3 shadow-sm border">
+                                        <div className="flex items-center gap-2">
+                                            <div className={`w-3 h-3 rounded-full ${event.color}`} />
+                                            <span className="font-medium">{event.title}</span>
+                                        </div>
+                                        <div className="text-sm text-gray-500 mt-1 capitalize">{event.type}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-gray-500 text-sm">No events scheduled</p>
+                        )}
+                    </div>
+                </>
             )}
         </div>
     );

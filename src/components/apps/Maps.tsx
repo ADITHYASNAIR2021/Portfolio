@@ -146,6 +146,7 @@ const getTypeLabel = (type: JourneyPoint['type']) => {
 
 export const Maps = () => {
     const [selectedPoint, setSelectedPoint] = useState<string | null>(null);
+    const [showJourney, setShowJourney] = useState(false);
 
     return (
         <div className="w-full h-full relative">
@@ -202,19 +203,36 @@ export const Maps = () => {
                 ))}
             </MapContainer>
 
-            {/* Journey Panel */}
-            <div className="absolute top-4 left-4 z-[400] bg-black/80 text-white p-5 rounded-2xl backdrop-blur-xl border border-white/10 max-w-xs shadow-2xl">
-                <h3 className="font-bold text-lg mb-1">My Journey</h3>
-                <p className="text-xs text-gray-400 mb-4">From Kerala to France 🌍</p>
+            {/* Journey Panel Toggle (Mobile) */}
+            <button
+                onClick={() => setShowJourney(!showJourney)}
+                className="md:hidden absolute top-4 left-4 z-[400] bg-black/80 text-white px-4 py-2 rounded-full backdrop-blur-xl border border-white/10 text-sm font-medium"
+            >
+                {showJourney ? 'Hide Journey' : 'View Journey'}
+            </button>
 
-                <div className="space-y-4">
+            {/* Journey Panel */}
+            <div className={`absolute top-16 md:top-4 left-4 right-4 md:right-auto md:w-80 z-[400] bg-black/80 text-white p-5 rounded-2xl backdrop-blur-xl border border-white/10 shadow-2xl transition-transform duration-300 origin-top-left ${showJourney ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none md:scale-100 md:opacity-100 md:pointer-events-auto'}`}>
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h3 className="font-bold text-lg mb-1">My Journey</h3>
+                        <p className="text-xs text-gray-400 mb-4">From Kerala to France 🌍</p>
+                    </div>
+                    <button onClick={() => setShowJourney(false)} className="md:hidden text-gray-400 hover:text-white">✕</button>
+                </div>
+
+                <div className="space-y-4 max-h-[40vh] md:max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
                     {JOURNEY_POINTS.map((point, index) => (
                         <div
                             key={point.id}
                             className={`relative pl-6 cursor-pointer transition-all ${selectedPoint === point.id ? 'opacity-100' : 'opacity-70 hover:opacity-100'
                                 }`}
-                            onClick={() => setSelectedPoint(point.id)}
+                            onClick={() => {
+                                setSelectedPoint(point.id);
+                                setShowJourney(false); // Close on mobile selection
+                            }}
                         >
+                            {/* ... Content ... */}
                             {/* Timeline line */}
                             {index < JOURNEY_POINTS.length - 1 && (
                                 <div className="absolute left-[5px] top-4 w-0.5 h-full bg-gradient-to-b from-blue-500 to-blue-500/20" />
@@ -234,34 +252,25 @@ export const Maps = () => {
                                 <div className="text-xs text-gray-400 mt-1">
                                     {point.details[0]}
                                 </div>
-                                {point.achievements && point.achievements.length > 0 && (
-                                    <div className="text-xs text-green-400 mt-1">
-                                        ⭐ {point.achievements[0]}
-                                    </div>
-                                )}
                             </div>
                         </div>
                     ))}
                 </div>
-
-                <div className="mt-4 pt-4 border-t border-white/10 text-xs text-gray-400">
-                    📍 Click markers for details
-                </div>
             </div>
 
             {/* Stats Panel */}
-            <div className="absolute bottom-4 right-4 z-[400] bg-black/80 text-white p-4 rounded-xl backdrop-blur-xl border border-white/10 flex gap-6">
+            <div className="absolute top-4 right-4 md:bottom-4 md:top-auto md:right-4 z-[400] bg-black/80 text-white p-3 md:p-4 rounded-xl backdrop-blur-xl border border-white/10 flex gap-4 md:gap-6 scale-90 md:scale-100 origin-top-right md:origin-bottom-right shadow-xl">
                 <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">3</div>
-                    <div className="text-xs text-gray-400">Locations</div>
+                    <div className="text-xl md:text-2xl font-bold text-blue-400">3</div>
+                    <div className="text-[10px] md:text-xs text-gray-400">Locations</div>
                 </div>
                 <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">7000+</div>
-                    <div className="text-xs text-gray-400">km Traveled</div>
+                    <div className="text-xl md:text-2xl font-bold text-green-400">7k+</div>
+                    <div className="text-[10px] md:text-xs text-gray-400">km Traveled</div>
                 </div>
                 <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-400">2</div>
-                    <div className="text-xs text-gray-400">Countries</div>
+                    <div className="text-xl md:text-2xl font-bold text-purple-400">2</div>
+                    <div className="text-[10px] md:text-xs text-gray-400">Countries</div>
                 </div>
             </div>
         </div>

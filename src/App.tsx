@@ -5,10 +5,17 @@ import { MenuBar } from './components/os/MenuBar';
 import { Dock } from './components/os/Dock';
 import { WindowManager } from './components/os/WindowManager';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { useMobile } from './hooks/useMobile';
+import { useEffect } from 'react';
 
 function App() {
-  const { booting } = useOSStore();
+  const { booting, hydrateFiles } = useOSStore();
+  const isMobile = useMobile();
   useKeyboardShortcuts();
+
+  useEffect(() => {
+    hydrateFiles();
+  }, [hydrateFiles]);
 
   if (booting) {
     return <BootScreen />;
@@ -16,9 +23,9 @@ function App() {
 
   return (
     <Desktop>
-      <MenuBar />
+      {!isMobile && <MenuBar />}
       <WindowManager />
-      <Dock />
+      {!isMobile && <Dock />}
     </Desktop>
   );
 }
