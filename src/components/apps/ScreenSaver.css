@@ -1,0 +1,19 @@
+/* Matrix Rain Styles */
+.matrix-column {
+    left: calc(var(--drop-x) * 1px);
+}
+
+.matrix-char {
+    opacity: var(--char-opacity);
+    color: var(--char-color);
+}
+
+/* Drift Shape Styles */
+.drift-shape {
+    left: var(--shape-x);
+    top: var(--shape-y);
+    width: calc(var(--shape-size) * 1px);
+    height: calc(var(--shape-size) * 1px);
+    background: var(--shape-color);
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,9 @@
+/* CSS for Widgets component */
+
+/* 
+ * Usage:
+ * <div className="widget-progress-bar ..." style={{ '--progress-width': `${value}%` } as React.CSSProperties} />
+ */
+.widget-progress-bar {
+    width: var(--progress-width, 0%);
+}
