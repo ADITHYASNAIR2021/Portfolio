@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# AdithyaOS Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-B73C9D?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-Currently, two official plugins are available:
+> A fully functional Web-Operating System portfolio inspired by macOS, built with modern web technologies.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Demo
 
-## React Compiler
+**[Visit AdithyaOS](https://ADITHYASNAIR2021.github.io/Portfolio)**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**AdithyaOS** is an immersive web-based operating system aimed at showcasing my portfolio in a unique and interactive way. It mimics a desktop environment complete with window management, a dock, system distinct apps, and a polished UI/UX.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🖥️ Desktop Environment
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Window Management**: Draggable, resizable, and minimizable windows with active state tracking.
+- **Dock**: macOS-style dock with magnification and bounce effects.
+- **Context Menus**: Custom right-click menus for the desktop and dock items.
+- **Dynamic Wallpapers**: Switch between beautiful backgrounds instantly.
+- **Screen Saver**: Auto-activating screen saver with "slide to unlock" functionality.
+
+### 📱 Applications
+
+- **Finder**: Navigate through a virtual file system.
+- **Terminal**: Fully functional terminal with command support (try `help`).
+- **VS Code**: Embedded code editor experience.
+- **Music**: Interactive music player with a canvas-based audio visualizer.
+- **Maps**: Interactive maps integration.
+- **GitHub Explorer**: Browse my repositories directly within the OS.
+- **AI Assistant**: Groq-powered AI helper for diverse tasks.
+- **System Settings**: Customize the look and feel of the OS.
+- **Utility Apps**: Calculator, Calendar, Notes, Reminders, Photos, and more.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [React 19](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Backend/DB**: [Supabase](https://supabase.com/) & [Groq SDK](https://groq.com/)
+
+## 📦 Installation
+
+To run this project locally:
+
+1. **Clone the repository**
+
+    ```bash
+    git clone https://github.com/ADITHYASNAIR2021/Portfolio.git
+    cd Portfolio
+    ```
+
+2. **Install Dependencies**
+
+    ```bash
+    npm install
+    ```
+
+3. **Run Development Server**
+
+    ```bash
+    npm run dev
+    ```
+
+## 🚀 Deployment
+
+This project is configured for deployment on GitHub Pages.
+
+```bash
+npm run deploy
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📄 License
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This project is open source and available under the [MIT License](LICENSE).
