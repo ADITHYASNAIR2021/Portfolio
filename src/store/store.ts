@@ -29,6 +29,9 @@ interface OSState {
     volume: number;
     setVolume: (value: number) => void;
 
+    soundEnabled: boolean;
+    toggleSound: () => void;
+
     wifi: boolean;
     toggleWifi: () => void;
 
@@ -125,6 +128,13 @@ export const useOSStore = create<OSState>((set) => ({
         setLocalStorage('os_volume', value);
         set({ volume: value });
     },
+
+    soundEnabled: getLocalStorage('os_sound_enabled', true),
+    toggleSound: () => set((state) => {
+        const newVal = !state.soundEnabled;
+        setLocalStorage('os_sound_enabled', newVal);
+        return { soundEnabled: newVal };
+    }),
 
     wifi: getLocalStorage('os_wifi', true),
     toggleWifi: () => set((state) => {

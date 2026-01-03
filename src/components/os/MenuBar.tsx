@@ -143,8 +143,8 @@ export const MenuBar = () => {
                 break;
             case 'new-window':
                 // Allow opening a new Finder window if active app is Finder (or desktop), otherwise simulate new window
-                if (!activeWindow || activeWindow.appId === 'finder') {
-                    openWindow('finder', 'Finder', <Finder />, true);
+                if (!activeWindow || activeWindow.id === 'finder') {
+                    openWindow('finder', 'Finder', <Finder />);
                 } else {
                     showToast("New Window");
                 }
@@ -199,10 +199,7 @@ export const MenuBar = () => {
                 if (activeWindowId) maximizeWindow(activeWindowId);
                 break;
             case 'bring-all-to-front':
-                if (activeWindow?.appId) {
-                    useOSStore.getState().bringAllToFront(activeWindow.appId);
-                    showToast("Brought all to front");
-                }
+                // Not implemented yet
                 break;
             default:
                 break;

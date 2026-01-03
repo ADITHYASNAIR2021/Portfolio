@@ -7,7 +7,7 @@ import { FileExplorer } from '../apps/FileExplorer';
 export const DesktopIcons = () => {
     const { files, openWindow } = useOSStore();
 
-    const handleIconClick = (file: { id: string, name: string, type: 'file' | 'folder' }) => {
+    const handleIconClick = (file: { id: string, name: string, type: 'file' | 'folder' | 'app' }) => {
         if (file.name === 'Resume.pdf') {
             openWindow('preview', 'Resume - Preview', <Preview />);
         } else if (file.name === 'Namude_Yatra.deck') {

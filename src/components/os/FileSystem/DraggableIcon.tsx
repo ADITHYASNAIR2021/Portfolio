@@ -9,7 +9,7 @@ import { useOSStore } from '../../../store/store';
 interface DraggableIconProps {
     id: string;
     name: string;
-    type: 'file' | 'folder';
+    type: 'file' | 'folder' | 'app';
     position?: { x: number; y: number };
     onClick?: () => void;
     menuItems?: ContextMenuItem[];

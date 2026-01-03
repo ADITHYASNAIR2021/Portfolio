@@ -21,7 +21,7 @@ export const FileExplorer = ({ id, title }: FileExplorerProps) => {
         restoreFile(fileId);
     };
 
-    const handleIconClick = (file: { id: string, name: string, type: 'file' | 'folder' }) => {
+    const handleIconClick = (file: { id: string, name: string, type: 'file' | 'folder' | 'app' }) => {
         if (file.type === 'folder') {
             openWindow(file.id, file.name, <FileExplorer id={file.id} title={file.name} />);
         }
