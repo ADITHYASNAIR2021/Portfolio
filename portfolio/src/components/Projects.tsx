@@ -91,6 +91,14 @@ function GitHubIcon() {
   );
 }
 
+function ExternalLinkIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    </svg>
+  );
+}
+
 export default function Projects() {
   return (
     <SectionWrapper id="projects" title="Projects" index="03">
@@ -107,49 +115,65 @@ export default function Projects() {
           >
             {/* Label */}
             <div className="flex items-center gap-3 mb-5">
-              <span className="font-mono text-xs tracking-widest uppercase" style={{ color: project.color }}>
+              <span
+                className="font-mono text-xs tracking-widest uppercase"
+                style={{ color: project.color }}
+              >
                 Featured Project
               </span>
-              <span className="text-muted font-mono text-xs">— {project.period}</span>
+              <span className="text-muted font-mono text-xs">
+                — {project.period}
+              </span>
             </div>
 
             {/* Card */}
             <div
-              className={`grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-border group-hover:border-opacity-50 transition-all duration-500`}
-              style={{ borderColor: `${project.color}22` }}
+              className="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden glass border border-white/5 group-hover:border-opacity-50 transition-all duration-500 card-hover"
+              style={{
+                borderColor: `${project.color}15`,
+              }}
             >
               {/* Illustration side */}
               <div
-                className={`relative bg-surface/80 min-h-[260px] flex items-center justify-center overflow-hidden ${
+                className={`relative min-h-[260px] flex items-center justify-center overflow-hidden ${
                   i % 2 === 1 ? "md:order-2" : ""
                 }`}
-                style={{ background: `radial-gradient(ellipse at center, ${project.color}08 0%, #0c101800 70%)` }}
+                style={{
+                  background: `radial-gradient(ellipse at center, ${project.color}0a 0%, transparent 70%)`,
+                }}
               >
-                <div className="w-full h-full p-4">
+                <div className="w-full h-full p-4 group-hover:scale-[1.03] transition-transform duration-700">
                   <project.Illustration />
                 </div>
                 {/* Corner accent */}
                 <div
-                  className="absolute top-0 left-0 w-24 h-24 opacity-20"
+                  className="absolute top-0 left-0 w-32 h-32 opacity-15 group-hover:opacity-25 transition-opacity"
                   style={{
                     background: `radial-gradient(circle at top left, ${project.color}, transparent 70%)`,
                   }}
+                />
+                {/* Shimmer effect on hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none shimmer"
                 />
               </div>
 
               {/* Content side */}
               <div
-                className={`p-8 bg-surface/50 flex flex-col justify-center ${
+                className={`p-8 flex flex-col justify-center ${
                   i % 2 === 1 ? "md:order-1" : ""
                 }`}
               >
                 <h3
-                  className="text-2xl md:text-3xl font-bold mb-1"
+                  className="text-2xl md:text-3xl font-bold mb-1 group-hover:text-foreground transition-colors"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {project.title}
                 </h3>
-                <p className="font-mono text-xs mb-5" style={{ color: project.color }}>
+                <p
+                  className="font-mono text-xs mb-5"
+                  style={{ color: project.color }}
+                >
                   {project.subtitle}
                 </p>
                 <p className="text-secondary text-sm leading-relaxed mb-6">
@@ -162,7 +186,7 @@ export default function Projects() {
                       className="text-xs font-mono px-2.5 py-1 rounded-full border"
                       style={{
                         color: project.color,
-                        borderColor: `${project.color}30`,
+                        borderColor: `${project.color}25`,
                         background: `${project.color}08`,
                       }}
                     >
@@ -170,16 +194,32 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-muted hover:text-accent transition-colors w-fit"
-                  aria-label={`View ${project.title} on GitHub`}
-                >
-                  <GitHubIcon />
-                  <span className="text-xs font-mono">View on GitHub</span>
-                </a>
+                <div className="flex items-center gap-4">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted hover:text-accent transition-colors group/link"
+                    aria-label={`View ${project.title} on GitHub`}
+                  >
+                    <GitHubIcon />
+                    <span className="text-xs font-mono group-hover/link:underline">
+                      Source
+                    </span>
+                  </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-muted hover:text-accent transition-colors group/link"
+                    aria-label={`View ${project.title} live`}
+                  >
+                    <ExternalLinkIcon />
+                    <span className="text-xs font-mono group-hover/link:underline">
+                      Details
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -203,58 +243,69 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-3 gap-5">
           {otherProjects.map((project, i) => (
-            <motion.div
+            <motion.a
               key={project.title}
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="group flex flex-col bg-surface/40 border border-border rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300"
-              style={{ borderColor: `${project.color}15` }}
+              className="group flex flex-col glass border border-white/5 rounded-xl overflow-hidden card-hover cursor-pointer"
             >
               {/* Mini illustration */}
               <div
                 className="relative h-[160px] flex items-center justify-center overflow-hidden"
-                style={{ background: `radial-gradient(ellipse at center, ${project.color}08 0%, transparent 80%)` }}
+                style={{
+                  background: `radial-gradient(ellipse at center, ${project.color}08 0%, transparent 80%)`,
+                }}
               >
-                <div className="w-full h-full p-2 scale-90 origin-center">
+                <div className="w-full h-full p-2 scale-90 origin-center group-hover:scale-95 transition-transform duration-500">
                   <project.Illustration />
                 </div>
               </div>
 
               {/* Card body */}
-              <div className="p-5 flex flex-col flex-1 border-t border-border">
+              <div className="p-5 flex flex-col flex-1 border-t border-white/5">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-xs text-muted">{project.period}</span>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted group-hover:text-accent transition-colors"
-                    aria-label={`View ${project.title} on GitHub`}
-                  >
-                    <GitHubIcon />
-                  </a>
+                  <span className="font-mono text-xs text-muted">
+                    {project.period}
+                  </span>
+                  <span className="text-muted group-hover:text-accent transition-colors">
+                    <ExternalLinkIcon />
+                  </span>
                 </div>
                 <h4
                   className="text-lg font-bold mb-1 group-hover:text-accent transition-colors"
-                  style={{ fontFamily: "var(--font-space-grotesk)", color: project.color }}
+                  style={{
+                    fontFamily: "var(--font-space-grotesk)",
+                    color: project.color,
+                  }}
                 >
                   {project.title}
                 </h4>
-                <p className="text-muted text-xs font-mono mb-3">{project.subtitle}</p>
+                <p className="text-muted text-xs font-mono mb-3">
+                  {project.subtitle}
+                </p>
                 <p className="text-secondary text-sm leading-relaxed flex-1 mb-4">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-auto">
                   {project.tech.map((t) => (
-                    <span key={t} className="text-xs font-mono text-muted">
+                    <span
+                      key={t}
+                      className="text-xs font-mono text-muted"
+                    >
                       {t}
+                      {t !== project.tech[project.tech.length - 1] && (
+                        <span className="text-border ml-1.5">·</span>
+                      )}
                     </span>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </motion.div>

@@ -48,7 +48,26 @@ export default function Hero() {
 
       {/* Radial gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06080d] z-[1]" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-accent/5 rounded-full blur-[120px] z-0" />
+      
+      {/* Animated gradient orbs */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.06, 0.1, 0.06],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] rounded-full blur-[120px] z-0"
+        style={{ background: "radial-gradient(ellipse, rgba(0,212,255,0.15) 0%, transparent 70%)" }}
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.04, 0.08, 0.04],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute top-1/3 right-1/4 w-[600px] h-[400px] rounded-full blur-[100px] z-0"
+        style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)" }}
+      />
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -58,7 +77,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <p className="font-mono text-accent text-sm md:text-base mb-6 tracking-widest uppercase">
-            &gt; initializing portfolio...
+            &gt; Hello, world. I&apos;m &mdash;
           </p>
         </motion.div>
 
@@ -70,7 +89,7 @@ export default function Hero() {
           style={{ fontFamily: "var(--font-space-grotesk)" }}
         >
           Adithya{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-violet">
+          <span className="gradient-text">
             S Nair
           </span>
         </motion.h1>
@@ -110,16 +129,37 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="px-8 py-3 bg-accent/10 border border-accent text-accent font-mono text-sm hover:bg-accent/20 transition-all rounded glow"
+            className="group relative px-8 py-3.5 bg-gradient-to-r from-accent/15 to-violet/15 border border-accent/40 text-accent font-mono text-sm hover:border-accent hover:from-accent/25 hover:to-violet/25 transition-all duration-300 rounded-lg glow overflow-hidden"
           >
-            View My Work
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              View My Work
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
           </a>
           <a
             href="#contact"
-            className="px-8 py-3 border border-border text-secondary font-mono text-sm hover:border-accent hover:text-accent transition-all rounded"
+            className="group px-8 py-3.5 border border-border text-secondary font-mono text-sm hover:border-accent/50 hover:text-accent transition-all duration-300 rounded-lg"
           >
-            Get In Touch
+            <span className="flex items-center justify-center gap-2">
+              Get In Touch
+              <svg className="w-4 h-4 group-hover:translate-y-px transition-transform opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
           </a>
+        </motion.div>
+
+        {/* Status badge */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3 }}
+          className="mt-12 inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/5"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
+          <span className="text-muted text-xs font-mono">Open to opportunities</span>
         </motion.div>
 
         {/* Scroll indicator */}

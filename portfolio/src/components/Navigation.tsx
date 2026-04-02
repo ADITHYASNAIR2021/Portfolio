@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -15,6 +15,14 @@ const navItems = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -22,21 +30,53 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // IntersectionObserver for active section
+  const handleIntersect = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(`#${entry.target.id}`);
+        }
+      });
+    },
+    []
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersect, {
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    });
+
+    navItems.forEach((item) => {
+      const el = document.querySelector(item.href);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [handleIntersect]);
+
   return (
     <>
+      {/* Scroll progress bar */}
+      <motion.div
+        className="scroll-progress"
+        style={{ scaleX, transformOrigin: "0%" }}
+      />
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#06080d]/80 backdrop-blur-xl border-b border-border"
+            ? "glass-strong border-b border-white/5"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 group">
-            <span className="font-mono text-accent font-bold text-lg tracking-tight">
+            <span className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center font-mono text-accent font-bold text-sm group-hover:bg-accent/20 group-hover:border-accent/40 transition-all">
               A
             </span>
             <span className="font-mono text-secondary text-sm hidden sm:inline group-hover:text-accent transition-colors">
@@ -53,13 +93,29 @@ export default function Navigation() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * i, duration: 0.4 }}
-                className="px-4 py-2 text-sm text-secondary hover:text-accent transition-colors font-mono relative group"
+                className={`px-4 py-2 text-sm transition-colors font-mono relative group ${
+                  activeSection === item.href
+                    ? "text-accent"
+                    : "text-secondary hover:text-accent"
+                }`}
               >
                 <span className="text-accent/50 mr-1 text-xs">
                   0{i + 1}.
                 </span>
                 {item.label}
-                <span className="absolute bottom-0 left-4 right-4 h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                {/* Active indicator */}
+                <motion.span
+                  className="absolute bottom-0 left-4 right-4 h-px bg-accent"
+                  initial={false}
+                  animate={{
+                    scaleX: activeSection === item.href ? 1 : 0,
+                    opacity: activeSection === item.href ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  style={{ transformOrigin: "left" }}
+                />
+                {/* Hover indicator */}
+                <span className="absolute bottom-0 left-4 right-4 h-px bg-accent/40 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
               </motion.a>
             ))}
             <motion.a
@@ -68,9 +124,10 @@ export default function Navigation() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.4 }}
-              className="ml-4 px-4 py-2 border border-accent text-accent text-sm font-mono hover:bg-accent/10 transition-colors rounded"
+              className="ml-4 px-4 py-2 border border-accent text-accent text-sm font-mono hover:bg-accent/10 transition-all rounded group"
             >
-              Resume
+              <span className="group-hover:mr-1 transition-all">Resume</span>
+              <span className="inline-block group-hover:translate-x-0.5 transition-transform opacity-0 group-hover:opacity-100 text-xs">↗</span>
             </motion.a>
           </div>
 
@@ -104,7 +161,7 @@ export default function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-[#06080d]/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-6"
+            className="fixed inset-0 z-40 glass-strong md:hidden flex flex-col items-center justify-center gap-6"
           >
             {navItems.map((item, i) => (
               <motion.a
@@ -114,7 +171,11 @@ export default function Navigation() {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.05 * i }}
-                className="text-2xl font-mono text-secondary hover:text-accent transition-colors"
+                className={`text-2xl font-mono transition-colors ${
+                  activeSection === item.href
+                    ? "text-accent"
+                    : "text-secondary hover:text-accent"
+                }`}
               >
                 <span className="text-accent/50 mr-2 text-sm">0{i + 1}.</span>
                 {item.label}

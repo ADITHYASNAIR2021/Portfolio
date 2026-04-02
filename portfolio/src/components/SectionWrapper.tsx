@@ -9,6 +9,7 @@ interface Props {
   index: string;
   children: ReactNode;
   className?: string;
+  alternate?: boolean;
 }
 
 export default function SectionWrapper({
@@ -17,9 +18,13 @@ export default function SectionWrapper({
   index,
   children,
   className = "",
+  alternate = false,
 }: Props) {
   return (
-    <section id={id} className={`py-24 md:py-32 px-6 ${className}`}>
+    <section
+      id={id}
+      className={`py-24 md:py-32 px-6 ${alternate ? "section-alt" : ""} ${className}`}
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -35,7 +40,13 @@ export default function SectionWrapper({
           >
             {title}
           </h2>
-          <div className="flex-1 h-px bg-border ml-4" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex-1 h-px bg-gradient-to-r from-border to-transparent ml-4 origin-left"
+          />
         </motion.div>
         {children}
       </div>
