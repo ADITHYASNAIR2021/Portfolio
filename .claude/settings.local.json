@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest portfolio --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm)",
+      "Bash(npm install:*)",
+      "Bash(mkdir -p \"D:/Portfolio/portfolio/public/images\")",
+      "Bash(cp \"D:/Portfolio/Image/adithya.jpg\" \"D:/Portfolio/portfolio/public/images/adithya.jpg\")",
+      "Bash(cp \"D:/Portfolio/Image/DIRR4755_cleanup.jpeg\" \"D:/Portfolio/portfolio/public/images/hero-bg.jpeg\")",
+      "Bash(cp \"D:/Portfolio/Resume/Adithya_S_Nair_FlowCV_Resume_2026-04-02.pdf\" \"D:/Portfolio/portfolio/public/Adithya_S_Nair_Resume.pdf\")",
+      "Bash(npx next:*)",
+      "Bash(npm run:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(taskkill //F //IM node.exe)"
+    ]
+  }
+}
