@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* ── Tailwind v4: class-based dark mode ── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Aurora animation for animate-aurora utility ── */
+@theme inline {
+  --animation-aurora: aurora 60s linear infinite;
+}
+@keyframes aurora {
+  from { background-position: 50% 50%, 50% 50%; }
+  to   { background-position: 350% 50%, 350% 50%; }
+}
+
 :root {
   --bg-primary: #06080d;
   --bg-secondary: #0c1018;
@@ -276,4 +288,232 @@ body {
 /* ═══ Section alternating bg ═══ */
 .section-alt {
   background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(12, 16, 24, 0.5) 50%, var(--bg-primary) 100%);
+}
+
+/* ═══ Aurora Background Orbs ═══ */
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+  pointer-events: none;
+}
+.aurora-orb-1 {
+  width: clamp(280px, 50vw, 640px);
+  height: clamp(280px, 50vw, 640px);
+  top: -15%;
+  right: -8%;
+  background: radial-gradient(circle at 40% 40%, rgba(0,212,255,0.18) 0%, rgba(0,212,255,0.05) 55%, transparent 75%);
+  filter: blur(60px);
+  animation: aurora-drift-1 16s ease-in-out infinite;
+}
+.aurora-orb-2 {
+  width: clamp(220px, 42vw, 540px);
+  height: clamp(220px, 42vw, 540px);
+  bottom: -12%;
+  left: -8%;
+  background: radial-gradient(circle at 60% 60%, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0.05) 55%, transparent 75%);
+  filter: blur(70px);
+  animation: aurora-drift-2 20s ease-in-out infinite;
+}
+.aurora-orb-3 {
+  width: clamp(180px, 32vw, 440px);
+  height: clamp(180px, 32vw, 440px);
+  top: 40%;
+  left: 25%;
+  background: radial-gradient(circle at 50% 50%, rgba(0,212,255,0.09) 0%, transparent 65%);
+  filter: blur(80px);
+  animation: aurora-drift-3 24s ease-in-out infinite;
+}
+@keyframes aurora-drift-1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  25% { transform: translate(-50px,35px) scale(1.06); }
+  50% { transform: translate(-15px,70px) scale(0.94); }
+  75% { transform: translate(35px,15px) scale(1.08); }
+}
+@keyframes aurora-drift-2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(65px,-55px) scale(1.1); }
+  66% { transform: translate(-35px,40px) scale(0.92); }
+}
+@keyframes aurora-drift-3 {
+  0%,100% { transform: translate(0,0) scale(1); opacity:0.7; }
+  50% { transform: translate(-70px,55px) scale(1.25); opacity:1; }
+}
+
+/* ═══ Liquid Glass Buttons ═══ */
+.liquid-glass-btn {
+  position: relative;
+  padding: 0.72rem 1.65rem;
+  border-radius: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+.liquid-glass-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.09) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.liquid-glass-btn:hover::after { opacity: 1; }
+.liquid-glass-btn-primary {
+  background: linear-gradient(135deg, rgba(0,212,255,0.11) 0%, rgba(139,92,246,0.1) 100%);
+  border: 1px solid rgba(0,212,255,0.32);
+  color: var(--accent);
+  box-shadow: 0 0 18px rgba(0,212,255,0.07), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.liquid-glass-btn-primary:hover {
+  background: linear-gradient(135deg, rgba(0,212,255,0.2) 0%, rgba(139,92,246,0.18) 100%);
+  border-color: rgba(0,212,255,0.6);
+  box-shadow: 0 0 28px rgba(0,212,255,0.16), 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.09);
+  transform: translateY(-2px);
+}
+.liquid-glass-btn-secondary {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: var(--text-secondary);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.liquid-glass-btn-secondary:hover {
+  background: rgba(0,212,255,0.05);
+  border-color: rgba(0,212,255,0.22);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ═══ Bento Grid ═══ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+.bento-cell {
+  background: rgba(12,16,24,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bento-cell:hover {
+  border-color: rgba(0,212,255,0.16);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.bento-cell-wide { grid-column: span 2; }
+.bento-cell-accent {
+  border-color: rgba(0,212,255,0.1);
+  background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(12,16,24,0.55) 100%);
+}
+.bento-cell-violet {
+  border-color: rgba(139,92,246,0.1);
+  background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(12,16,24,0.55) 100%);
+}
+
+/* ═══ Shimmer Text (sweep effect for headings) ═══ */
+.shimmer-heading {
+  background: linear-gradient(
+    110deg,
+    var(--text-primary) 0%,
+    var(--text-primary) 28%,
+    var(--accent) 46%,
+    var(--violet) 60%,
+    var(--text-primary) 78%,
+    var(--text-primary) 100%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-sweep 6s ease-in-out infinite;
+}
+@keyframes shimmer-sweep {
+  0%,100% { background-position: 100% 0%; }
+  50% { background-position: 0% 0%; }
+}
+
+/* ═══ SVG Path Draw animation ═══ */
+@keyframes path-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ═══ AuroraBackground color variables (Tailwind v3-compat naming) ═══ */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --violet-200: #ddd6fe;
+}
+
+/* ═══ CpuArchitecture — particle animations ═══ */
+.cpu-architecture {
+  offset-anchor: 10px 0px;
+  animation: animation-path;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.75, -0.01, 0, 0.99);
+}
+
+.cpu-line-1 {
+  offset-path: path("M 10 20 h 79.5 q 5 0 5 5 v 30");
+  animation-duration: 5s;
+  animation-delay: 1s;
+}
+.cpu-line-2 {
+  offset-path: path("M 180 10 h -69.7 q -5 0 -5 5 v 40");
+  animation-delay: 6s;
+  animation-duration: 2s;
+}
+.cpu-line-3 {
+  offset-path: path("M 130 20 v 21.8 q 0 5 -5 5 h -25");
+  animation-delay: 4s;
+  animation-duration: 6s;
+}
+.cpu-line-4 {
+  offset-path: path("M 170 80 v -21.8 q 0 -5 -5 -5 h -65");
+  animation-delay: 3s;
+  animation-duration: 3s;
+}
+.cpu-line-5 {
+  offset-path: path("M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35");
+  animation-delay: 9s;
+  animation-duration: 4s;
+}
+.cpu-line-6 {
+  offset-path: path("M 94.8 95 v -46");
+  animation-delay: 3s;
+  animation-duration: 7s;
+}
+.cpu-line-7 {
+  offset-path: path("M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28");
+  animation-delay: 4s;
+  animation-duration: 4s;
+}
+.cpu-line-8 {
+  offset-path: path("M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 35");
+  animation-delay: 3s;
+  animation-duration: 3s;
+}
+
+@keyframes animation-path {
+  0%   { offset-distance: 0%;   }
+  100% { offset-distance: 100%; }
 }

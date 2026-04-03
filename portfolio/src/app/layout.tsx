@@ -49,9 +49,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${jetMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${jetMono.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
     >
-      <body className="grain min-h-full flex flex-col">{children}</body>
+      <body className="grain min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

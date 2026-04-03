@@ -8,22 +8,32 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-10 px-6 border-t border-white/5">
+    <footer className="py-10 px-6 border-t border-white/5 relative overflow-hidden">
+      {/* Subtle aurora glow at bottom */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 100%, rgba(0,212,255,0.06) 0%, transparent 70%)",
+          filter: "blur(40px)",
+        }}
+      />
+
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="max-w-6xl mx-auto"
+        className="max-w-6xl mx-auto relative z-10"
       >
         {/* Back to top */}
         <div className="flex justify-center mb-8">
           <button
             onClick={scrollToTop}
-            className="group flex items-center gap-2 px-4 py-2 glass border border-white/5 rounded-full hover:border-accent/20 transition-all"
+            className="liquid-glass-btn liquid-glass-btn-secondary px-5 py-2 rounded-full"
             aria-label="Back to top"
           >
             <svg
-              className="w-4 h-4 text-muted group-hover:text-accent group-hover:-translate-y-0.5 transition-all"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -35,9 +45,7 @@ export default function Footer() {
                 d="M5 15l7-7 7 7"
               />
             </svg>
-            <span className="text-muted group-hover:text-accent text-xs font-mono transition-colors">
-              Back to top
-            </span>
+            <span className="text-xs">Back to top</span>
           </button>
         </div>
 
@@ -72,15 +80,10 @@ export default function Footer() {
 
           {/* Credit */}
           <p className="text-muted text-xs font-mono text-center">
-            Designed & Built by{" "}
+            Designed &amp; Built by{" "}
             <span className="text-secondary hover:text-accent transition-colors">
               Adithya S Nair
             </span>
-          </p>
-
-          {/* Easter egg hint */}
-          <p className="text-muted/40 text-[10px] font-mono text-center">
-            hint: try the konami code ↑↑↓↓←→←→ba
           </p>
         </div>
       </motion.div>
