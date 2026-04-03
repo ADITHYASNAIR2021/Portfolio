@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import {
   LensAIIllustration,
@@ -99,216 +100,159 @@ function ExternalLinkIcon() {
   );
 }
 
+type Tab = "featured" | "other";
+
 export default function Projects() {
+  const [activeTab, setActiveTab] = useState<Tab>("featured");
+
   return (
     <SectionWrapper id="projects" title="Projects" index="03">
-      {/* Featured projects */}
-      <div className="space-y-20 mb-24">
-        {featuredProjects.map((project, i) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: i * 0.05 }}
-            className="group"
+
+      {/* Tab switcher */}
+      <div className="flex items-center gap-1 mb-12 border-b border-border/50 pb-0 -mt-4 overflow-x-auto">
+        {(["featured", "other"] as Tab[]).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`relative px-5 py-3 text-sm font-mono transition-colors whitespace-nowrap ${
+              activeTab === tab ? "text-accent" : "text-muted hover:text-secondary"
+            }`}
           >
-            {/* Label */}
-            <div className="flex items-center gap-3 mb-5">
-              <span
-                className="font-mono text-xs tracking-widest uppercase"
-                style={{ color: project.color }}
-              >
-                Featured Project
-              </span>
-              <span className="text-muted font-mono text-xs">
-                — {project.period}
-              </span>
-            </div>
-
-            {/* Card */}
-            <div
-              className="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden glass border border-white/5 group-hover:border-opacity-50 transition-all duration-500 card-hover"
-              style={{
-                borderColor: `${project.color}15`,
-              }}
-            >
-              {/* Illustration side */}
-              <div
-                className={`relative min-h-[260px] flex items-center justify-center overflow-hidden ${
-                  i % 2 === 1 ? "md:order-2" : ""
-                }`}
-                style={{
-                  background: `radial-gradient(ellipse at center, ${project.color}0a 0%, transparent 70%)`,
-                }}
-              >
-                <div className="w-full h-full p-4 group-hover:scale-[1.03] transition-transform duration-700">
-                  <project.Illustration />
-                </div>
-                {/* Corner accent */}
-                <div
-                  className="absolute top-0 left-0 w-32 h-32 opacity-15 group-hover:opacity-25 transition-opacity"
-                  style={{
-                    background: `radial-gradient(circle at top left, ${project.color}, transparent 70%)`,
-                  }}
-                />
-                {/* Shimmer effect on hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none shimmer"
-                />
-              </div>
-
-              {/* Content side */}
-              <div
-                className={`p-8 flex flex-col justify-center ${
-                  i % 2 === 1 ? "md:order-1" : ""
-                }`}
-              >
-                <h3
-                  className="text-2xl md:text-3xl font-bold mb-1 group-hover:text-foreground transition-colors"
-                  style={{ fontFamily: "var(--font-space-grotesk)" }}
-                >
-                  {project.title}
-                </h3>
-                <p
-                  className="font-mono text-xs mb-5"
-                  style={{ color: project.color }}
-                >
-                  {project.subtitle}
-                </p>
-                <p className="text-secondary text-sm leading-relaxed mb-6">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs font-mono px-2.5 py-1 rounded-full border"
-                      style={{
-                        color: project.color,
-                        borderColor: `${project.color}25`,
-                        background: `${project.color}08`,
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-muted hover:text-accent transition-colors group/link"
-                    aria-label={`View ${project.title} on GitHub`}
-                  >
-                    <GitHubIcon />
-                    <span className="text-xs font-mono group-hover/link:underline">
-                      Source
-                    </span>
-                  </a>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-muted hover:text-accent transition-colors group/link"
-                    aria-label={`View ${project.title} live`}
-                  >
-                    <ExternalLinkIcon />
-                    <span className="text-xs font-mono group-hover/link:underline">
-                      Details
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            {tab === "featured" ? "Featured" : "Other Projects"}
+            {activeTab === tab && (
+              <motion.span
+                layoutId="tab-underline"
+                className="absolute bottom-0 left-0 right-0 h-px bg-accent"
+                transition={{ type: "spring", stiffness: 400, damping: 35 }}
+              />
+            )}
+          </button>
         ))}
       </div>
 
-      {/* Other projects */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="flex items-center gap-4 mb-10">
-          <div className="flex-1 h-px bg-border" />
-          <span className="font-mono text-muted text-xs tracking-widest uppercase whitespace-nowrap">
-            Other Noteworthy Projects
-          </span>
-          <div className="flex-1 h-px bg-border" />
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-5">
-          {otherProjects.map((project, i) => (
-            <motion.a
-              key={project.title}
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="group flex flex-col glass border border-white/5 rounded-xl overflow-hidden card-hover cursor-pointer"
-            >
-              {/* Mini illustration */}
-              <div
-                className="relative h-[160px] flex items-center justify-center overflow-hidden"
-                style={{
-                  background: `radial-gradient(ellipse at center, ${project.color}08 0%, transparent 80%)`,
-                }}
-              >
-                <div className="w-full h-full p-2 scale-90 origin-center group-hover:scale-95 transition-transform duration-500">
-                  <project.Illustration />
-                </div>
-              </div>
-
-              {/* Card body */}
-              <div className="p-5 flex flex-col flex-1 border-t border-white/5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-xs text-muted">
-                    {project.period}
+      <AnimatePresence mode="wait">
+        {activeTab === "featured" ? (
+          <motion.div
+            key="featured"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="space-y-16"
+          >
+            {featuredProjects.map((project, i) => (
+              <div key={project.title} className="group">
+                {/* Period label */}
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="font-mono text-xs tracking-widest uppercase" style={{ color: project.color }}>
+                    Featured
                   </span>
-                  <span className="text-muted group-hover:text-accent transition-colors">
-                    <ExternalLinkIcon />
-                  </span>
+                  <span className="text-muted font-mono text-xs">— {project.period}</span>
                 </div>
-                <h4
-                  className="text-lg font-bold mb-1 group-hover:text-accent transition-colors"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    color: project.color,
-                  }}
+
+                {/* Card */}
+                <div
+                  className="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden glass border transition-all duration-500 card-hover"
+                  style={{ borderColor: `${project.color}18` }}
                 >
-                  {project.title}
-                </h4>
-                <p className="text-muted text-xs font-mono mb-3">
-                  {project.subtitle}
-                </p>
-                <p className="text-secondary text-sm leading-relaxed flex-1 mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5 mt-auto">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs font-mono text-muted"
-                    >
-                      {t}
-                      {t !== project.tech[project.tech.length - 1] && (
-                        <span className="text-border ml-1.5">·</span>
-                      )}
-                    </span>
-                  ))}
+                  {/* Illustration */}
+                  <div
+                    className={`relative min-h-[240px] flex items-center justify-center overflow-hidden ${i % 2 === 1 ? "md:order-2" : ""}`}
+                    style={{ background: `radial-gradient(ellipse at center, ${project.color}09 0%, transparent 70%)` }}
+                  >
+                    <div className="w-full h-full p-4 group-hover:scale-[1.03] transition-transform duration-700">
+                      <project.Illustration />
+                    </div>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none shimmer" />
+                  </div>
+
+                  {/* Content */}
+                  <div className={`p-7 md:p-8 flex flex-col justify-center ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-1" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                      {project.title}
+                    </h3>
+                    <p className="font-mono text-xs mb-5" style={{ color: project.color }}>{project.subtitle}</p>
+                    <p className="text-secondary text-sm leading-relaxed mb-6">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((t) => (
+                        <span key={t} className="text-xs font-mono px-2.5 py-1 rounded-full border"
+                          style={{ color: project.color, borderColor: `${project.color}25`, background: `${project.color}08` }}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-muted hover:text-accent transition-colors group/link">
+                        <GitHubIcon />
+                        <span className="text-xs font-mono group-hover/link:underline">Source</span>
+                      </a>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-muted hover:text-accent transition-colors group/link">
+                        <ExternalLinkIcon />
+                        <span className="text-xs font-mono group-hover/link:underline">Details</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </motion.a>
-          ))}
-        </div>
-      </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="other"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="grid sm:grid-cols-2 md:grid-cols-3 gap-5"
+          >
+            {otherProjects.map((project, i) => (
+              <motion.a
+                key={project.title}
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: i * 0.08 }}
+                className="group flex flex-col glass border border-white/5 rounded-xl overflow-hidden card-hover cursor-pointer"
+              >
+                {/* Mini illustration */}
+                <div
+                  className="relative h-[150px] flex items-center justify-center overflow-hidden"
+                  style={{ background: `radial-gradient(ellipse at center, ${project.color}08 0%, transparent 80%)` }}
+                >
+                  <div className="w-full h-full p-2 scale-90 origin-center group-hover:scale-95 transition-transform duration-500">
+                    <project.Illustration />
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="p-5 flex flex-col flex-1 border-t border-white/5">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="font-mono text-xs text-muted">{project.period}</span>
+                    <span className="text-muted group-hover:text-accent transition-colors"><ExternalLinkIcon /></span>
+                  </div>
+                  <h4 className="text-lg font-bold mb-1 group-hover:text-accent transition-colors"
+                    style={{ fontFamily: "var(--font-space-grotesk)", color: project.color }}>
+                    {project.title}
+                  </h4>
+                  <p className="text-muted text-xs font-mono mb-3">{project.subtitle}</p>
+                  <p className="text-secondary text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {project.tech.map((t, idx) => (
+                      <span key={t} className="text-xs font-mono text-muted">
+                        {t}{idx < project.tech.length - 1 && <span className="text-border ml-1.5">·</span>}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SectionWrapper>
   );
 }

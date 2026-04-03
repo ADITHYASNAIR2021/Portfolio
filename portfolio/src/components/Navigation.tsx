@@ -99,9 +99,6 @@ export default function Navigation() {
                     : "text-secondary hover:text-accent"
                 }`}
               >
-                <span className="text-accent/50 mr-1 text-xs">
-                  0{i + 1}.
-                </span>
                 {item.label}
                 {/* Active indicator */}
                 <motion.span
@@ -177,7 +174,6 @@ export default function Navigation() {
                     : "text-secondary hover:text-accent"
                 }`}
               >
-                <span className="text-accent/50 mr-2 text-sm">0{i + 1}.</span>
                 {item.label}
               </motion.a>
             ))}
