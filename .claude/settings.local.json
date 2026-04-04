@@ -11,7 +11,8 @@
       "Bash(npm run:*)",
       "mcp__Claude_Preview__preview_start",
       "Bash(taskkill //F //IM node.exe)",
-      "WebFetch(domain:21st.dev)"
+      "WebFetch(domain:21st.dev)",
+      "Bash(xargs grep:*)"
     ]
   }
 }
