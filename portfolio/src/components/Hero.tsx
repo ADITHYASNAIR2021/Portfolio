@@ -49,7 +49,7 @@ function TextCycle({ items }: { items: string[] }) {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
+    <section className="relative flex flex-col overflow-hidden">
       {/* ── AuroraBackground (21st.dev component) ── */}
       <AuroraBackground
         className="absolute inset-0 z-0"
@@ -69,7 +69,7 @@ export default function Hero() {
       </div>
 
       {/* ── Main content ── */}
-      <div className="relative z-10 flex-1 flex items-center w-full">
+      <div className="relative z-10 w-full pt-28 pb-12 md:min-h-[calc(100svh-56px)] md:flex md:items-center md:pt-0 md:pb-0">
         <div className="max-w-6xl mx-auto px-6 w-full">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 
@@ -118,9 +118,11 @@ export default function Hero() {
                 transition={{ duration: 0.6, delay: 0.45 }}
                 className="text-secondary text-base md:text-lg max-w-lg mb-10 leading-relaxed"
               >
-                I build LLM pipelines, RAG systems, and vision analysis tools
-                for medical AI &mdash; DICOM imaging, multi-provider LLMs, and
-                FastAPI services in production.
+                For the past two years I&apos;ve been deep in medical AI &mdash;
+                building the systems that read DICOM scans, reason over clinical
+                data, and write structured radiology reports. It&apos;s a niche
+                where the gap between &ldquo;works in demo&rdquo; and
+                &ldquo;works reliably&rdquo; is widest.
               </motion.p>
 
               {/* Liquid glass CTA buttons */}
@@ -241,15 +243,16 @@ export default function Hero() {
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center gap-x-8 gap-y-2">
           <span className="font-mono text-xs text-muted">
-            ~2 yrs production experience
+            2 yrs in production
           </span>
           <span className="text-border hidden sm:block">&middot;</span>
           <span className="font-mono text-xs text-muted">
-            Medical AI &middot; LLMs &middot; RAG
+            currently shipping{" "}
+            <span className="text-accent/70">LensAI</span>
           </span>
           <span className="text-border hidden sm:block">&middot;</span>
           <span className="font-mono text-xs text-muted">
-            FastAPI &middot; Python &middot; DICOM
+            open to remote roles globally
           </span>
         </div>
       </motion.div>

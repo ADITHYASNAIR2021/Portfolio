@@ -69,48 +69,64 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-secondary text-base leading-relaxed mb-10"
           >
-            Currently open to new roles. Whether it&apos;s a job opportunity, a
-            project you&apos;re building, or just a question — drop me a line and
-            I&apos;ll get back to you.
+            Currently open to new roles &mdash; full-time, contract, or anything
+            in between. Whether you have a job, a project, or just want to talk
+            about something I&apos;ve built, I&apos;m easy to reach and I
+            actually reply.
           </motion.p>
 
           {/* Email — prominent */}
-          <motion.a
-            href="mailto:adithyasnair2021@gmail.com"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block font-mono text-accent text-lg hover:text-accent/80 transition-colors mb-10 border-b border-accent/30 hover:border-accent/60 pb-0.5"
-          >
-            adithyasnair2021@gmail.com
-          </motion.a>
-
-          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-12"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-10 flex items-center gap-3"
           >
             <a
               href="mailto:adithyasnair2021@gmail.com"
-              className="liquid-glass-btn liquid-glass-btn-primary px-10 py-4 text-sm"
+              className="liquid-glass-btn liquid-glass-btn-primary text-sm"
             >
-              Send a message
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
+              Send a message
+            </a>
+            <a
+              href="/Adithya_S_Nair_Resume.pdf"
+              target="_blank"
+              className="liquid-glass-btn liquid-glass-btn-secondary text-sm"
+            >
+              Resume
+              <svg className="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </a>
           </motion.div>
+
+          {/* Email text */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="font-mono text-xs text-muted mb-10"
+          >
+            or write directly:{" "}
+            <a
+              href="mailto:adithyasnair2021@gmail.com"
+              className="text-secondary hover:text-accent transition-colors"
+            >
+              adithyasnair2021@gmail.com
+            </a>
+          </motion.p>
 
           {/* Social links */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
             className="flex items-center justify-center md:justify-start gap-5"
           >
             {socialLinks.map((link) => (

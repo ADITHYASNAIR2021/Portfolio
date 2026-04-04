@@ -8,6 +8,7 @@ import Leadership from "@/components/Leadership";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import EasterEgg from "@/components/EasterEgg";
+import PageLoader from "@/components/PageLoader";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       <Contact />
       <Footer />
       <EasterEgg />
+      <PageLoader />
     </main>
   );
 }

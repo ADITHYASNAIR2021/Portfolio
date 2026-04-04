@@ -23,32 +23,34 @@ export default function About() {
           className="md:col-span-3 space-y-5"
         >
           <p className="text-secondary leading-relaxed text-base md:text-lg">
-            I&apos;m an AI Engineer with close to two years of production
-            experience building and maintaining core components of a{" "}
-            <span className="text-accent">medical AI platform</span> — spanning
-            LLM pipeline design, RAG workflows, prompt engineering, model
-            evaluation, and FastAPI backend services.
+            Most of what I do is make LLMs useful in{" "}
+            <span className="text-accent">production</span> — not demo-useful,
+            but actually-reliable useful. For the past two years that&apos;s meant
+            building and maintaining the AI core of a{" "}
+            <span className="text-foreground font-medium">medical reporting platform</span>{" "}
+            at Doctreen, where the margin for error is low and the edge cases
+            are everywhere.
           </p>
           <p className="text-secondary leading-relaxed">
-            At{" "}
-            <span className="text-foreground font-medium">Doctreen</span>, I
-            work on AI-driven medical report generation, integrating multiple LLM
-            providers (OpenAI, HuggingFace, Nebius, OVH) and designing vision
-            analysis pipelines for DICOM medical imaging across 10+ modalities.
+            The day-to-day involves LLM pipeline design, RAG workflows, and
+            vision analysis for DICOM medical imaging across 10+ modalities. We
+            use multiple providers &mdash; OpenAI, HuggingFace, Nebius, OVH
+            &mdash; each with their own tradeoffs, and I&apos;ve learned more
+            about evaluation methodology than I expected when I started.
           </p>
           <p className="text-secondary leading-relaxed">
-            Beyond engineering, I led the{" "}
-            <span className="text-foreground font-medium">
-              ACM Student Chapter
-            </span>{" "}
-            at Amritapuri as Chairperson — organising national-level hackathons,
-            mentoring 200+ members in AI/ML, and coordinating the ICPC Asia West
-            Regional Finals.
+            Separately, I spent 1.5 years running the{" "}
+            <span className="text-foreground font-medium">ACM Student Chapter</span>{" "}
+            at Amritapuri as Chairperson &mdash; organising hackathons,
+            mentoring students in AI&nbsp;/&nbsp;ML, and eventually coordinating
+            the ICPC Asia West Regional Finals, which turned out to be a very
+            different kind of systems problem.
           </p>
           <p className="text-secondary leading-relaxed">
-            Currently looking to take on harder problems — more complex pipelines,
-            different domains, or roles with more ownership. If something I&apos;ve
-            built interests you, reach out.
+            I&apos;m looking for what comes next &mdash; harder engineering
+            problems, a different domain, or a role with more ownership. If
+            you&apos;ve read this far and something looks interesting, I&apos;m
+            easy to reach.
           </p>
 
           {/* ── Bento Grid quick facts ── */}
@@ -123,6 +125,24 @@ export default function About() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald" />
               </span>
               <span className="text-foreground text-xs font-mono">Open to work</span>
+            </div>
+
+            {/* Currently building */}
+            <div className="bento-cell bento-cell-wide flex items-center gap-3">
+              <span className="text-amber shrink-0">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </span>
+              <div>
+                <p className="text-muted text-[10px] font-mono uppercase tracking-wider">Currently Building</p>
+                <p className="text-foreground text-sm font-medium">
+                  LensAI &mdash;{" "}
+                  <span className="text-secondary font-normal text-xs">
+                    browser extension that explains anything on your screen
+                  </span>
+                </p>
+              </div>
             </div>
 
             {/* Skills chip row */}

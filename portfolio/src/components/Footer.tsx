@@ -84,8 +84,9 @@ export default function Footer() {
         </div>
 
         {/* Credit */}
-        <p className="text-muted/50 text-[10px] font-mono text-center mt-6">
-          Designed &amp; Built by Adithya S Nair &middot; 2026
+        <p className="text-muted/40 text-[10px] font-mono text-center mt-6">
+          Designed &amp; built by Adithya S Nair &middot; 2026 &middot;{" "}
+          <span className="italic">no templates were harmed</span>
         </p>
       </motion.div>
     </footer>

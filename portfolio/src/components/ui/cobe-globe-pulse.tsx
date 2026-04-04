@@ -17,10 +17,8 @@ interface GlobePulseProps {
 }
 
 const defaultMarkers: PulseMarker[] = [
-  { id: "kerala",      location: [10.85,  76.27],  delay: 0,   label: "Kerala, India"         },
-  { id: "montpellier", location: [43.61,   3.88],  delay: 0.6, label: "Montpellier, France"   },
-  { id: "bengaluru",   location: [12.97,  77.59],  delay: 1.2, label: "Bengaluru, India"      },
-  { id: "london",      location: [51.51,  -0.13],  delay: 1.8, label: "London, UK"            },
+  { id: "kerala",      location: [10.85,  76.27],  delay: 0,   label: "Kerala, India"       },
+  { id: "montpellier", location: [43.61,   3.88],  delay: 0.6, label: "Montpellier, France" },
 ];
 
 export function GlobePulse({
