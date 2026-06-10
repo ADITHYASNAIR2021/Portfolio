@@ -558,6 +558,27 @@ body {
   border-color: rgba(0, 212, 255, 0.6);
 }
 
+/* ═══ 3D Tilt glare ═══ */
+.tilt-inner {
+  border-radius: 0.75rem;
+}
+.tilt-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(0, 212, 255, 0.16),
+    transparent 42%
+  );
+  opacity: var(--glare-o, 0);
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 20;
+  mix-blend-mode: screen;
+}
+
 /* ═══ Subtle card inner glow on hover ═══ */
 .card-hover::after {
   content: "";

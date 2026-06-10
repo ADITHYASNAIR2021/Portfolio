@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
+import TiltCard from "./TiltCard";
+import { featuredProjects, otherProjects, type IllustrationKey } from "@/content/portfolio";
 import {
   LensAIIllustration,
   MittiMitraIllustration,
@@ -10,79 +12,25 @@ import {
   MedReportIllustration,
   OptiHireIllustration,
   DQNIllustration,
+  VidyapathIllustration,
+  SWCMriIllustration,
 } from "./ProjectIllustrations";
 
-const featuredProjects = [
-  {
-    title: "LensAI",
-    subtitle: "AI-Powered Screen Region Explainer",
-    period: "Feb 2026 — Present",
-    description:
-      "Browser extension that lets users highlight any screen region — code, diagrams, articles, UI — and get instant, context-aware explanations powered by LLM integration. No more context-switching friction for developers and researchers.",
-    tech: ["JavaScript", "Browser Extension APIs", "Claude", "Claude Code"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    Illustration: LensAIIllustration,
-    color: "#00d4ff",
-  },
-  {
-    title: "Mitti Mitra",
-    subtitle: "AI Soil Health Diagnostics for Farmers",
-    period: "Dec 2025 — Mar 2026",
-    description:
-      "Mobile app using computer vision and multi-source data fusion to help Indian farmers assess soil health and receive actionable crop recommendations. Designed the ML pipeline and integrated with a Flutter/Firebase frontend for field-ready deployment.",
-    tech: ["Python", "Computer Vision", "Flutter", "Firebase"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    Illustration: MittiMitraIllustration,
-    color: "#22c55e",
-  },
-  {
-    title: "Namude Yatra",
-    subtitle: "Multi-Agent Travel Planner",
-    period: "Feb — Mar 2025",
-    description:
-      "Multi-agent travel planner that generates full day-by-day itineraries through coordinated LLM agents using LangChain, with interactive map visualisations (Pydeck) and a chatbot interface for real-time trip adjustments.",
-    tech: ["LangChain", "Streamlit", "Pydeck", "Multi-Agent", "Geopy"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    Illustration: NamudeYatraIllustration,
-    color: "#8b5cf6",
-  },
-];
+const illustrationMap: Record<IllustrationKey, React.ComponentType> = {
+  vidyapath: VidyapathIllustration,
+  lensai: LensAIIllustration,
+  mittiMitra: MittiMitraIllustration,
+  namudeYatra: NamudeYatraIllustration,
+  swcMri: SWCMriIllustration,
+  medReport: MedReportIllustration,
+  optiHire: OptiHireIllustration,
+  dqn: DQNIllustration,
+};
 
-const otherProjects = [
-  {
-    title: "MedReportGen AI",
-    subtitle: "AI Engine & Architecture",
-    period: "Aug 2024 — Feb 2025",
-    description:
-      "Advanced medical report generation system integrating Microsoft's Radino VLM for feature extraction and an LLM for detailed analysis, transforming unstructured clinical data into precise, structured reports.",
-    tech: ["Python", "VLM", "LLM", "Medical AI"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    Illustration: MedReportIllustration,
-    color: "#00d4ff",
-  },
-  {
-    title: "OptiHire",
-    subtitle: "AI Job Application Assistant",
-    period: "Oct — Nov 2024",
-    description:
-      "Web app generating tailored cover letters from job descriptions, analysing resumes for keyword gaps, and tracking applications in one place with real-time feedback and visual analytics.",
-    tech: ["Streamlit", "Web Scraping", "LLM", "NLP"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    Illustration: OptiHireIllustration,
-    color: "#f59e0b",
-  },
-  {
-    title: "Inventory Optimisation",
-    subtitle: "Deep Q-Network Agent",
-    period: "Apr — Jun 2024",
-    description:
-      "Modelled inventory control as a Markov Decision Process. The DQN agent outperformed classic (s,S) reorder policies with lower total costs and fewer stockouts across test scenarios.",
-    tech: ["Reinforcement Learning", "DQN", "Python"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    Illustration: DQNIllustration,
-    color: "#8b5cf6",
-  },
-];
+function Illustration({ name }: { name: IllustrationKey }) {
+  const Cmp = illustrationMap[name];
+  return <Cmp />;
+}
 
 function GitHubIcon() {
   return (
@@ -151,6 +99,7 @@ export default function Projects() {
                 </div>
 
                 {/* Card */}
+                <TiltCard max={5} className="rounded-xl">
                 <div
                   className="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden glass border transition-all duration-500 card-hover"
                   style={{ borderColor: `${project.color}18` }}
@@ -161,7 +110,7 @@ export default function Projects() {
                     style={{ background: `radial-gradient(ellipse at center, ${project.color}09 0%, transparent 70%)` }}
                   >
                     <div className="w-full h-full p-4 group-hover:scale-[1.03] transition-transform duration-700">
-                      <project.Illustration />
+                      <Illustration name={project.illustration} />
                     </div>
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none shimmer" />
                   </div>
@@ -195,6 +144,7 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
+                </TiltCard>
               </div>
             ))}
           </motion.div>
@@ -208,15 +158,15 @@ export default function Projects() {
             className="grid sm:grid-cols-2 md:grid-cols-3 gap-5"
           >
             {otherProjects.map((project, i) => (
+              <TiltCard key={project.title} max={6} className="h-full">
               <motion.a
-                key={project.title}
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: i * 0.08 }}
-                className="group flex flex-col glass border border-white/5 rounded-xl overflow-hidden card-hover cursor-pointer"
+                className="group flex flex-col h-full glass border border-white/5 rounded-xl overflow-hidden card-hover cursor-pointer"
               >
                 {/* Mini illustration */}
                 <div
@@ -224,7 +174,7 @@ export default function Projects() {
                   style={{ background: `radial-gradient(ellipse at center, ${project.color}08 0%, transparent 80%)` }}
                 >
                   <div className="w-full h-full p-2 scale-90 origin-center group-hover:scale-95 transition-transform duration-500">
-                    <project.Illustration />
+                    <Illustration name={project.illustration} />
                   </div>
                 </div>
 
@@ -249,6 +199,7 @@ export default function Projects() {
                   </div>
                 </div>
               </motion.a>
+              </TiltCard>
             ))}
           </motion.div>
         )}

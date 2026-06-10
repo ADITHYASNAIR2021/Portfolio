@@ -3,11 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionWrapper from "./SectionWrapper";
-
-const skills = [
-  "Python", "FastAPI", "LLMs", "RAG", "DICOM",
-  "HuggingFace", "OpenAI API", "Docker", "CI/CD", "PostgreSQL",
-];
+import { aboutStack as skills } from "@/content/portfolio";
 
 export default function About() {
   return (
@@ -25,16 +21,16 @@ export default function About() {
           <p className="text-secondary leading-relaxed text-base md:text-lg">
             Most of what I do is make LLMs useful in{" "}
             <span className="text-accent">production</span> — not demo-useful,
-            but actually-reliable useful. For the past two years that&apos;s meant
+            but actually-reliable useful. For close to two years that meant
             building and maintaining the AI core of a{" "}
             <span className="text-foreground font-medium">medical reporting platform</span>{" "}
             at Doctreen, where the margin for error is low and the edge cases
             are everywhere.
           </p>
           <p className="text-secondary leading-relaxed">
-            The day-to-day involves LLM pipeline design, RAG workflows, and
+            The day-to-day involved LLM pipeline design, RAG workflows, and
             vision analysis for DICOM medical imaging across 10+ modalities. We
-            use multiple providers &mdash; OpenAI, HuggingFace, Nebius, OVH
+            used multiple providers &mdash; OpenAI, HuggingFace, Nebius, OVH
             &mdash; each with their own tradeoffs, and I&apos;ve learned more
             about evaluation methodology than I expected when I started.
           </p>
@@ -48,9 +44,12 @@ export default function About() {
           </p>
           <p className="text-secondary leading-relaxed">
             I&apos;m looking for what comes next &mdash; harder engineering
-            problems, a different domain, or a role with more ownership. If
-            you&apos;ve read this far and something looks interesting, I&apos;m
-            easy to reach.
+            problems, a different domain, or a role with more ownership. The
+            quiet ambition is to keep building AI that delivers when it matters,
+            and to grow into{" "}
+            <span className="text-foreground font-medium">mentoring and leading engineering teams</span>.
+            If you&apos;ve read this far and something looks interesting,
+            I&apos;m easy to reach.
           </p>
 
           {/* ── Bento Grid quick facts ── */}
@@ -137,9 +136,9 @@ export default function About() {
               <div>
                 <p className="text-muted text-[10px] font-mono uppercase tracking-wider">Currently Building</p>
                 <p className="text-foreground text-sm font-medium">
-                  LensAI &mdash;{" "}
+                  Vidyapath &mdash;{" "}
                   <span className="text-secondary font-normal text-xs">
-                    browser extension that explains anything on your screen
+                    multi-school LMS platform with AI-assisted teaching tools
                   </span>
                 </p>
               </div>
@@ -218,7 +217,7 @@ export default function About() {
                     Adithya S Nair
                   </p>
                   <p className="text-accent text-xs font-mono mt-0.5">
-                    AI Engineer @ Doctreen
+                    AI Engineer &middot; ex-Doctreen
                   </p>
                   <div className="flex items-center gap-1.5 mt-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald" />

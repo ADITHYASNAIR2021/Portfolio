@@ -45,7 +45,7 @@ const socialLinks = [
 
 export default function Contact() {
   return (
-    <SectionWrapper id="contact" title="Get In Touch" index="06" alternate>
+    <SectionWrapper id="contact" title="Get In Touch" index="07" alternate>
       {/* Two-column on desktop: text left, globe right */}
       <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 

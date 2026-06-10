@@ -2,36 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionWrapper from "./SectionWrapper";
-
-const experiences = [
-  {
-    role: "AI Engineer",
-    company: "Doctreen",
-    location: "Montpellier, France (Remote)",
-    period: "Jun 2025 — Present",
-    description: [
-      "Build and maintain the AI features of a live medical report generation platform — integrating LLMs across multiple providers (OpenAI, HuggingFace, Nebius, OVH) with RAG pipelines and prompt engineering. Most of the hard problems turn out to be evaluation, not modelling.",
-      "Design vision analysis pipelines for DICOM medical imaging across 10+ modalities, validated against radiologist ground-truth data to measure and close the accuracy gap.",
-      "Built internal tooling including a token-efficient serialisation format that meaningfully reduced API costs on high-volume inference runs.",
-      "Set up CI/CD pipelines and model monitoring so performance regressions surface before they reach production.",
-    ],
-    tech: ["Python", "FastAPI", "LLM APIs", "RAG", "Docker", "CI/CD"],
-    current: true,
-  },
-  {
-    role: "AI Research Intern",
-    company: "Doctreen",
-    location: "Montpellier, France (Remote)",
-    period: "Jan 2025 — Jun 2025",
-    description: [
-      "Joined at the foundational stage of the AI-assisted medical report system — the phase where you make architectural decisions you'll live with for years.",
-      "Built security guardrails and input validation against prompt injection and adversarial inputs; an underrated part of production LLM work.",
-      "Developed a multi-model benchmarking system to compare LLM performance across all pipeline stages, running evaluations in parallel to cut iteration time.",
-    ],
-    tech: ["Python", "LLM Evaluation", "Security", "Benchmarking"],
-    current: false,
-  },
-];
+import { experiences, education } from "@/content/portfolio";
 
 /** Animated SVG paths that draw in as the section enters view */
 function BackgroundPaths() {
@@ -187,20 +158,20 @@ export default function Experience() {
         >
           <div className="absolute left-0 md:left-8 top-2 w-2 h-2 -translate-x-[3.5px] bg-violet rounded-full glow-violet" />
           <div className="font-mono text-violet text-xs mb-2 tracking-wider">
-            Sep 2021 — Aug 2025
+            {education.period}
           </div>
           <div className="glass border border-white/5 rounded-xl p-6 hover:border-violet/20 transition-all">
             <h3
               className="text-xl font-semibold text-foreground"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              B.Tech, Computer Science{" "}
-              <span className="text-violet">(AI & ML)</span>
+              {education.degree}{" "}
+              <span className="text-violet">({education.specialisation})</span>
             </h3>
             <p className="text-secondary text-sm mt-1">
-              Amrita Vishwa Vidyapeetham, Amritapuri
+              {education.school}
             </p>
-            <p className="text-muted text-sm font-mono mt-2">CGPA: 8.48</p>
+            <p className="text-muted text-sm font-mono mt-2">CGPA: {education.cgpa}</p>
           </div>
         </motion.div>
       </div>

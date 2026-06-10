@@ -278,3 +278,112 @@ export function DQNIllustration() {
     </svg>
   );
 }
+
+export function VidyapathIllustration() {
+  return (
+    <svg viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      {/* App shell */}
+      <rect x="20" y="20" width="360" height="220" rx="10" fill="#0c1018" stroke="#1e293b" strokeWidth="1.5"/>
+      {/* Top bar */}
+      <rect x="20" y="20" width="360" height="34" rx="10" fill="#111827"/>
+      <rect x="20" y="42" width="360" height="12" fill="#111827"/>
+      <text x="40" y="42" fill="#8b5cf6" fontSize="11" fontFamily="sans-serif" fontWeight="bold">Vidyapath</text>
+      <text x="118" y="42" fill="#6b7280" fontSize="8" fontFamily="monospace">CBSE School Platform</text>
+      {/* Role pills (multi-portal) */}
+      <rect x="262" y="30" width="34" height="14" rx="7" fill="#8b5cf6" fillOpacity="0.18" stroke="#8b5cf6" strokeWidth="0.7"/>
+      <text x="279" y="40" textAnchor="middle" fill="#8b5cf6" fontSize="6.5" fontFamily="monospace">Admin</text>
+      <rect x="300" y="30" width="32" height="14" rx="7" fill="#00d4ff" fillOpacity="0.15" stroke="#00d4ff" strokeWidth="0.7"/>
+      <text x="316" y="40" textAnchor="middle" fill="#00d4ff" fontSize="6.5" fontFamily="monospace">Teach</text>
+      <rect x="336" y="30" width="34" height="14" rx="7" fill="#22c55e" fillOpacity="0.15" stroke="#22c55e" strokeWidth="0.7"/>
+      <text x="353" y="40" textAnchor="middle" fill="#22c55e" fontSize="6.5" fontFamily="monospace">Student</text>
+      {/* Sidebar */}
+      <rect x="30" y="64" width="78" height="166" rx="6" fill="#060912"/>
+      {["Dashboard","Assignments","Gradebook","Attendance","Timetable"].map((t, i) => (
+        <g key={t}>
+          <rect x="38" y={76 + i * 28} width="62" height="18" rx="4" fill={i === 1 ? "#8b5cf6" : "#111827"} fillOpacity={i === 1 ? 0.22 : 1}/>
+          <text x="46" y={88 + i * 28} fill={i === 1 ? "#8b5cf6" : "#6b7280"} fontSize="7" fontFamily="sans-serif">{t}</text>
+        </g>
+      ))}
+      {/* Main: AI assignment generator card */}
+      <rect x="118" y="64" width="252" height="76" rx="6" fill="#060912" stroke="#1e293b" strokeWidth="1"/>
+      <text x="130" y="80" fill="#8b5cf6" fontSize="8.5" fontFamily="monospace">⚡ AI Assignment Generator</text>
+      <rect x="130" y="86" width="170" height="1" fill="#1e293b"/>
+      {[94, 104, 114].map((y, i) => (
+        <rect key={i} x="130" y={y} width={i % 2 === 0 ? 220 : 170} height="5" rx="2" fill="#2a3a4a"/>
+      ))}
+      {/* Model routing chips */}
+      <rect x="130" y="122" width="42" height="13" rx="6" fill="#00d4ff" fillOpacity="0.12" stroke="#00d4ff" strokeWidth="0.7"/>
+      <text x="151" y="131" textAnchor="middle" fill="#00d4ff" fontSize="6.5" fontFamily="monospace">Groq</text>
+      <rect x="176" y="122" width="50" height="13" rx="6" fill="#8b5cf6" fillOpacity="0.12" stroke="#8b5cf6" strokeWidth="0.7"/>
+      <text x="201" y="131" textAnchor="middle" fill="#8b5cf6" fontSize="6.5" fontFamily="monospace">Gemini</text>
+      <rect x="230" y="122" width="42" height="13" rx="6" fill="#22c55e" fillOpacity="0.12" stroke="#22c55e" strokeWidth="0.7"/>
+      <text x="251" y="131" textAnchor="middle" fill="#22c55e" fontSize="6.5" fontFamily="monospace">RAG</text>
+      {/* Stat tiles */}
+      <rect x="118" y="148" width="80" height="40" rx="6" fill="#060912"/>
+      <text x="158" y="168" textAnchor="middle" fill="#8b5cf6" fontSize="14" fontFamily="sans-serif" fontWeight="bold">12</text>
+      <text x="158" y="180" textAnchor="middle" fill="#6b7280" fontSize="6.5" fontFamily="monospace">Schools</text>
+      <rect x="204" y="148" width="80" height="40" rx="6" fill="#060912"/>
+      <text x="244" y="168" textAnchor="middle" fill="#00d4ff" fontSize="14" fontFamily="sans-serif" fontWeight="bold">RBAC</text>
+      <text x="244" y="180" textAnchor="middle" fill="#6b7280" fontSize="6.5" fontFamily="monospace">HMAC-JWT</text>
+      <rect x="290" y="148" width="80" height="40" rx="6" fill="#060912"/>
+      <text x="330" y="168" textAnchor="middle" fill="#22c55e" fontSize="13" fontFamily="sans-serif" fontWeight="bold">Next 14</text>
+      <text x="330" y="180" textAnchor="middle" fill="#6b7280" fontSize="6.5" fontFamily="monospace">Supabase</text>
+      {/* Gradebook strip */}
+      <rect x="118" y="196" width="252" height="34" rx="6" fill="#060912"/>
+      {[0,1,2,3,4,5,6].map((i) => (
+        <rect key={i} x={130 + i * 34} y={214 - (i % 3) * 6 - 4} width="20" height={(i % 3) * 6 + 10} rx="2" fill="#8b5cf6" fillOpacity={0.3 + (i % 3) * 0.2}/>
+      ))}
+      <text x="130" y="208" fill="#6b7280" fontSize="6.5" fontFamily="monospace">Gradebook</text>
+      {/* Glow */}
+      <circle cx="250" cy="100" r="90" fill="#8b5cf6" fillOpacity="0.04"/>
+    </svg>
+  );
+}
+
+export function SWCMriIllustration() {
+  return (
+    <svg viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <rect x="20" y="20" width="360" height="220" rx="10" fill="#0c1018" stroke="#1e293b" strokeWidth="1.5"/>
+      <text x="200" y="44" textAnchor="middle" fill="#e8eaed" fontSize="11" fontFamily="sans-serif" fontWeight="bold">SWC from MRI — Vascular Graph</text>
+      {/* Left: MRI brain slice */}
+      <rect x="30" y="58" width="150" height="170" rx="6" fill="#060912"/>
+      <rect x="36" y="64" width="34" height="13" rx="3" fill="#00d4ff" fillOpacity="0.15"/>
+      <text x="53" y="74" textAnchor="middle" fill="#00d4ff" fontSize="6.5" fontFamily="monospace">MRI</text>
+      {/* brain outline */}
+      <path d="M 105 90 Q 70 92 66 130 Q 60 175 105 195 Q 150 175 144 130 Q 140 92 105 90 Z" fill="#16222e" stroke="#2a4a5a" strokeWidth="1.2"/>
+      <path d="M 105 95 Q 105 150 105 192" stroke="#1e3a4a" strokeWidth="1"/>
+      {/* vascular flow lines */}
+      <path d="M 88 110 Q 100 130 92 160" stroke="#f43f5e" strokeWidth="1.4" fill="none" strokeOpacity="0.8"/>
+      <path d="M 120 108 Q 110 135 124 165" stroke="#f43f5e" strokeWidth="1.4" fill="none" strokeOpacity="0.8"/>
+      <path d="M 100 100 Q 130 120 118 150" stroke="#00d4ff" strokeWidth="1.2" fill="none" strokeOpacity="0.7"/>
+      {/* scan line */}
+      <line x1="36" y1="140" x2="174" y2="140" stroke="#00d4ff" strokeWidth="0.8" strokeOpacity="0.35"/>
+      <text x="40" y="220" fill="#6b7280" fontSize="7" fontFamily="monospace">Refining flow…</text>
+      {/* Arrow */}
+      <path d="M 184 142 h 22 m 0 0 l -6 -5 m 6 5 l -6 5" stroke="#8b5cf6" strokeWidth="1.4" fill="none"/>
+      {/* Right: graph representation */}
+      <rect x="214" y="58" width="156" height="170" rx="6" fill="#060912" stroke="#1e293b" strokeWidth="1"/>
+      <text x="292" y="74" textAnchor="middle" fill="#8b5cf6" fontSize="8.5" fontFamily="monospace">SWC Graph</text>
+      {(() => {
+        const nodes = [
+          { x: 250, y: 100 }, { x: 300, y: 92 }, { x: 340, y: 110 },
+          { x: 268, y: 140 }, { x: 312, y: 148 }, { x: 246, y: 184 },
+          { x: 296, y: 190 }, { x: 344, y: 176 },
+        ];
+        const edges = [[0,1],[1,2],[0,3],[3,4],[1,4],[3,5],[4,6],[2,7],[6,7]];
+        return (
+          <>
+            {edges.map(([a, b], i) => (
+              <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} stroke="#8b5cf6" strokeWidth="1" strokeOpacity="0.4"/>
+            ))}
+            {nodes.map((n, i) => (
+              <circle key={i} cx={n.x} cy={n.y} r={i === 0 ? 6 : 4.5} fill="#0c1018" stroke={i === 0 ? "#00d4ff" : "#8b5cf6"} strokeWidth="1.5"/>
+            ))}
+          </>
+        );
+      })()}
+      <text x="222" y="218" fill="#6b7280" fontSize="7" fontFamily="monospace">nodes + branch topology</text>
+      <circle cx="292" cy="140" r="80" fill="#8b5cf6" fillOpacity="0.04"/>
+    </svg>
+  );
+}

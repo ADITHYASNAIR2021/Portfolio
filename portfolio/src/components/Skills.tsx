@@ -2,81 +2,53 @@
 
 import { motion } from "framer-motion";
 import SectionWrapper from "./SectionWrapper";
+import SkillsVisual from "./SkillsVisual";
+import { skillGroups, additionalTools } from "@/content/portfolio";
 
-const skillGroups = [
-  {
-    label: "Languages",
-    color: "#00d4ff",
-    skills: ["Python", "JavaScript", "TypeScript", "Java", "SQL"],
-  },
-  {
-    label: "AI / ML",
-    color: "#8b5cf6",
-    skills: [
-      "LLM Integration",
-      "Prompt Engineering",
-      "RAG Systems",
-      "Deep Learning",
-      "Model Evaluation",
-      "Multi-Agent Systems",
-      "Computer Vision",
-    ],
-  },
-  {
-    label: "Frameworks",
-    color: "#22c55e",
-    skills: ["FastAPI", "PyTorch", "LangChain", "React / Next.js", "Streamlit", "Django"],
-  },
-  {
-    label: "Infrastructure",
-    color: "#f59e0b",
-    skills: ["Docker", "Git / CI/CD", "REST APIs", "MongoDB", "Hugging Face", "Linux"],
-  },
-];
+/** Categorised typographic list — used as the mobile / reduced-motion fallback. */
+function SkillTable() {
+  return (
+    <div className="divide-y divide-border/40">
+      {skillGroups.map((group, i) => (
+        <motion.div
+          key={group.label}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, delay: i * 0.08 }}
+          className="py-6 grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr] gap-4 items-start group"
+        >
+          {/* Category label */}
+          <span
+            className="text-[10px] font-mono uppercase tracking-widest pt-0.5 transition-opacity"
+            style={{ color: group.color }}
+          >
+            {group.label}
+          </span>
 
-const additionalTools = [
-  "TensorFlow", "Scikit-learn", "CrewAI", "Gradio", "Pandas",
-  "NumPy", "MariaDB", "Postman", "Jira", "Confluence",
-  "Claude Skills Dev", "DICOM", "Jupyter", "Weights & Biases",
-];
+          {/* Skills — plain text, space-separated on mobile, wrapping */}
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {group.skills.map((skill) => (
+              <span
+                key={skill}
+                className="text-secondary text-sm font-mono hover:text-foreground transition-colors cursor-default"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 export default function Skills() {
   return (
     <SectionWrapper id="skills" title="Skills & Tools" index="04" alternate>
 
-      {/* Clean typographic skill table */}
-      <div className="divide-y divide-border/40">
-        {skillGroups.map((group, i) => (
-          <motion.div
-            key={group.label}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45, delay: i * 0.08 }}
-            className="py-6 grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr] gap-4 items-start group"
-          >
-            {/* Category label */}
-            <span
-              className="text-[10px] font-mono uppercase tracking-widest pt-0.5 transition-opacity"
-              style={{ color: group.color }}
-            >
-              {group.label}
-            </span>
-
-            {/* Skills — plain text, space-separated on mobile, wrapping */}
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="text-secondary text-sm font-mono hover:text-foreground transition-colors cursor-default"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      {/* Interactive 3D constellation on desktop, categorised list on mobile */}
+      <SkillsVisual fallback={<SkillTable />} />
 
       {/* Also experienced with — marquee */}
       <motion.div

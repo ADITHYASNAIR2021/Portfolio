@@ -1,9 +1,14 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { CpuArchitecture } from "@/components/ui/cpu-architecture";
+import HeroVisual from "@/components/HeroVisual";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const roles = [
   "AI Engineer",
@@ -48,8 +53,25 @@ function TextCycle({ items }: { items: string[] }) {
 }
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const st = {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      };
+      gsap.to(".hero-parallax-bg", { yPercent: 22, ease: "none", scrollTrigger: st });
+      gsap.to(".hero-parallax-visual", { yPercent: -10, ease: "none", scrollTrigger: st });
+    },
+    { scope: heroRef }
+  );
+
   return (
-    <section className="relative flex flex-col overflow-hidden">
+    <section ref={heroRef} className="relative flex flex-col overflow-hidden">
       {/* ── AuroraBackground (21st.dev component) ── */}
       <AuroraBackground
         className="absolute inset-0 z-0"
@@ -57,7 +79,7 @@ export default function Hero() {
       />
 
       {/* Dot-grid overlay + edge vignette */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
+      <div className="hero-parallax-bg absolute inset-0 z-[1] pointer-events-none">
         <div className="absolute inset-0 dot-grid opacity-15" />
         <div
           className="absolute inset-0"
@@ -81,7 +103,7 @@ export default function Hero() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-muted text-sm font-mono mb-7 tracking-wide"
               >
-                Kerala, India &mdash; currently at Doctreen
+                Kerala, India &mdash; most recently at Doctreen
               </motion.p>
 
               <motion.h1
@@ -183,9 +205,9 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.55 }}
               className="hidden md:flex flex-col items-center justify-center"
             >
-              {/* CPU diagram */}
-              <div className="relative w-full max-w-sm">
-                {/* Glow behind the SVG */}
+              {/* 3D neural centerpiece (falls back to CPU SVG) */}
+              <div className="hero-parallax-visual relative w-full max-w-sm">
+                {/* Glow behind the visual */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
@@ -194,13 +216,7 @@ export default function Hero() {
                     filter: "blur(30px)",
                   }}
                 />
-                <CpuArchitecture
-                  text="AI"
-                  className="opacity-80 w-full h-auto"
-                  animateText
-                  animateLines
-                  animateMarkers
-                />
+                <HeroVisual />
               </div>
 
               {/* Mini context labels below the diagram */}
@@ -211,7 +227,7 @@ export default function Hero() {
                 className="grid grid-cols-2 gap-2 w-full max-w-sm mt-3"
               >
                 {[
-                  { label: "Currently at", value: "Doctreen" },
+                  { label: "Most recently", value: "Doctreen" },
                   { label: "Specialty",    value: "Medical AI" },
                   { label: "Stack",        value: "LLMs · RAG · DICOM" },
                   { label: "Location",     value: "Kerala, India" },
@@ -248,7 +264,7 @@ export default function Hero() {
           <span className="text-border hidden sm:block">&middot;</span>
           <span className="font-mono text-xs text-muted">
             currently shipping{" "}
-            <span className="text-accent/70">LensAI</span>
+            <span className="text-accent/70">Vidyapath</span>
           </span>
           <span className="text-border hidden sm:block">&middot;</span>
           <span className="font-mono text-xs text-muted">

@@ -9,6 +9,7 @@ const navItems = [
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Leadership", href: "#leadership" },
+  { label: "Certificates", href: "#certificates" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -89,7 +90,7 @@ export default function Navigation() {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navItems.map((item, i) => (
               <motion.a
                 key={item.href}
@@ -135,7 +136,7 @@ export default function Navigation() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="lg:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
             <motion.span
@@ -162,7 +163,7 @@ export default function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 glass-strong md:hidden flex flex-col items-center justify-center gap-6"
+            className="fixed inset-0 z-40 glass-strong lg:hidden flex flex-col items-center justify-center gap-6"
           >
             {navItems.map((item, i) => (
               <motion.a
