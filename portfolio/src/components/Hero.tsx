@@ -2,13 +2,13 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { AuroraBackground } from "@/components/ui/aurora-background";
+import dynamic from "next/dynamic";
 import HeroVisual from "@/components/HeroVisual";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+const AuroraBackground = dynamic(
+  () => import("@/components/ui/aurora-background").then((m) => ({ default: m.AuroraBackground })),
+  { ssr: false, loading: () => <div className="absolute inset-0 z-0 bg-[#06080d]" /> }
+);
 
 const roles = [
   "Freelance AI Engineer",
@@ -57,20 +57,27 @@ function TextCycle({ items }: { items: string[] }) {
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const st = {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      };
-      gsap.to(".hero-parallax-bg", { yPercent: 22, ease: "none", scrollTrigger: st });
-      gsap.to(".hero-parallax-visual", { yPercent: -10, ease: "none", scrollTrigger: st });
-    },
-    { scope: heroRef }
-  );
+  // Lazy-load GSAP parallax — doesn't block initial render or TBT
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let ctx: gsap.Context | null = null;
+    import("gsap").then(({ default: gsap }) => {
+      import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+        gsap.registerPlugin(ScrollTrigger);
+        const st = {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        };
+        ctx = gsap.context(() => {
+          gsap.to(".hero-parallax-bg", { yPercent: 22, ease: "none", scrollTrigger: st });
+          gsap.to(".hero-parallax-visual", { yPercent: -10, ease: "none", scrollTrigger: st });
+        }, heroRef);
+      });
+    });
+    return () => { ctx?.revert(); };
+  }, []);
 
   return (
     <section ref={heroRef} className="relative flex flex-col overflow-hidden">

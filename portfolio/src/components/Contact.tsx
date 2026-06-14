@@ -1,8 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import SectionWrapper from "./SectionWrapper";
-import { GlobePulse } from "@/components/ui/cobe-globe-pulse";
+
+const GlobePulse = dynamic(
+  () => import("@/components/ui/cobe-globe-pulse").then((m) => ({ default: m.GlobePulse })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative aspect-square select-none w-full max-w-xs md:max-w-sm flex items-center justify-center">
+        <div className="w-48 h-48 rounded-full border border-white/5 animate-pulse" />
+      </div>
+    ),
+  }
+);
 
 const socialLinks = [
   {

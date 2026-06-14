@@ -106,12 +106,12 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} ${jetMono.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
     >
-      <head>
-        {/* ── JSON-LD Structured Data (AEO & Knowledge Graph) ── */}
-
+      <head suppressHydrationWarning>
+        {/* JSON-LD structured data — browser extensions may shift DOM in dev; production HTML is correct */}
         {/* Person Schema */}
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
