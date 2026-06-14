@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://adithyasnair.vercel.app"),
   title: "Adithya S Nair | Freelance Full-Stack AI Engineer",
   description:
-    "Adithya S Nair — freelance AI Engineer from Kerala, India. I build production LLM pipelines, RAG systems, medical AI, AI agents, and full-stack applications. Available for remote projects worldwide.",
+    "Freelance Full-Stack AI Engineer from Kerala, India. I build LLM pipelines, RAG systems, AI agents, and full-stack apps. Available for projects worldwide.",
   keywords: [
     "AI Engineer",
     "freelance AI developer",
