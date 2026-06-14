@@ -91,6 +91,9 @@ export const metadata: Metadata = {
     ],
   },
   category: "technology",
+  verification: {
+    google: "XY2vsY-mUzFjv9oOW52A2wv7BzsKVXxAIZABVJxDqdI",
+  },
 };
 
 export default function RootLayout({
