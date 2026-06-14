@@ -117,13 +117,13 @@ export default function About() {
               </div>
             </div>
 
-            {/* Open to work */}
+            {/* Available for freelance */}
             <div className="bento-cell flex items-center justify-center gap-2">
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald" />
               </span>
-              <span className="text-foreground text-xs font-mono">Open to work</span>
+              <span className="text-foreground text-xs font-mono">Available for freelance</span>
             </div>
 
             {/* Currently building */}
@@ -198,7 +198,7 @@ export default function About() {
               <div className="relative aspect-[3/4]">
                 <Image
                   src="/images/adithya.jpg"
-                  alt="Adithya S Nair"
+                  alt="Adithya S Nair — Freelance Full-Stack AI Engineer from Kerala, India, specializing in LLM pipelines, RAG systems, and medical AI"
                   fill
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   sizes="280px"
@@ -217,12 +217,12 @@ export default function About() {
                     Adithya S Nair
                   </p>
                   <p className="text-accent text-xs font-mono mt-0.5">
-                    AI Engineer &middot; ex-Doctreen
+                    Freelance AI Engineer &middot; ex-Doctreen
                   </p>
                   <div className="flex items-center gap-1.5 mt-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
                     <span className="text-muted text-xs font-mono">
-                      Open to new roles
+                      Available for freelance
                     </span>
                   </div>
                 </div>

@@ -11,10 +11,12 @@ import HeroVisual from "@/components/HeroVisual";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const roles = [
-  "AI Engineer",
+  "Freelance AI Engineer",
+  "Full-Stack Developer",
   "RAG Specialist",
-  "LLM Developer",
-  "Medical AI Builder",
+  "LLM Pipeline Builder",
+  "AI Agent Developer",
+  "Medical AI Engineer",
   "Python Engineer",
 ];
 
@@ -140,11 +142,11 @@ export default function Hero() {
                 transition={{ duration: 0.6, delay: 0.45 }}
                 className="text-secondary text-base md:text-lg max-w-lg mb-10 leading-relaxed"
               >
-                For the past two years I&apos;ve been deep in medical AI &mdash;
+                Freelance Full-Stack AI Engineer from Kerala, India. For the
+                past two years I&apos;ve been deep in medical AI &mdash;
                 building the systems that read DICOM scans, reason over clinical
-                data, and write structured radiology reports. It&apos;s a niche
-                where the gap between &ldquo;works in demo&rdquo; and
-                &ldquo;works reliably&rdquo; is widest.
+                data, and write structured radiology reports. I bring that same
+                production rigour to every project I take on.
               </motion.p>
 
               {/* Liquid glass CTA buttons */}
@@ -181,7 +183,7 @@ export default function Hero() {
                 </a>
               </motion.div>
 
-              {/* Open-to-work badge */}
+              {/* Available-for-freelance badge */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -193,7 +195,7 @@ export default function Hero() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald" />
                 </span>
                 <span className="text-muted text-xs font-mono">
-                  Open to new roles
+                  Available for freelance &amp; remote roles globally
                 </span>
               </motion.div>
             </div>
@@ -263,12 +265,12 @@ export default function Hero() {
           </span>
           <span className="text-border hidden sm:block">&middot;</span>
           <span className="font-mono text-xs text-muted">
-            currently shipping{" "}
+            shipping{" "}
             <span className="text-accent/70">Vidyapath</span>
           </span>
           <span className="text-border hidden sm:block">&middot;</span>
-          <span className="font-mono text-xs text-muted">
-            open to remote roles globally
+          <span className="font-mono text-xs text-accent/80">
+            AI Agents &middot; LLMs &middot; RAG &middot; Full-Stack
           </span>
         </div>
       </motion.div>

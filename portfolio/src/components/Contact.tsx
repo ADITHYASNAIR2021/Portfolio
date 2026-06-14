@@ -69,10 +69,10 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-secondary text-base leading-relaxed mb-10"
           >
-            Currently open to new roles &mdash; full-time, contract, or anything
-            in between. Whether you have a job, a project, or just want to talk
-            about something I&apos;ve built, I&apos;m easy to reach and I
-            actually reply.
+            Currently available for freelance projects &mdash; AI development,
+            LLM pipelines, full-stack apps, AI agents, or consulting. Whether
+            you have a project, a contract, or just want to talk about something
+            I&apos;ve built, I&apos;m easy to reach and I actually reply.
           </motion.p>
 
           {/* Email — prominent */}
@@ -157,7 +157,7 @@ export default function Contact() {
         >
           {/* Intro label */}
           <p className="text-muted text-xs font-mono mb-4 tracking-wide text-center">
-            Kerala &rarr; Montpellier &rarr; Worldwide
+            Kerala, India &rarr; Remote &mdash; Worldwide
           </p>
 
           <GlobePulse

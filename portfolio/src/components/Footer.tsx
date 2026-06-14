@@ -33,7 +33,7 @@ export default function Footer() {
             Adithya <span className="gradient-text">S Nair</span>
           </p>
           <p className="text-muted text-sm font-mono">
-            AI Engineer &middot; Kerala, India
+            Freelance Full-Stack AI Engineer &middot; Kerala, India
           </p>
         </div>
 
