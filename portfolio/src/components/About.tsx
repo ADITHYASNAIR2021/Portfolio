@@ -210,10 +210,7 @@ export default function About() {
               {/* Name overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <div className="glass-strong rounded-xl p-4 border border-white/5">
-                  <p
-                    className="text-foreground font-semibold text-base"
-                    style={{ fontFamily: "var(--font-space-grotesk)" }}
-                  >
+                  <p className="text-foreground font-display font-semibold text-base">
                     Adithya S Nair
                   </p>
                   <p className="text-accent text-xs font-mono mt-0.5">

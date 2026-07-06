@@ -26,7 +26,7 @@
   --rose: #f43f5e;
   --text-primary: #e8eaed;
   --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-muted: #7d8590;
   --border: #1e293b;
   --border-hover: #334155;
 }
@@ -50,6 +50,19 @@
   --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-jet-mono);
   --font-display: var(--font-space-grotesk);
+}
+
+/* ═══ Fluid display type scale ═══ */
+@utility font-display {
+  font-family: var(--font-display);
+}
+.text-hero-title {
+  font-size: clamp(2.75rem, 1.85rem + 3.6vw, 4.5rem);
+  line-height: 1.05;
+}
+.text-section-title {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  line-height: 1.2;
 }
 
 /* Smooth scroll */
@@ -399,7 +412,7 @@ body {
 /* ═══ Bento Grid ═══ */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 9px;
 }
 .bento-cell {

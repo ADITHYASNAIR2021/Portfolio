@@ -45,7 +45,7 @@ function SkillTable() {
 
 export default function Skills() {
   return (
-    <SectionWrapper id="skills" title="Skills & Tools" index="04" alternate>
+    <SectionWrapper id="skills" title="Skills & Tools" index="04" alternate accent="amber">
 
       {/* Interactive 3D constellation on desktop, categorised list on mobile */}
       <SkillsVisual fallback={<SkillTable />} />

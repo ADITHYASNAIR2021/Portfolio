@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import SectionWrapper from "./SectionWrapper";
+import Magnetic from "./Magnetic";
 
 const GlobePulse = dynamic(
   () => import("@/components/ui/cobe-globe-pulse").then((m) => ({ default: m.GlobePulse })),
@@ -68,8 +69,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold mb-5 shimmer-heading"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
+            className="text-section-title font-display font-bold mb-5 shimmer-heading"
           >
             Say hello.
           </motion.h3>
@@ -95,15 +95,17 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-10 flex items-center gap-3"
           >
-            <a
-              href="mailto:adithyasnair2021@gmail.com"
-              className="liquid-glass-btn liquid-glass-btn-primary text-sm"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              Send a message
-            </a>
+            <Magnetic>
+              <a
+                href="mailto:adithyasnair2021@gmail.com"
+                className="liquid-glass-btn liquid-glass-btn-primary text-sm"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Send a message
+              </a>
+            </Magnetic>
             <a
               href="/Adithya_S_Nair_Resume.pdf"
               target="_blank"

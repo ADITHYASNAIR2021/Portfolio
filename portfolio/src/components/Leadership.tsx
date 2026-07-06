@@ -70,7 +70,7 @@ function AnimatedCounter({
 export default function Leadership() {
   const lead = leadershipRoles[0];
   return (
-    <SectionWrapper id="leadership" title="Leadership & Community" index="05">
+    <SectionWrapper id="leadership" title="Leadership & Community" index="05" accent="emerald">
       {/* Featured ACM role — full width */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -100,10 +100,7 @@ export default function Leadership() {
                   {lead.period}
                 </span>
               </div>
-              <h3
-                className="text-xl md:text-2xl font-semibold text-foreground mb-1"
-                style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >
+              <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground mb-1">
                 {lead.title}
               </h3>
               <p className="text-accent text-sm font-mono mb-3">
@@ -134,10 +131,7 @@ export default function Leadership() {
                 {role.period}
               </span>
             </div>
-            <h3
-              className="text-base font-semibold text-foreground mb-1"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
+            <h3 className="text-base font-display font-semibold text-foreground mb-1">
               {role.title}
             </h3>
             <p className="text-accent text-xs font-mono mb-3">{role.role}</p>
@@ -165,10 +159,7 @@ export default function Leadership() {
             transition={{ delay: 0.5 + i * 0.08 }}
             className="bento-cell bento-cell-accent text-center py-5"
           >
-            <div
-              className="text-3xl md:text-4xl font-bold text-accent mb-1"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
+            <div className="text-3xl md:text-4xl font-display font-bold text-accent mb-1">
               <AnimatedCounter
                 value={stat.value}
                 suffix={stat.suffix}

@@ -44,7 +44,7 @@ function BackgroundPaths() {
 
 export default function Experience() {
   return (
-    <SectionWrapper id="experience" title="Experience" index="02" alternate>
+    <SectionWrapper id="experience" title="Experience" index="02" alternate accent="violet">
       <div className="relative">
         {/* Decorative animated paths in background */}
         <BackgroundPaths />
@@ -102,10 +102,7 @@ export default function Experience() {
               <div className="glass border border-white/5 rounded-xl p-6 card-hover hover:border-accent/20 group">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                   <div>
-                    <h3
-                      className="text-xl font-semibold text-foreground"
-                      style={{ fontFamily: "var(--font-space-grotesk)" }}
-                    >
+                    <h3 className="text-xl font-display font-semibold text-foreground">
                       {exp.role}{" "}
                       <span className="text-accent">@ {exp.company}</span>
                     </h3>
@@ -161,10 +158,7 @@ export default function Experience() {
             {education.period}
           </div>
           <div className="glass border border-white/5 rounded-xl p-6 hover:border-violet/20 transition-all">
-            <h3
-              className="text-xl font-semibold text-foreground"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
+            <h3 className="text-xl font-display font-semibold text-foreground">
               {education.degree}{" "}
               <span className="text-violet">({education.specialisation})</span>
             </h3>

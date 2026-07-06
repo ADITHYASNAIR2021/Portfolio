@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import HeroVisual from "@/components/HeroVisual";
+import Magnetic from "@/components/Magnetic";
 
 const AuroraBackground = dynamic(
   () => import("@/components/ui/aurora-background").then((m) => ({ default: m.AuroraBackground })),
@@ -119,8 +120,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4"
-                style={{ fontFamily: "var(--font-space-grotesk)" }}
+                className="text-hero-title font-display font-bold tracking-tight mb-4"
               >
                 Adithya{" "}
                 <span className="gradient-text">S Nair</span>
@@ -163,25 +163,27 @@ export default function Hero() {
                 transition={{ duration: 0.5, delay: 0.58 }}
                 className="flex flex-wrap gap-4 mb-9"
               >
-                <a
-                  href="#projects"
-                  className="liquid-glass-btn liquid-glass-btn-primary group"
-                >
-                  View My Work
-                  <svg
-                    className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <Magnetic>
+                  <a
+                    href="#projects"
+                    className="liquid-glass-btn liquid-glass-btn-primary group"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </a>
+                    View My Work
+                    <svg
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </a>
+                </Magnetic>
                 <a
                   href="#contact"
                   className="liquid-glass-btn liquid-glass-btn-secondary"

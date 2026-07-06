@@ -6,7 +6,7 @@ import { certificates, languages, certificateRepoUrl } from "@/content/portfolio
 
 function CertIcon() {
   return (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   );
@@ -14,7 +14,7 @@ function CertIcon() {
 
 export default function Certificates() {
   return (
-    <SectionWrapper id="certificates" title="Certificates & Languages" index="06">
+    <SectionWrapper id="certificates" title="Certificates & Languages" index="06" accent="violet">
       <div className="grid md:grid-cols-5 gap-12 items-start">
 
         {/* Certificates */}
@@ -40,10 +40,7 @@ export default function Certificates() {
                   <CertIcon />
                 </span>
                 <div className="flex-1 min-w-0">
-                  <h4
-                    className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors"
-                    style={{ fontFamily: "var(--font-space-grotesk)" }}
-                  >
+                  <h4 className="text-sm font-display font-semibold text-foreground group-hover:text-accent transition-colors">
                     {cert.title}
                   </h4>
                   <p className="text-muted text-xs font-mono mt-0.5 truncate">{cert.issuer}</p>

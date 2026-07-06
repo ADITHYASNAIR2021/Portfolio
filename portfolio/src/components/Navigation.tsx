@@ -80,7 +80,7 @@ export default function Navigation() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="#" className="flex items-center gap-2 group" aria-label="Back to top">
             <span className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center font-mono text-accent font-bold text-sm group-hover:bg-accent/20 group-hover:border-accent/40 transition-all">
               A
             </span>
@@ -136,8 +136,9 @@ export default function Navigation() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2"
+            className="lg:hidden flex flex-col gap-1.5 items-center justify-center w-11 h-11 -mr-2"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             <motion.span
               animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}

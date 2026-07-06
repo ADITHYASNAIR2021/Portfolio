@@ -3,6 +3,15 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
+type Accent = "cyan" | "violet" | "amber" | "emerald";
+
+const accentVar: Record<Accent, string> = {
+  cyan: "var(--accent)",
+  violet: "var(--violet)",
+  amber: "var(--amber)",
+  emerald: "var(--emerald)",
+};
+
 interface Props {
   id: string;
   title: string;
@@ -10,6 +19,8 @@ interface Props {
   children: ReactNode;
   className?: string;
   alternate?: boolean;
+  /** Per-section personality tint for the index number + divider line. Defaults to cyan. */
+  accent?: Accent;
 }
 
 export default function SectionWrapper({
@@ -19,7 +30,9 @@ export default function SectionWrapper({
   children,
   className = "",
   alternate = false,
+  accent = "cyan",
 }: Props) {
+  const color = accentVar[accent];
   return (
     <section
       id={id}
@@ -33,11 +46,8 @@ export default function SectionWrapper({
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-16"
         >
-          <span className="font-mono text-accent text-sm">{index}.</span>
-          <h2
-            className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
+          <span className="font-mono text-sm" style={{ color }}>{index}.</span>
+          <h2 className="text-section-title font-display font-bold tracking-tight">
             {title}
           </h2>
           <motion.div
@@ -45,7 +55,8 @@ export default function SectionWrapper({
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex-1 h-px bg-gradient-to-r from-border to-transparent ml-4 origin-left"
+            className="flex-1 h-px ml-4 origin-left"
+            style={{ background: `linear-gradient(90deg, ${color}33, transparent)` }}
           />
         </motion.div>
         {children}

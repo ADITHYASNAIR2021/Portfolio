@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import Cursor from "@/components/ui/cursor";
 
@@ -273,8 +274,10 @@ export default function RootLayout({
         className="min-h-full flex flex-col overflow-x-hidden"
         suppressHydrationWarning
       >
-        {children}
-        <Cursor />
+        <MotionConfig reducedMotion="user">
+          {children}
+          <Cursor />
+        </MotionConfig>
       </body>
     </html>
   );

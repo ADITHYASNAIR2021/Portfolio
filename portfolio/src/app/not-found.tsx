@@ -26,8 +26,7 @@ export default function NotFound() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[120px] md:text-[160px] font-bold leading-none gradient-text select-none"
-          style={{ fontFamily: "var(--font-space-grotesk)" }}
+          className="text-[120px] md:text-[160px] font-display font-bold leading-none gradient-text select-none"
         >
           404
         </motion.p>
@@ -36,8 +35,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl font-semibold text-foreground mb-3"
-          style={{ fontFamily: "var(--font-space-grotesk)" }}
+          className="text-xl font-display font-semibold text-foreground mb-3"
         >
           Nothing here.
         </motion.h1>

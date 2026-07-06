@@ -26,10 +26,7 @@ export default function Footer() {
       >
         {/* Personal line */}
         <div className="text-center mb-8">
-          <p
-            className="text-2xl md:text-3xl font-bold tracking-tight mb-2"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
+          <p className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-2">
             Adithya <span className="gradient-text">S Nair</span>
           </p>
           <p className="text-muted text-sm font-mono">
