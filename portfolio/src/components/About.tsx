@@ -20,7 +20,7 @@ export default function About() {
         >
           <p className="text-secondary leading-relaxed text-base md:text-lg">
             Most of what I do is make LLMs useful in{" "}
-            <span className="text-accent">production</span> — not demo-useful,
+            <span className="text-accent">production</span> not demo-useful,
             but actually-reliable useful. For close to two years that meant
             building and maintaining the AI core of a{" "}
             <span className="text-foreground font-medium">medical reporting platform</span>{" "}
@@ -30,20 +30,20 @@ export default function About() {
           <p className="text-secondary leading-relaxed">
             The day-to-day involved LLM pipeline design, RAG workflows, and
             vision analysis for DICOM medical imaging across 10+ modalities. We
-            used multiple providers &mdash; OpenAI, HuggingFace, Nebius, OVH
-            &mdash; each with their own tradeoffs, and I&apos;ve learned more
+            used multiple providers &dash; OpenAI, HuggingFace, Nebius, OVH
+            &dash; each with their own tradeoffs, and I&apos;ve learned more
             about evaluation methodology than I expected when I started.
           </p>
           <p className="text-secondary leading-relaxed">
             Separately, I spent 1.5 years running the{" "}
             <span className="text-foreground font-medium">ACM Student Chapter</span>{" "}
-            at Amritapuri as Chairperson &mdash; organising hackathons,
+            at Amritapuri as Chairperson &dash; organising hackathons,
             mentoring students in AI&nbsp;/&nbsp;ML, and eventually coordinating
             the ICPC Asia West Regional Finals, which turned out to be a very
             different kind of systems problem.
           </p>
           <p className="text-secondary leading-relaxed">
-            I&apos;m looking for what comes next &mdash; harder engineering
+            I&apos;m looking for what comes next &dash; harder engineering
             problems, a different domain, or a role with more ownership. The
             quiet ambition is to keep building AI that delivers when it matters,
             and to grow into{" "}
@@ -98,7 +98,7 @@ export default function About() {
                 </span>
                 <div>
                   <p className="text-muted text-[10px] font-mono uppercase tracking-wider">Education</p>
-                  <p className="text-foreground text-sm font-medium">B.Tech CS &mdash; AI &amp; ML</p>
+                  <p className="text-foreground text-sm font-medium">B.Tech CS &dash; AI &amp; ML</p>
                 </div>
               </div>
               <span className="text-muted text-xs font-mono hidden sm:block">Amrita, Amritapuri</span>
@@ -136,7 +136,7 @@ export default function About() {
               <div>
                 <p className="text-muted text-[10px] font-mono uppercase tracking-wider">Currently Building</p>
                 <p className="text-foreground text-sm font-medium">
-                  Vidyapath &mdash;{" "}
+                  Vidyapath &dash;{" "}
                   <span className="text-secondary font-normal text-xs">
                     multi-school LMS platform with AI-assisted teaching tools
                   </span>

@@ -85,6 +85,17 @@ export default function Footer() {
           Designed &amp; built by Adithya S Nair &middot; 2026 &middot;{" "}
           <span className="italic">no templates were harmed</span>
         </p>
+        <p className="text-muted/40 text-[10px] font-mono text-center mt-2">
+          Made in collaboration with{" "}
+          <a
+            href="https://codrantlabs.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-accent transition-colors"
+          >
+            CodrantLabs
+          </a>
+        </p>
       </motion.div>
     </footer>
   );
