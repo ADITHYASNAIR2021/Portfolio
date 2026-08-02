@@ -1,88 +1,24 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
-      {/* Background glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 40%, rgba(0,212,255,0.06) 0%, transparent 60%)",
-        }}
-      />
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-center max-w-md relative z-10"
-      >
-        {/* 404 number */}
-        <motion.p
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[120px] md:text-[160px] font-display font-bold leading-none gradient-text select-none"
-        >
-          404
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl font-display font-semibold text-foreground mb-3"
-        >
-          Nothing here.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-secondary text-sm leading-relaxed mb-10 font-mono"
-        >
-          This page doesn&apos;t exist — or it moved. Either way, the homepage
-          is a better bet.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <Link href="/" className="liquid-glass-btn liquid-glass-btn-primary">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to home
-          </Link>
-        </motion.div>
-      </motion.div>
-
-      {/* Monospace hint */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-        className="absolute bottom-8 font-mono text-muted/40 text-xs"
-      >
-        error: page not found · status 404
-      </motion.p>
-    </div>
+    <main className="min-h-screen px-5 py-8 flex flex-col justify-between bg-[var(--paper)] text-[var(--ink)] overflow-hidden relative">
+      <div className="absolute right-[-8rem] top-[15%] h-[26rem] w-[26rem] rounded-full border border-[var(--cobalt)] opacity-40" />
+      <div className="flex items-center justify-between border-b border-white/20 pb-4 font-mono text-xs uppercase tracking-wider relative">
+        <span className="text-[var(--lime)]">AS/N · lost signal</span>
+        <span>Error 404</span>
+      </div>
+      <div className="max-w-6xl mx-auto w-full py-20 relative">
+        <p className="font-mono text-xs uppercase tracking-wider mb-6 text-[var(--tomato)]">No useful output at this address</p>
+        <h1 className="[font-family:var(--font-display)] text-[clamp(4.7rem,16vw,13rem)] leading-[0.75] tracking-[-0.075em] font-extrabold">
+          Signal<br /><span className="text-[var(--cobalt)]">not found.</span>
+        </h1>
+        <p className="mt-10 max-w-md text-base text-[var(--ink-soft)]">
+          The route disappeared. The work did not. Return to the systems, experiments, and questions still in motion.
+        </p>
+        <Link className="button button-primary mt-8 w-fit" href="/">Return to the work →</Link>
+      </div>
+      <p className="font-mono text-xs uppercase tracking-wider relative">Diagnosis: wrong coordinate, healthy system.</p>
+    </main>
   );
 }
