@@ -191,7 +191,7 @@ export const experiences: ExperienceItem[] = [
     period: "Jun 2025 — May 2026",
     description: [
       "Built and maintained the AI features of a live medical report generation platform — integrating LLMs across multiple providers (OpenAI, HuggingFace, Nebius, OVH) with RAG pipelines and prompt engineering. Most of the hard problems turned out to be evaluation, not modelling.",
-      "Designed vision analysis pipelines for DICOM medical imaging across 10+ modalities, validated against radiologist ground-truth data to measure and close the accuracy gap.",
+      "Designed vision analysis pipelines for DICOM medical imaging, validated against radiologist ground-truth data to measure and close the accuracy gap.",
       "Built internal tooling including a token-efficient serialisation format that meaningfully reduced API costs on high-volume inference runs.",
       "Set up CI/CD pipelines and model monitoring so performance regressions surface before they reach production.",
     ],

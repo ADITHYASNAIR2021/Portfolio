@@ -1,21 +1,25 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import {
   capabilities,
   caseStudies,
   education,
   experience,
+  faq,
   leadership,
   profile,
   proofPoints,
   publication,
   smallerBuilds,
+  studio,
   type CaseStudy,
 } from "@/content/story";
 
@@ -35,80 +39,14 @@ function Arrow({ direction = "up-right" }: { direction?: "up-right" | "down" | "
   );
 }
 
-function SignalTrace({ className = "" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 320 82" fill="none" aria-hidden="true">
-      <path
-        d="M2 43h48l17-31 27 58 28-51 21 24h48l13-19 19 37 21-18h74"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="67" cy="12" r="4" fill="currentColor" />
-      <circle cx="223" cy="61" r="4" fill="currentColor" />
-    </svg>
-  );
-}
-
-function CaseVisual({ kind }: { kind: CaseStudy["visual"] }) {
-  if (kind === "medical") {
-    return (
-      <svg className="case-glyph" viewBox="0 0 600 420" fill="none" aria-hidden="true">
-        <rect x="58" y="44" width="484" height="330" rx="2" className="glyph-frame" />
-        <path className="glyph-faint" d="M58 112h484M154 44v330" />
-        <circle cx="349" cy="209" r="104" className="glyph-orbit" />
-        <circle cx="349" cy="209" r="61" className="glyph-orbit dash" />
-        <path className="glyph-solid" d="M174 225h52l18-52 33 111 28-79 25 20h58l25-74 25 74h80" />
-        <path className="glyph-faint" d="M183 86h98M183 310h76M183 332h118" />
-        <circle cx="349" cy="209" r="8" className="glyph-dot" />
-        <text x="78" y="87" className="glyph-label">EVAL / 10+ MODALITIES</text>
-        <text x="459" y="352" className="glyph-label">SIGNAL</text>
-      </svg>
-    );
-  }
-
-  if (kind === "school") {
-    return (
-      <svg className="case-glyph" viewBox="0 0 600 420" fill="none" aria-hidden="true">
-        <path className="glyph-frame" d="M62 62h476v296H62z" />
-        <path className="glyph-faint" d="M62 135h476M181 62v296M419 62v296" />
-        <circle cx="300" cy="210" r="78" className="glyph-orbit dash" />
-        <path className="glyph-solid" d="M181 103h64c31 0 55 25 55 55v104c0 31 25 55 55 55h64" />
-        <path className="glyph-solid reverse" d="M419 103h-64c-31 0-55 25-55 55v104c0 31-25 55-55 55h-64" />
-        <circle cx="181" cy="103" r="11" className="glyph-dot" />
-        <circle cx="419" cy="103" r="11" className="glyph-dot" />
-        <circle cx="181" cy="317" r="11" className="glyph-dot" />
-        <circle cx="419" cy="317" r="11" className="glyph-dot" />
-        <text x="84" y="104" className="glyph-label">STUDENT</text>
-        <text x="436" y="104" className="glyph-label">TEACHER</text>
-        <text x="84" y="322" className="glyph-label">PARENT</text>
-        <text x="436" y="322" className="glyph-label">ADMIN</text>
-      </svg>
-    );
-  }
-
-  return (
-    <svg className="case-glyph" viewBox="0 0 600 420" fill="none" aria-hidden="true">
-      <rect x="60" y="48" width="480" height="324" className="glyph-frame" />
-      <path className="glyph-faint" d="M60 102h480M124 48v324M476 48v324" />
-      <path className="glyph-solid" d="m124 118 128 92-128 92M476 118 348 210l128 92" />
-      <circle cx="300" cy="210" r="69" className="glyph-orbit" />
-      <path className="glyph-solid reverse" d="M258 210h84M300 168v84" />
-      <circle cx="300" cy="210" r="14" className="glyph-dot" />
-      <text x="81" y="82" className="glyph-label">PROBLEM → PRODUCT</text>
-      <text x="397" y="348" className="glyph-label">DIRECT SIGNAL</text>
-    </svg>
-  );
-}
-
 function Navigation() {
   const [open, setOpen] = useState(false);
   const links = [
     ["Work", "#work"],
-    ["Research", "#research"],
-    ["About", "#about"],
-    ["Contact", "#contact"],
+    ["Lab", "#lab"],
+    ["Story", "#about"],
+    ["Q&A", "#faq"],
+    ["Journal", "/blog"],
   ];
 
   useEffect(() => {
@@ -121,23 +59,16 @@ function Navigation() {
   return (
     <header className="site-header">
       <a className="skip-link" href="#main">Skip to content</a>
-      <a className="brand-mark" href="#top" aria-label="Adithya S Nair, back to top">
+      <Link className="brand-mark" href="/" aria-label="Adithya S Nair, home">
         <span>AS/N</span>
-        <small>Build log / 26.08</small>
-      </a>
-
+        <small>Applied AI / 26</small>
+      </Link>
       <nav className="desktop-nav" aria-label="Primary navigation">
         {links.map(([label, href], index) => (
-          <a href={href} key={href}>
-            <span>0{index + 1}</span>{label}
-          </a>
+          <a href={href} key={href}><span>0{index + 1}</span>{label}</a>
         ))}
       </nav>
-
-      <a className="availability" href={`mailto:${profile.email}`}>
-        <i /> Open to difficult problems
-      </a>
-
+      <a className="availability" href={`mailto:${profile.email}`}><i /> Available for meaningful work</a>
       <button
         className="menu-button"
         type="button"
@@ -146,10 +77,8 @@ function Navigation() {
         aria-controls="mobile-menu"
         onClick={() => setOpen((value) => !value)}
       >
-        <span>{open ? "Close" : "Menu"}</span>
-        <i className={open ? "is-open" : ""} />
+        <span>{open ? "Close" : "Menu"}</span><i className={open ? "is-open" : ""} />
       </button>
-
       <AnimatePresence>
         {open && (
           <motion.nav
@@ -159,7 +88,7 @@ function Navigation() {
             initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
             exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.38, ease }}
+            transition={{ duration: 0.36, ease }}
           >
             <div className="mobile-nav-inner">
               {links.map(([label, href], index) => (
@@ -167,9 +96,9 @@ function Navigation() {
                   href={href}
                   key={href}
                   onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 + index * 0.06, ease }}
+                  transition={{ delay: 0.07 + index * 0.05, ease }}
                 >
                   <span>0{index + 1}</span>{label}
                 </motion.a>
@@ -188,40 +117,32 @@ function Hero() {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-grid page-grid">
         <div className="hero-kicker" data-reveal>
-          <span>AI engineering / research / product</span>
-          <span>Based in Kerala · working anywhere</span>
+          <span>AI systems / research / product</span>
+          <span>Kerala, India / working worldwide</span>
         </div>
-
         <div className="hero-copy">
-          <div className="hero-title-wrap">
-            <h1 id="hero-title">
-              <span className="hero-line"><span className="hero-word">AI should survive</span></span>
-              <span className="hero-line"><span className="hero-word hero-serif">contact with</span></span>
-              <span className="hero-line"><span className="hero-word">the real world.</span></span>
-            </h1>
-            <SignalTrace className="hero-scribble" />
-          </div>
+          <p className="hero-overline" data-reveal>Adithya S Nair / AI engineer</p>
+          <h1 id="hero-title">
+            <span className="hero-line"><span className="hero-word">Build AI</span></span>
+            <span className="hero-line"><span className="hero-word hero-serif">that earns</span></span>
+            <span className="hero-line"><span className="hero-word">confidence.</span></span>
+          </h1>
           <p className="hero-intro" data-reveal>
-            I design the pipelines, products, and evaluation loops that make that happen—from medical vision systems to multi-school platforms.
+            I turn difficult AI ideas into measurable systems. My work spans medical vision, agent memory, evaluation, and products people can trust.
           </p>
           <div className="hero-actions" data-reveal>
-            <a className="button button-primary" href="#work">
-              See selected work <Arrow direction="down" />
-            </a>
-            <a className="button button-quiet" href={profile.resume} target="_blank" rel="noreferrer">
-              Read résumé <Arrow />
-            </a>
+            <a className="button button-primary" href="#work">See selected work <Arrow direction="down" /></a>
+            <a className="button button-quiet" href={profile.resume} target="_blank" rel="noreferrer">Read resume <Arrow /></a>
           </div>
         </div>
-
         <div className="portrait-wrap" data-parallax>
           <div className="portrait-index">HUMAN / SIGNAL</div>
           <div className="portrait-frame">
             <Image
-              src="/images/adithya-wide.jpeg"
-              alt="Adithya S Nair standing outdoors in Kerala"
+              src="/images/adithya-professional-v3.webp"
+              alt="Professional portrait of Adithya S Nair, AI engineer and researcher"
               fill
-              sizes="(max-width: 767px) 88vw, (max-width: 1200px) 38vw, 520px"
+              sizes="(max-width: 767px) 92vw, (max-width: 1200px) 40vw, 520px"
               fetchPriority="high"
               className="portrait-image"
             />
@@ -232,27 +153,26 @@ function Hero() {
             drag
             dragElastic={0.12}
             dragMomentum={false}
-            whileDrag={{ rotate: -4, scale: 1.04 }}
+            whileDrag={{ rotate: -3, scale: 1.03 }}
             whileHover={{ rotate: 1 }}
             aria-hidden="true"
           >
-            Current obsession:<br />memory × agents × reliable evaluation.
-            <small>← move the signal</small>
+            Current research:<br />memory x agents x evaluation.
+            <small>move the signal</small>
           </motion.div>
-          <div className="portrait-caption">
-            <span>Build</span><span>Measure</span><span>Make useful</span>
-          </div>
+          <div className="portrait-caption"><span>Frame</span><span>Build</span><span>Prove</span></div>
         </div>
-
-        <a className="scroll-cue" href="#proof" aria-label="Scroll to quick facts">
-          <span>Keep going</span><Arrow direction="down" />
-        </a>
+        <a className="scroll-cue" href="#proof" aria-label="Scroll to quick facts"><span>Explore</span><Arrow direction="down" /></a>
       </div>
-
       <div className="thought-loop" aria-label="Working principles">
-        <div>
-          <span>question assumptions</span><i>↗</i><span>prototype the hard part</span><i>↗</i><span>measure what matters</span><i>↗</i>
-          <span>question assumptions</span><i>↗</i><span>prototype the hard part</span><i>↗</i><span>measure what matters</span><i>↗</i>
+        <div className="thought-track">
+          {Array.from({ length: 12 }).map((_, set) => (
+            <span className="thought-set" key={set} aria-hidden={set > 0 ? "true" : undefined}>
+              <span>question assumptions</span><i aria-hidden="true">+</i>
+              <span>prototype the hard part</span><i aria-hidden="true">+</i>
+              <span>measure what matters</span><i aria-hidden="true">+</i>
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -263,19 +183,123 @@ function ProofStrip() {
   return (
     <section className="proof-strip page-grid" id="proof" aria-label="Selected facts">
       <div className="proof-intro" data-reveal>
-        <span className="eyebrow">My operating thesis</span>
-        <p>The model is a component. The system is the product.</p>
+        <span className="eyebrow">Operating thesis</span>
+        <p>A model can impress. A system must hold up.</p>
       </div>
       <div className="proof-list">
         {proofPoints.map((item, index) => (
           <div className="proof-item" key={item.label} data-reveal>
-            <span>0{index + 1}</span>
-            <strong>{item.value}</strong>
-            <p>{item.label}</p>
+            <span>0{index + 1}</span><strong>{item.value}</strong><p>{item.label}</p>
           </div>
         ))}
       </div>
     </section>
+  );
+}
+
+const labModes = [
+  {
+    label: "Remember",
+    code: "M-01",
+    title: "Keep only useful state.",
+    detail: "Memory should preserve decisions, evidence, and unresolved risk. More context is not the same as better context.",
+    signal: [24, 44, 38, 72, 56, 88],
+    measure: "Retrieval precision",
+  },
+  {
+    label: "Route",
+    code: "R-02",
+    title: "Give each step a reason.",
+    detail: "Agents need explicit tools, boundaries, and hand-off rules. Good routing makes a complex system easier to inspect.",
+    signal: [18, 34, 66, 48, 78, 92],
+    measure: "Decision trace",
+  },
+  {
+    label: "Evaluate",
+    code: "E-03",
+    title: "Test the whole journey.",
+    detail: "A correct final answer can hide a fragile process. I evaluate outcomes, tool choices, recovery, cost, and latency together.",
+    signal: [30, 52, 46, 82, 68, 96],
+    measure: "Task reliability",
+  },
+];
+
+function SignalWorkbench() {
+  const [active, setActive] = useState(0);
+  const mode = labModes[active];
+
+  return (
+    <section className="lab-section page-grid" id="lab" aria-labelledby="lab-title">
+      <header className="lab-heading" data-reveal>
+        <span className="eyebrow">Interactive field lab / 01</span>
+        <h2 id="lab-title">Test the <em>system.</em></h2>
+        <p>Choose a layer. See what I optimise before an AI product reaches real users.</p>
+      </header>
+      <div className="lab-console" data-reveal>
+        <div className="lab-tabs" role="tablist" aria-label="AI system layers">
+          {labModes.map((item, index) => (
+            <button
+              key={item.code}
+              type="button"
+              role="tab"
+              aria-selected={active === index}
+              aria-controls={`lab-panel-${index}`}
+              id={`lab-tab-${index}`}
+              className={active === index ? "active" : ""}
+              onClick={() => setActive(index)}
+            >
+              <span>{item.code}</span>{item.label}
+            </button>
+          ))}
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="lab-panel"
+            key={mode.code}
+            role="tabpanel"
+            id={`lab-panel-${active}`}
+            aria-labelledby={`lab-tab-${active}`}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease }}
+          >
+            <div className="lab-copy">
+              <span>Active layer / {mode.code}</span>
+              <h3>{mode.title}</h3>
+              <p>{mode.detail}</p>
+              <small>Primary measure: {mode.measure}</small>
+            </div>
+            <div className="lab-viz" aria-hidden="true">
+              <div className="lab-bars">
+                {mode.signal.map((height, index) => (
+                  <motion.i key={`${mode.code}-${index}`} initial={{ height: 12 }} animate={{ height: `${height}%` }} />
+                ))}
+              </div>
+              <div className="lab-orbit"><i /><i /><i /><strong>{active + 1}</strong></div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
+function SystemVisual({ project }: { project: CaseStudy }) {
+  return (
+    <div className={`system-visual visual-${project.visual}`} aria-hidden="true">
+      <div className="visual-grid" />
+      <div className="visual-orbit orbit-one" />
+      <div className="visual-orbit orbit-two" />
+      <div className="visual-node node-one" />
+      <div className="visual-node node-two" />
+      <div className="visual-node node-three" />
+      <div className="visual-line line-one" />
+      <div className="visual-line line-two" />
+      <span>{project.kind}</span>
+      <strong>{project.metric}</strong>
+      <small>{project.metricLabel}</small>
+    </div>
   );
 }
 
@@ -284,33 +308,23 @@ function Work() {
     <section className="work-section" id="work" aria-labelledby="work-title">
       <header className="section-heading page-grid" data-reveal>
         <span className="eyebrow">Selected systems / 03</span>
-        <h2 id="work-title">Built where failure<br /><em>is not abstract.</em></h2>
-        <p>Healthcare, education, and product delivery—three environments where reliability matters more than a polished demo.</p>
+        <h2 id="work-title">Systems with <em>stakes.</em></h2>
+        <p>Healthcare, education, and product delivery. Three places where reliability matters more than a polished demo.</p>
       </header>
-
       <div className="case-list">
         {caseStudies.map((project) => (
           <article className={`case-study case-${project.accent}`} key={project.title}>
             <div className="case-topline page-grid">
-              <span>{project.index} / 03</span>
-              <span>{project.kind}</span>
-              <span>Selected case</span>
+              <span>{project.index} / 03</span><span>{project.kind}</span><span>Selected case</span>
             </div>
             <div className="case-layout page-grid">
               <div className="case-copy" data-reveal>
                 <h3>{project.title}</h3>
                 <p className="case-subtitle">{project.subtitle}</p>
                 <p className="case-thesis">{project.thesis}</p>
-                <a className="text-link" href={project.href} target="_blank" rel="noreferrer">
-                  Visit the work <Arrow />
-                </a>
+                <a className="text-link" href={project.href} target="_blank" rel="noreferrer">Visit the work <Arrow /></a>
               </div>
-              <div className="case-visual" data-parallax>
-                <CaseVisual kind={project.visual} />
-                <div className="case-metric">
-                  <strong>{project.metric}</strong><span>{project.metricLabel}</span>
-                </div>
-              </div>
+              <div className="case-visual" data-parallax><SystemVisual project={project} /></div>
             </div>
             <div className="case-notes page-grid">
               <div data-reveal><span>The tension</span><p>{project.challenge}</p></div>
@@ -331,30 +345,21 @@ function Research() {
   return (
     <section className="research-section" id="research" aria-labelledby="research-title">
       <div className="research-grid page-grid">
-        <div className="research-label" data-reveal>
-          <span className="eyebrow">Published research</span>
-          <span>{publication.venue}</span>
-        </div>
+        <div className="research-label" data-reveal><span className="eyebrow">Published research</span><span>{publication.venue}</span></div>
         <div className="research-title" data-reveal>
           <span className="research-acronym">{publication.title}</span>
-          <h2 id="research-title">{publication.expanded}</h2>
+          <h2 id="research-title">Smaller model.<br /><em>Serious signal.</em></h2>
+          <strong className="research-full-title">{publication.expanded}</strong>
           <p>{publication.summary}</p>
         </div>
         <div className="research-diagram" aria-hidden="true" data-parallax>
-          <div><span>RAD-DINO</span><small>vision</small></div>
-          <i>→</i>
-          <div className="research-adapter"><span>SA adapter</span><small>align</small></div>
-          <i>→</i>
+          <div><span>RAD-DINO</span><small>vision</small></div><i>to</i>
+          <div className="research-adapter"><span>SA adapter</span><small>align</small></div><i>to</i>
           <div><span>BioGPT</span><small>language</small></div>
         </div>
         <div className="research-facts">
-          {publication.facts.map((fact) => (
-            <div key={fact.label} data-reveal>
-              <strong>{fact.value}</strong><span>{fact.label}</span>
-            </div>
-          ))}
+          {publication.facts.map((fact) => <div key={fact.label} data-reveal><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
         </div>
-        <p className="research-margin-note">98% less to train.<br />93.6% performance kept.</p>
       </div>
     </section>
   );
@@ -391,14 +396,12 @@ function CapabilityIndex() {
             role="tabpanel"
             id={`capability-panel-${active}`}
             aria-labelledby={`capability-tab-${active}`}
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease }}
           >
-            <h3>{item.title}</h3>
-            <p>{item.detail}</p>
-            <span>{item.tools}</span>
+            <h3>{item.title}</h3><p>{item.detail}</p><span>{item.tools}</span>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -410,50 +413,33 @@ function About() {
   return (
     <section className="about-section" id="about" aria-labelledby="about-title">
       <div className="about-intro page-grid">
-        <span className="eyebrow" data-reveal>How I work</span>
-        <h2 id="about-title" data-reveal>
-          Broad by curiosity.<br /><em>Precise by habit.</em>
-        </h2>
-        <p data-reveal>
-          I work best where product thinking, research, and engineering collide: asking the inconvenient question early, proving the hard part quickly, and staying accountable after launch.
-        </p>
+        <span className="eyebrow" data-reveal>Method / background</span>
+        <h2 id="about-title" data-reveal>How I get to <em>useful.</em></h2>
+        <p data-reveal>I connect product thinking, research, and engineering. I ask the difficult question early, prove the hard part quickly, and stay accountable after launch.</p>
       </div>
-      <div className="page-grid" data-reveal>
-        <CapabilityIndex />
-      </div>
-
+      <div className="page-grid" data-reveal><CapabilityIndex /></div>
       <div className="story-grid page-grid">
         <div className="timeline-block">
-          <header data-reveal><span className="eyebrow">Experience</span><h3>The work behind the work.</h3></header>
+          <header data-reveal><span className="eyebrow">Experience</span><h3>Work in the real world.</h3></header>
           {experience.map((item) => (
             <article className="timeline-row" key={`${item.role}-${item.period}`} data-reveal>
-              <span>{item.period}</span>
-              <div><h4>{item.role} · {item.company}</h4><small>{item.location}</small><p>{item.note}</p></div>
+              <span>{item.period}</span><div><h4>{item.role} / {item.company}</h4><small>{item.location}</small><p>{item.note}</p></div>
             </article>
           ))}
         </div>
         <div className="education-block">
-          <header data-reveal><span className="eyebrow">Education</span><h3>Still studying the edges.</h3></header>
-          {education.map((item) => (
+          <header data-reveal><span className="eyebrow">Education</span><h3>Built on research.</h3></header>
+          {education.map((item, index) => (
             <article className="education-row" key={item.degree} data-reveal>
-              <span>{item.period}</span>
-              <h4>{item.degree}</h4>
-              <strong>{item.focus}</strong>
-              <small>{item.school}</small>
-              <p>{item.note}</p>
+              <div className="education-index">0{index + 1}</div><span>{item.period}</span><h4>{item.degree}</h4>
+              <strong>{item.focus}</strong><small>{item.school}</small><p>{item.note}</p>
             </article>
           ))}
         </div>
       </div>
-
       <div className="leadership-note page-grid" data-reveal>
-        <div className="leadership-stamp">200+<small>people, not users</small></div>
-        <div>
-          <span className="eyebrow">Leadership / community</span>
-          <h3>{leadership.title}</h3>
-          <strong>{leadership.path}</strong>
-          <p>{leadership.body}</p>
-        </div>
+        <div className="leadership-stamp">200+<small>people led</small></div>
+        <div><span className="eyebrow">Leadership / community</span><h3>{leadership.title}</h3><strong>{leadership.path}</strong><p>{leadership.body}</p></div>
       </div>
     </section>
   );
@@ -461,20 +447,78 @@ function About() {
 
 function SideProjects() {
   return (
-    <section className="side-projects page-grid" aria-labelledby="side-projects-title">
-      <header data-reveal>
-        <span className="eyebrow">Selected experiments</span>
-        <h2 id="side-projects-title">Experiments with<br /><em>useful consequences.</em></h2>
+    <section className="side-projects" aria-labelledby="side-projects-title">
+      <div className="side-projects-pin">
+        <header className="side-projects-head page-grid" data-reveal>
+          <span className="eyebrow">Selected experiments / 05</span>
+          <h2 id="side-projects-title">Built to <em>learn.</em></h2>
+          <span className="side-projects-hint" aria-hidden="true">Keep scrolling <Arrow direction="right" /></span>
+        </header>
+        <div className="side-project-rail" tabIndex={0} role="group" aria-label="Experiment gallery, scrolls horizontally">
+          <div className="side-project-track">
+            {smallerBuilds.map((project, index) => (
+              <article className="side-project-card" key={project.title}>
+                <div className="card-top"><span>{project.year}</span><strong>0{index + 1}</strong></div>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="card-tags">{project.tags.map((tag) => <small key={tag}>{tag}</small>)}</div>
+              </article>
+            ))}
+            <article className="side-project-card card-cta">
+              <div className="card-top"><span>Next</span><strong>0{smallerBuilds.length + 1}</strong></div>
+              <h3>Your hard problem</h3>
+              <p>The list grows wherever a difficult idea needs a working, measurable system.</p>
+              <a className="text-link" href="#contact">Start one <Arrow /></a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BlogPreview() {
+  return (
+    <section className="journal-preview page-grid" aria-labelledby="journal-title">
+      <div className="journal-image" data-reveal>
+        <Image
+          src="/images/agent-memory-lab-v1.webp"
+          alt="Editorial illustration of an AI memory system moving through evaluation checkpoints"
+          fill
+          sizes="(max-width: 767px) 92vw, 54vw"
+        />
+        <span>Field note / 001</span>
+      </div>
+      <div className="journal-copy" data-reveal>
+        <span className="eyebrow">New from the journal</span>
+        <h2 id="journal-title">Memory is not a <em>feature.</em></h2>
+        <p>Why capable agents need selective memory, observable retrieval, and evaluation across the full task journey.</p>
+        <div><span>12 min read</span><span>August 3, 2026</span></div>
+        <Link className="button button-primary" href="/blog/agent-memory-needs-evaluation">Read the field note <Arrow /></Link>
+        <Link className="text-link" href="/blog">Browse all writing <Arrow /></Link>
+      </div>
+    </section>
+  );
+}
+
+function Faq() {
+  return (
+    <section className="faq-section page-grid" id="faq" aria-labelledby="faq-title">
+      <header className="faq-heading" data-reveal>
+        <span className="eyebrow">Common questions / 06</span>
+        <h2 id="faq-title">Direct <em>answers.</em></h2>
+        <p>The short version — for people in a hurry and the engines answering for them.</p>
       </header>
-      <div className="side-project-list">
-        {smallerBuilds.map((project, index) => (
-          <article key={project.title} data-reveal>
-            <span>{project.year}</span>
-            <strong>0{index + 1}</strong>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div>{project.tags.map((tag) => <small key={tag}>{tag}</small>)}</div>
-          </article>
+      <div className="faq-list">
+        {faq.map((item, index) => (
+          <details className="faq-item" key={item.id} id={item.id} data-reveal>
+            <summary>
+              <span aria-hidden="true">0{index + 1}</span>
+              {item.question}
+              <i aria-hidden="true" />
+            </summary>
+            <p>{item.answer}</p>
+          </details>
         ))}
       </div>
     </section>
@@ -486,22 +530,15 @@ function Contact() {
     <section className="contact-section" id="contact" aria-labelledby="contact-title">
       <div className="contact-grid page-grid">
         <div className="contact-copy" data-reveal>
-          <span className="eyebrow">The next hard thing</span>
-          <h2 id="contact-title">Bring me the problem<br /><em>that resists shortcuts.</em></h2>
-          <p>
-            I’m open to AI engineering roles, research collaborations, and focused product builds with real users, real constraints, and standards worth defending.
-          </p>
+          <span className="eyebrow">The next hard thing</span><h2 id="contact-title">Let&apos;s build the <em>hard part.</em></h2>
+          <p>I am open to AI engineering roles, research collaborations, and focused product builds with real users and real constraints.</p>
         </div>
-        <a className="contact-orbit" href={`mailto:${profile.email}`} data-reveal>
-          <span>Start a conversation</span>
-          <strong>Say hello</strong>
-          <Arrow />
-        </a>
+        <a className="contact-orbit" href={`mailto:${profile.email}`} data-reveal><span>Start a conversation</span><strong>Say hello</strong><Arrow /></a>
         <div className="contact-links" data-reveal>
           <a href={`mailto:${profile.email}`}>{profile.email}<Arrow /></a>
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn<Arrow /></a>
           <a href={profile.github} target="_blank" rel="noreferrer">GitHub<Arrow /></a>
-          <a href={profile.resume} target="_blank" rel="noreferrer">Résumé<Arrow /></a>
+          <a href={profile.resume} target="_blank" rel="noreferrer">Resume<Arrow /></a>
         </div>
       </div>
     </section>
@@ -510,10 +547,18 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="site-footer page-grid">
-      <div><strong>Adithya S Nair</strong><span>Full-stack AI engineer & researcher</span></div>
-      <p>Designed as a living system, not a template.<br />Built in Kerala for problems without borders.</p>
-      <a href="#top">Back to top <Arrow direction="up-right" /></a>
+    <footer className="site-footer">
+      <div className="page-grid">
+        <div className="footer-id"><strong>Adithya S Nair</strong><span>Full-stack AI engineer & researcher</span></div>
+        <p>Designed as a living system.<br />Built in Kerala for problems without borders.</p>
+        <div className="footer-links"><Link href="/blog">Journal</Link><a href="#top">Back to top <Arrow /></a></div>
+        <div className="footer-credit">
+          <span>© 2026 Adithya S Nair · Kottayam, Kerala</span>
+          <a href={studio.url} target="_blank" rel="noreferrer">
+            Made with <strong>{studio.name}</strong> · {studio.domain} <Arrow />
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
@@ -523,51 +568,80 @@ export default function PortfolioExperience() {
 
   useGSAP(
     () => {
-      gsap.registerPlugin(ScrollTrigger);
-
+      gsap.registerPlugin(ScrollTrigger, SplitText);
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduceMotion) {
         gsap.set("[data-reveal], .hero-word", { opacity: 1, y: 0, clearProps: "transform" });
         return;
       }
 
-      gsap.fromTo(
-        ".hero-word",
-        { yPercent: 115 },
-        { yPercent: 0, duration: 1.05, stagger: 0.09, ease: "power4.out", delay: 0.18 },
-      );
-
+      gsap.fromTo(".hero-word", { yPercent: 115 }, { yPercent: 0, duration: 0.95, stagger: 0.08, ease: "power4.out", delay: 0.16 });
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
-        gsap.fromTo(
-          element,
-          { y: 32, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: "power3.out",
-            scrollTrigger: { trigger: element, start: "top 88%", once: true },
-          },
-        );
+        gsap.fromTo(element, { y: 26, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.68,
+          ease: "power3.out",
+          scrollTrigger: { trigger: element, start: "top 90%", once: true },
+        });
       });
-
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((element) => {
-        gsap.fromTo(
-          element,
-          { yPercent: 3 },
-          {
-            yPercent: -3,
-            ease: "none",
-            scrollTrigger: { trigger: element, start: "top bottom", end: "bottom top", scrub: 0.6 },
+        gsap.fromTo(element, { yPercent: 2 }, {
+          yPercent: -2,
+          ease: "none",
+          scrollTrigger: { trigger: element, start: "top bottom", end: "bottom top", scrub: 0.5 },
+        });
+      });
+      gsap.to(".scroll-progress", { scaleX: 1, transformOrigin: "left center", ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.2 } });
+
+      // Marquee: GSAP-driven so scroll velocity can push it.
+      const marqueeTrack = root.current?.querySelector<HTMLElement>(".thought-track");
+      if (marqueeTrack) {
+        marqueeTrack.style.animation = "none";
+        const marquee = gsap.to(marqueeTrack, { xPercent: -50, ease: "none", duration: 36, repeat: -1 });
+        ScrollTrigger.create({
+          onUpdate: (self) => {
+            const boost = Math.min(Math.abs(self.getVelocity()) / 800, 3.2);
+            gsap.to(marquee, { timeScale: 1 + boost, duration: 0.45, overwrite: true });
           },
-        );
+        });
+      }
+
+      // Experiments rail: pin the section and pan it horizontally with scroll.
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 900px)", () => {
+        const rail = root.current?.querySelector<HTMLElement>(".side-project-rail");
+        if (!rail || rail.scrollWidth <= rail.clientWidth) return;
+        gsap.to(rail, {
+          scrollLeft: () => rail.scrollWidth - rail.clientWidth,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".side-projects",
+            start: "top top",
+            end: () => `+=${rail.scrollWidth - rail.clientWidth}`,
+            scrub: 0.6,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
       });
 
-      gsap.to(".scroll-progress", {
-        scaleX: 1,
-        transformOrigin: "left center",
-        ease: "none",
-        scrollTrigger: { start: 0, end: "max", scrub: 0.2 },
+      // Masked line reveals on section headings, after fonts settle.
+      document.fonts.ready.then(() => {
+        gsap.utils.toArray<HTMLElement>(
+          ".section-heading h2, .lab-heading h2, .about-intro h2, .side-projects h2, .journal-copy h2, .contact-copy h2, .faq-heading h2, .research-title h2",
+        ).forEach((heading) => {
+          const split = SplitText.create(heading, { type: "lines", mask: "lines" });
+          gsap.from(split.lines, {
+            yPercent: 112,
+            duration: 0.85,
+            stagger: 0.09,
+            ease: "power4.out",
+            scrollTrigger: { trigger: heading, start: "top 88%", once: true },
+          });
+        });
+        ScrollTrigger.refresh();
       });
     },
     { scope: root },
@@ -580,10 +654,13 @@ export default function PortfolioExperience() {
       <main id="main">
         <Hero />
         <ProofStrip />
+        <SignalWorkbench />
         <Work />
         <Research />
         <About />
         <SideProjects />
+        <BlogPreview />
+        <Faq />
         <Contact />
       </main>
       <Footer />

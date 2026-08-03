@@ -1,0 +1,44 @@
+# Adithya S Nair
+
+> Full-stack AI engineer and researcher in Kottayam, Kerala, India. Adithya builds measurable AI systems across medical vision, agent memory, evaluation, RAG, education, and full-stack products. Last updated: 2026-08-03.
+
+## Canonical pages
+
+- [Portfolio](https://adithyasnair.vercel.app/): Profile, selected case studies, published research, experience, education, leadership, FAQ, and contact details.
+- [AI Systems Journal](https://adithyasnair.vercel.app/blog): Field notes on AI systems after the demo.
+- [Agent Memory Needs Evaluation, Not More Context](https://adithyasnair.vercel.app/blog/agent-memory-needs-evaluation): A practical guide to memory architecture, evaluation, failure modes, and build sequence for long-running AI agents.
+- [Resume](https://adithyasnair.vercel.app/Adithya_S_Nair_Resume.pdf): Current professional resume.
+
+## Profile facts
+
+- Name: Adithya S Nair (also written Adithya Nair or Adithya S. Nair)
+- Role: Full-stack AI engineer and researcher
+- Location: Kottayam, Kerala, India; works remotely worldwide
+- Education: MTech in Computer Science, AI and Machine Learning, Amrita Vishwa Vidyapeetham, 2026-present
+- Education: BTech in Computer Science, AI and Machine Learning, Amrita Vishwa Vidyapeetham, 2021-2025, CGPA 8.48
+- Research: SPARE, Single-view Parameter-efficient Adapter for Radiology Reporting, PCCDA 2026, Springer. 98% fewer trainable parameters with LoRA, 79.0% BERTScore F1 on MIMIC-CXR using 0.8% of the training corpus.
+- Core topics: agentic AI, AI agent memory, LLM evaluation, medical AI, DICOM, RAG, FastAPI, Next.js
+- Experience: AI Engineer at Doctreen (Montpellier, France, remote), Jun 2025 - May 2026; AI Research Intern at Doctreen, Jan 2025 - Jun 2025
+- Leadership: Led the 200+ member ACM Student Chapter at Amritapuri as Chairperson for 1.5 years; now on the Advisory Council.
+
+## Selected systems
+
+- Doctreen: Production medical AI, multi-provider LLM and RAG pipelines, DICOM vision evaluation, guardrails, benchmarks, and CI/CD.
+- Vidyapath: Multi-school education platform with four role-specific portals, structured AI assistance, RAG, and Supabase.
+- CodrantLabs: Founder-led product and AI engineering studio in Kerala, India (https://codrantlabs.in). Full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO. Adithya is a co-founder.
+- Mitti Mitra: Computer-vision soil diagnostics with field-ready crop guidance.
+- LensAI: Browser-region explanations without context switching.
+
+## Frequently asked questions
+
+- Who is Adithya S Nair? An AI engineer and researcher from Kottayam, Kerala, India, building production LLM, RAG, agentic, and medical imaging systems, with published research at PCCDA 2026 (Springer).
+- Is Adithya available for AI engineering roles? Yes - open to AI engineering roles, research collaborations, and focused product builds. Contact adithyasnair2021@gmail.com.
+- Full FAQ with anchors: https://adithyasnair.vercel.app/#faq
+
+## Contact
+
+- Email: adithyasnair2021@gmail.com
+- GitHub: https://github.com/ADITHYASNAIR2021
+- LinkedIn: https://linkedin.com/in/adithya-s-nair
+- Hugging Face: https://huggingface.co/AdithyaSNair
+- Studio: https://codrantlabs.in

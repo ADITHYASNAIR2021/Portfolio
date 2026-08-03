@@ -6,13 +6,24 @@ export const profile = {
   phone: "+91 81368 59455",
   github: "https://github.com/ADITHYASNAIR2021",
   linkedin: "https://linkedin.com/in/adithya-s-nair",
+  huggingface: "https://huggingface.co/AdithyaSNair",
   resume: "/Adithya_S_Nair_Resume.pdf",
+};
+
+/* Studio credit — shown in the footer and referenced in structured data. */
+export const studio = {
+  name: "CodrantLabs",
+  url: "https://codrantlabs.in",
+  domain: "codrantlabs.in",
+  tagline: "We build machines that think.",
+  description:
+    "Founder-led product and AI engineering studio in Kerala, India — full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
 };
 
 export const proofPoints = [
   { value: "2 yrs", label: "shipping production AI" },
-  { value: "10+", label: "medical modalities evaluated" },
-  { value: "98%", label: "fewer trainable parameters" },
+  { value: "3", label: "selected systems with real stakes" },
+  { value: "1", label: "peer-reviewed research paper" },
   { value: "200+", label: "people led in tech community" },
 ];
 
@@ -40,15 +51,15 @@ export const caseStudies: CaseStudy[] = [
     title: "Doctreen",
     subtitle: "Clinical signal, engineered for real use.",
     thesis:
-      "Built and maintained the AI core of a medical reporting platform across providers, modalities, and the less glamorous realities of production.",
+      "Built and maintained the AI core of a medical reporting platform across providers, clinical workflows, and the less glamorous realities of production.",
     challenge:
       "Reliable medical AI is an evaluation problem as much as a modelling problem: outputs need guardrails, measurable quality, and predictable operating costs.",
     response:
       "Designed multi-provider LLM and RAG pipelines, DICOM vision workflows, adversarial-input guardrails, parallel benchmarks, CI/CD, and internal data tooling.",
     outcome:
       "A production system that could be tested against radiologist ground truth, monitored for regressions, and improved without treating every model change as guesswork.",
-    metric: "10+",
-    metricLabel: "DICOM modalities",
+    metric: "Live",
+    metricLabel: "medical AI system",
     tech: ["Python", "FastAPI", "RAG", "LLM evaluation", "Docker", "CI/CD"],
     href: "https://www.doctreen.com/",
     accent: "tomato",
@@ -90,7 +101,7 @@ export const caseStudies: CaseStudy[] = [
     metric: "0",
     metricLabel: "layers of account management",
     tech: ["Product strategy", "AI agents", "Full-stack", "RAG", "AEO", "Delivery"],
-    href: "https://codrantlabs.com/",
+    href: "https://codrantlabs.in/",
     accent: "lime",
     visual: "studio",
   },
@@ -111,6 +122,12 @@ export const publication = {
 };
 
 export const smallerBuilds = [
+  {
+    year: "2026",
+    title: "Mitti Mitra",
+    description: "Field-ready soil diagnostics that turn vision and multi-source signals into useful crop guidance.",
+    tags: ["Computer vision", "Flutter", "Firebase"],
+  },
   {
     year: "2026",
     title: "LensAI",
@@ -192,10 +209,56 @@ export const capabilities = [
   },
 ];
 
+export type FaqItem = {
+  /** Stable anchor id, e.g. #faq-research — keep persistent for AI citations. */
+  id: string;
+  question: string;
+  answer: string;
+};
+
+/* Answer-engine ready: natural questions, 30–50 word self-contained answers. */
+export const faq: FaqItem[] = [
+  {
+    id: "faq-who-is-adithya",
+    question: "Who is Adithya S Nair?",
+    answer:
+      "Adithya S Nair is an AI engineer and researcher from Kottayam, Kerala, India. He builds production LLM, RAG, agentic, and medical imaging systems, and published the SPARE radiology reporting research at PCCDA 2026 (Springer).",
+  },
+  {
+    id: "faq-specialisation",
+    question: "What does Adithya specialise in as an AI engineer?",
+    answer:
+      "He specialises in LLM integration, retrieval-augmented generation, agent memory, AI evaluation, and DICOM medical vision. He ships full-stack AI products with Python, FastAPI, PyTorch, and Next.js — from first prototype to monitored production.",
+  },
+  {
+    id: "faq-production-systems",
+    question: "Which production AI systems has Adithya built?",
+    answer:
+      "At Doctreen he built the AI core of a live medical reporting platform. He architected Vidyapath, a multi-school LMS with four role-specific portals, and co-founded CodrantLabs, a product and AI engineering studio.",
+  },
+  {
+    id: "faq-research",
+    question: "What research has Adithya S Nair published?",
+    answer:
+      "SPARE — Single-view Parameter-efficient Adapter for Radiology Reporting — accepted at PCCDA 2026 (Springer). It cuts trainable parameters by 98% with LoRA and reaches 79.0% BERTScore F1 on MIMIC-CXR using 0.8% of the training corpus.",
+  },
+  {
+    id: "faq-availability",
+    question: "Is Adithya available for AI engineering roles?",
+    answer:
+      "Yes. Adithya is open to AI engineering roles, research collaborations, and focused product builds with real users. Email adithyasnair2021@gmail.com to start a conversation.",
+  },
+  {
+    id: "faq-location",
+    question: "Where is Adithya based, and does he work remotely?",
+    answer:
+      "He is based in Kottayam, Kerala, India, and works remotely worldwide. He previously worked remotely as an AI Engineer with Doctreen in Montpellier, France, on production medical AI.",
+  },
+];
+
 export const leadership = {
   title: "ACM Student Chapter, Amritapuri",
   path: "Member → AI Club Mentor → Chairperson → Advisory Council",
   body:
     "Led a 200+ member technical community for 1.5 years, organised national-level hackathons and workshops, mentored students in machine learning, and now advise the next leadership team.",
 };
-

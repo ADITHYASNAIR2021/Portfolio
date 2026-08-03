@@ -1,101 +1,24 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Adithya S Nair — AI Engineer and Researcher";
+export const alt = "Adithya S Nair - AI Engineer and Researcher";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          padding: "46px 54px",
-          display: "flex",
-          flexDirection: "column",
-          color: "#f1f6ec",
-          background: "#0d0c12",
-          fontFamily: "sans-serif",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            background:
-              "radial-gradient(circle at 79% 34%, rgba(197,184,255,0.28), transparent 25%), linear-gradient(112deg, transparent 0 70%, rgba(186,245,90,0.08) 70% 71%, transparent 71%)",
-          }}
-        />
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontFamily: "monospace",
-            fontSize: 15,
-            letterSpacing: "0.09em",
-            position: "relative",
-          }}
-        >
-          <span style={{ color: "#baf55a" }}>AS/N · BUILD LOG 26.08</span>
-          <span>AI ENGINEERING / RESEARCH / PRODUCT</span>
+      <div style={{ width: "100%", height: "100%", padding: "48px 54px", display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#f4f1e8", background: "#080d16", fontFamily: "sans-serif", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: -120, top: 60, width: 430, height: 430, border: "2px solid rgba(111,140,255,0.38)", borderRadius: "50%", display: "flex" }} />
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "monospace", fontSize: 15, letterSpacing: "0.1em", position: "relative" }}>
+          <span style={{ color: "#c9f45a" }}>AS/N / APPLIED AI 26</span><span>KERALA / WORLDWIDE</span>
         </div>
-
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              fontSize: 30,
-              fontWeight: 700,
-              marginBottom: 15,
-              color: "#c5b8ff",
-            }}
-          >
-            Adithya S Nair
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: 88,
-              lineHeight: 0.88,
-              letterSpacing: "-0.06em",
-              fontWeight: 800,
-            }}
-          >
-            <span>AI should survive</span>
-            <span style={{ color: "#c5b8ff" }}>
-              contact with the real world.
-            </span>
-          </div>
+        <div style={{ display: "flex", flexDirection: "column", position: "relative" }}>
+          <span style={{ color: "#6f8cff", fontSize: 28, marginBottom: 14 }}>Adithya S Nair / AI engineer</span>
+          <strong style={{ maxWidth: 820, fontSize: 104, lineHeight: 0.84, letterSpacing: "-0.065em" }}>Build AI that earns confidence.</strong>
         </div>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 18,
-            position: "relative",
-          }}
-        >
-          <div style={{ width: 11, height: 11, background: "#ff633b", transform: "rotate(45deg)" }} />
-          <div style={{ flex: 1, height: 2, background: "#ff633b" }} />
-          <div style={{ display: "flex", fontFamily: "monospace", fontSize: 15, letterSpacing: "0.06em" }}>
-            MEDICAL AI · RAG · AGENTS · FULL-STACK SYSTEMS
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 18, fontFamily: "monospace", fontSize: 14, letterSpacing: "0.07em", position: "relative" }}>
+          <span style={{ width: 14, height: 14, background: "#ff6a4d", transform: "rotate(45deg)" }} />
+          <span>MEDICAL AI / AGENT MEMORY / EVALUATION / FULL-STACK</span>
         </div>
       </div>
     ),
