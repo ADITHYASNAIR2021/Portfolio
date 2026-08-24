@@ -17,7 +17,7 @@ export default function BlogOpenGraphImage() {
         </div>
         <div style={{ display: "flex", gap: 16, alignItems: "center", fontSize: 16, letterSpacing: "0.08em" }}>
           <span style={{ width: 14, height: 14, background: "#ff6a4d", transform: "rotate(45deg)" }} />
-          <span>MEMORY / EVALUATION / MEDICAL AI / RAG</span>
+          <span>MEMORY / EVALUATION / AGENTS / RAG</span>
         </div>
       </div>
     ),

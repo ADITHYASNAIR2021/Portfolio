@@ -18,7 +18,7 @@ export default function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 18, fontFamily: "monospace", fontSize: 14, letterSpacing: "0.07em", position: "relative" }}>
           <span style={{ width: 14, height: 14, background: "#ff6a4d", transform: "rotate(45deg)" }} />
-          <span>MEDICAL AI / AGENT MEMORY / EVALUATION / FULL-STACK</span>
+          <span>AI SYSTEMS / AGENT MEMORY / EVALUATION / FULL-STACK</span>
         </div>
       </div>
     ),

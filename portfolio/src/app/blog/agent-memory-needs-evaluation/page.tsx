@@ -124,7 +124,7 @@ export default function AgentMemoryArticle() {
 
             <h2 id="memory-problem">The memory problem</h2>
             <p>
-              Stateless assistants start each turn with what the user provides. Long-running agents face a different problem. They operate across tools, files, people, and sessions. A later step may depend on a decision made hours earlier. A deployment agent may need to remember that a migration was intentionally deferred. A medical workflow may need to preserve the source of a clinical observation. A product agent may need to honour a user preference without treating it as permanent truth.
+              Stateless assistants start each turn with what the user provides. Long-running agents face a different problem. They operate across tools, files, people, and sessions. A later step may depend on a decision made hours earlier. A deployment agent may need to remember that a migration was intentionally deferred. A support workflow may need to preserve the source of an important observation. A product agent may need to honour a user preference without treating it as permanent truth.
             </p>
             <p>
               This is why memory cannot be reduced to storage. The system must decide what deserves persistence. It must attach provenance. It must know which state can change. It must retrieve a small, useful subset when the next decision arrives. It must also support correction. A remembered item that cannot be revised is not knowledge. It is technical debt with excellent recall.

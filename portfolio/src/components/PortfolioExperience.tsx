@@ -7,17 +7,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import {
   capabilities,
   caseStudies,
+  communityRoles,
   education,
   experience,
   faq,
-  leadership,
   profile,
   proofPoints,
-  publication,
+  skillGroups,
   smallerBuilds,
   studio,
   type CaseStudy,
@@ -43,9 +42,9 @@ function Navigation() {
   const [open, setOpen] = useState(false);
   const links = [
     ["Work", "#work"],
-    ["Lab", "#lab"],
+    ["Skills", "#skills"],
     ["Story", "#about"],
-    ["Q&A", "#faq"],
+    ["Community", "#community"],
     ["Journal", "/blog"],
   ];
 
@@ -117,50 +116,62 @@ function Hero() {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-grid page-grid">
         <div className="hero-kicker" data-reveal>
-          <span>AI systems / research / product</span>
-          <span>Kerala, India / working worldwide</span>
+          <span>AI systems / product engineering / research</span>
+          <span>Kottayam, India / working worldwide</span>
         </div>
         <div className="hero-copy">
-          <p className="hero-overline" data-reveal>Adithya S Nair / AI engineer</p>
+          <p className="hero-overline" data-reveal>Adithya S Nair / full-stack AI engineer</p>
           <h1 id="hero-title">
-            <span className="hero-line"><span className="hero-word">Build AI</span></span>
+            <span className="hero-line"><span className="hero-word">Engineering AI</span></span>
             <span className="hero-line"><span className="hero-word hero-serif">that earns</span></span>
             <span className="hero-line"><span className="hero-word">confidence.</span></span>
           </h1>
           <p className="hero-intro" data-reveal>
-            I turn difficult AI ideas into measurable systems. My work spans medical vision, agent memory, evaluation, and products people can trust.
+            I build measurable AI systems from prototype to production, combining LLM and RAG pipelines, agent memory, evaluation, full-stack engineering, and thoughtful product decisions.
           </p>
           <div className="hero-actions" data-reveal>
             <a className="button button-primary" href="#work">See selected work <Arrow direction="down" /></a>
             <a className="button button-quiet" href={profile.resume} target="_blank" rel="noreferrer">Read resume <Arrow /></a>
           </div>
         </div>
-        <div className="portrait-wrap" data-parallax>
-          <div className="portrait-index">HUMAN / SIGNAL</div>
-          <div className="portrait-frame">
-            <Image
-              src="/images/adithya-professional-v3.webp"
-              alt="Professional portrait of Adithya S Nair, AI engineer and researcher"
-              fill
-              sizes="(max-width: 767px) 92vw, (max-width: 1200px) 40vw, 520px"
-              fetchPriority="high"
-              className="portrait-image"
-            />
-            <div className="portrait-tone" />
+        <div className="hero-workbench" data-parallax aria-hidden="true">
+          <div className="workbench-shell">
+            <div className="workbench-topline">
+              <span>ASN / SYSTEMS DESK</span>
+              <div><i /> <i /> <i /></div>
+            </div>
+            <div className="workbench-screen">
+              <div className="screen-meta"><span>Production AI core</span><strong>Online</strong></div>
+              <div className="signal-graph">
+                {[34, 58, 46, 76, 61, 88, 72, 94].map((height, index) => (
+                  <i key={index} style={{ height: `${height}%` }} />
+                ))}
+              </div>
+              <div className="screen-route"><span>Input</span><i /><span>Evaluate</span><i /><span>Ship</span></div>
+            </div>
+            <div className="workbench-controls">
+              <div className="control-module">
+                <span>Model health</span>
+                <div className="vu-meter"><i /><i /><i /><i /><i /><i /></div>
+                <small>Measured / 96</small>
+              </div>
+              <div className="control-module dial-module">
+                <span>System focus</span>
+                <div className="rotary-dial"><i /></div>
+                <small>Reliability</small>
+              </div>
+              <div className="control-module switch-module">
+                <span>Research mode</span>
+                <div className="toggle-switch"><i /></div>
+                <small>Evidence on</small>
+              </div>
+            </div>
+            <div className="workbench-footer">
+              <span><i /> Production systems</span>
+              <span><i /> LLM + RAG</span>
+              <span><i /> Agent memory</span>
+            </div>
           </div>
-          <motion.div
-            className="portrait-note"
-            drag
-            dragElastic={0.12}
-            dragMomentum={false}
-            whileDrag={{ rotate: -3, scale: 1.03 }}
-            whileHover={{ rotate: 1 }}
-            aria-hidden="true"
-          >
-            Current research:<br />memory x agents x evaluation.
-            <small>move the signal</small>
-          </motion.div>
-          <div className="portrait-caption"><span>Frame</span><span>Build</span><span>Prove</span></div>
         </div>
         <a className="scroll-cue" href="#proof" aria-label="Scroll to quick facts"><span>Explore</span><Arrow direction="down" /></a>
       </div>
@@ -309,7 +320,7 @@ function Work() {
       <header className="section-heading page-grid" data-reveal>
         <span className="eyebrow">Selected systems / 03</span>
         <h2 id="work-title">Systems with <em>stakes.</em></h2>
-        <p>Healthcare, education, and product delivery. Three places where reliability matters more than a polished demo.</p>
+        <p>Developer tools, education platforms, and product delivery. Three places where reliable systems matter more than polished demos.</p>
       </header>
       <div className="case-list">
         {caseStudies.map((project) => (
@@ -341,25 +352,53 @@ function Work() {
   );
 }
 
-function Research() {
+function Skills() {
+  const [active, setActive] = useState(0);
+  const group = skillGroups[active];
+
   return (
-    <section className="research-section" id="research" aria-labelledby="research-title">
-      <div className="research-grid page-grid">
-        <div className="research-label" data-reveal><span className="eyebrow">Published research</span><span>{publication.venue}</span></div>
-        <div className="research-title" data-reveal>
-          <span className="research-acronym">{publication.title}</span>
-          <h2 id="research-title">Smaller model.<br /><em>Serious signal.</em></h2>
-          <strong className="research-full-title">{publication.expanded}</strong>
-          <p>{publication.summary}</p>
+    <section className="skills-section page-grid" id="skills" aria-labelledby="skills-title">
+      <header className="skills-heading" data-reveal>
+        <span className="eyebrow">Working toolkit / 04</span>
+        <h2 id="skills-title">Useful skills, <em>clearly grouped.</em></h2>
+        <p>Select an area to see the tools I use to move from an unclear problem to a dependable product.</p>
+      </header>
+      <div className="skills-console" data-reveal>
+        <div className="skill-tabs" role="tablist" aria-label="Skill groups">
+          {skillGroups.map((item, index) => (
+            <button
+              key={item.code}
+              type="button"
+              role="tab"
+              aria-selected={active === index}
+              aria-controls={`skill-panel-${index}`}
+              id={`skill-tab-${index}`}
+              tabIndex={active === index ? 0 : -1}
+              className={active === index ? "active" : ""}
+              onClick={() => setActive(index)}
+            >
+              <span>{item.code}</span>{item.label}
+            </button>
+          ))}
         </div>
-        <div className="research-diagram" aria-hidden="true" data-parallax>
-          <div><span>RAD-DINO</span><small>vision</small></div><i>to</i>
-          <div className="research-adapter"><span>SA adapter</span><small>align</small></div><i>to</i>
-          <div><span>BioGPT</span><small>language</small></div>
-        </div>
-        <div className="research-facts">
-          {publication.facts.map((fact) => <div key={fact.label} data-reveal><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="skill-panel"
+            key={group.code}
+            role="tabpanel"
+            id={`skill-panel-${active}`}
+            aria-labelledby={`skill-tab-${active}`}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.22, ease }}
+          >
+            <div className="skill-panel-intro"><span>{group.code} / focus</span><h3>{group.label}</h3><p>{group.summary}</p></div>
+            <div className="skill-chip-grid">
+              {group.skills.map((skill, index) => <span key={skill}><i>{String(index + 1).padStart(2, "0")}</i>{skill}</span>)}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -368,6 +407,23 @@ function Research() {
 function CapabilityIndex() {
   const [active, setActive] = useState(0);
   const item = capabilities[active];
+
+  const moveTab = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const keys = ["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", "Home", "End"];
+    if (!keys.includes(event.key)) return;
+
+    event.preventDefault();
+    const direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : -1;
+    const next = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? capabilities.length - 1
+        : (index + direction + capabilities.length) % capabilities.length;
+    setActive(next);
+    event.currentTarget.parentElement
+      ?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]
+      ?.focus();
+  };
 
   return (
     <div className="capability-index">
@@ -382,6 +438,7 @@ function CapabilityIndex() {
             tabIndex={active === index ? 0 : -1}
             className={active === index ? "active" : ""}
             onClick={() => setActive(index)}
+            onKeyDown={(event) => moveTab(event, index)}
             key={capability.title}
           >
             <span>{capability.number}</span>{capability.title}
@@ -423,7 +480,9 @@ function About() {
           <header data-reveal><span className="eyebrow">Experience</span><h3>Work in the real world.</h3></header>
           {experience.map((item) => (
             <article className="timeline-row" key={`${item.role}-${item.period}`} data-reveal>
-              <span>{item.period}</span><div><h4>{item.role} / {item.company}</h4><small>{item.location}</small><p>{item.note}</p></div>
+              <span>{item.period}</span><div><h4>{item.role} / {item.company}</h4><small>{item.location}</small><p>{item.note}</p>
+                <ul>{item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
+              </div>
             </article>
           ))}
         </div>
@@ -433,13 +492,32 @@ function About() {
             <article className="education-row" key={item.degree} data-reveal>
               <div className="education-index">0{index + 1}</div><span>{item.period}</span><h4>{item.degree}</h4>
               <strong>{item.focus}</strong><small>{item.school}</small><p>{item.note}</p>
+              <ul>{item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
             </article>
           ))}
         </div>
       </div>
-      <div className="leadership-note page-grid" data-reveal>
-        <div className="leadership-stamp">200+<small>people led</small></div>
-        <div><span className="eyebrow">Leadership / community</span><h3>{leadership.title}</h3><strong>{leadership.path}</strong><p>{leadership.body}</p></div>
+    </section>
+  );
+}
+
+function Community() {
+  return (
+    <section className="community-section" id="community" aria-labelledby="community-title">
+      <header className="community-heading page-grid" data-reveal>
+        <span className="eyebrow">Volunteering and events / 04</span>
+        <h2 id="community-title">Work beyond <em>the desk.</em></h2>
+        <p>Leadership, mentoring, event operations, and community programmes that strengthened how I communicate and coordinate.</p>
+      </header>
+      <div className="community-grid page-grid" role="group" aria-label="Volunteering and event roles" tabIndex={0}>
+        {communityRoles.map((item, index) => (
+          <article className={`community-card community-${item.accent}`} key={item.title} data-reveal>
+            <div><span>{item.period}</span><strong>0{index + 1}</strong></div>
+            <h3>{item.title}</h3>
+            <h4>{item.role}</h4>
+            <p>{item.note}</p>
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -450,11 +528,11 @@ function SideProjects() {
     <section className="side-projects" aria-labelledby="side-projects-title">
       <div className="side-projects-pin">
         <header className="side-projects-head page-grid" data-reveal>
-          <span className="eyebrow">Selected experiments / 05</span>
+          <span className="eyebrow">Selected experiments / 04</span>
           <h2 id="side-projects-title">Built to <em>learn.</em></h2>
-          <span className="side-projects-hint" aria-hidden="true">Keep scrolling <Arrow direction="right" /></span>
+          <p>Compact experiments that sharpened a specific technical or product skill.</p>
         </header>
-        <div className="side-project-rail" tabIndex={0} role="group" aria-label="Experiment gallery, scrolls horizontally">
+        <div className="side-project-rail page-grid" role="group" aria-label="Experiment gallery" tabIndex={0}>
           <div className="side-project-track">
             {smallerBuilds.map((project, index) => (
               <article className="side-project-card" key={project.title}>
@@ -464,12 +542,6 @@ function SideProjects() {
                 <div className="card-tags">{project.tags.map((tag) => <small key={tag}>{tag}</small>)}</div>
               </article>
             ))}
-            <article className="side-project-card card-cta">
-              <div className="card-top"><span>Next</span><strong>0{smallerBuilds.length + 1}</strong></div>
-              <h3>Your hard problem</h3>
-              <p>The list grows wherever a difficult idea needs a working, measurable system.</p>
-              <a className="text-link" href="#contact">Start one <Arrow /></a>
-            </article>
           </div>
         </div>
       </div>
@@ -507,7 +579,7 @@ function Faq() {
       <header className="faq-heading" data-reveal>
         <span className="eyebrow">Common questions / 06</span>
         <h2 id="faq-title">Direct <em>answers.</em></h2>
-        <p>The short version — for people in a hurry and the engines answering for them.</p>
+        <p>The short version, for people in a hurry and the engines answering for them.</p>
       </header>
       <div className="faq-list">
         {faq.map((item, index) => (
@@ -568,14 +640,13 @@ export default function PortfolioExperience() {
 
   useGSAP(
     () => {
-      gsap.registerPlugin(ScrollTrigger, SplitText);
+      gsap.registerPlugin(ScrollTrigger);
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduceMotion) {
-        gsap.set("[data-reveal], .hero-word", { opacity: 1, y: 0, clearProps: "transform" });
+        gsap.set("[data-reveal]", { opacity: 1, y: 0, clearProps: "transform" });
         return;
       }
 
-      gsap.fromTo(".hero-word", { yPercent: 115 }, { yPercent: 0, duration: 0.95, stagger: 0.08, ease: "power4.out", delay: 0.16 });
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
         gsap.fromTo(element, { y: 26, opacity: 0 }, {
           y: 0,
@@ -607,42 +678,6 @@ export default function PortfolioExperience() {
         });
       }
 
-      // Experiments rail: pin the section and pan it horizontally with scroll.
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 900px)", () => {
-        const rail = root.current?.querySelector<HTMLElement>(".side-project-rail");
-        if (!rail || rail.scrollWidth <= rail.clientWidth) return;
-        gsap.to(rail, {
-          scrollLeft: () => rail.scrollWidth - rail.clientWidth,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".side-projects",
-            start: "top top",
-            end: () => `+=${rail.scrollWidth - rail.clientWidth}`,
-            scrub: 0.6,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      });
-
-      // Masked line reveals on section headings, after fonts settle.
-      document.fonts.ready.then(() => {
-        gsap.utils.toArray<HTMLElement>(
-          ".section-heading h2, .lab-heading h2, .about-intro h2, .side-projects h2, .journal-copy h2, .contact-copy h2, .faq-heading h2, .research-title h2",
-        ).forEach((heading) => {
-          const split = SplitText.create(heading, { type: "lines", mask: "lines" });
-          gsap.from(split.lines, {
-            yPercent: 112,
-            duration: 0.85,
-            stagger: 0.09,
-            ease: "power4.out",
-            scrollTrigger: { trigger: heading, start: "top 88%", once: true },
-          });
-        });
-        ScrollTrigger.refresh();
-      });
     },
     { scope: root },
   );
@@ -656,8 +691,9 @@ export default function PortfolioExperience() {
         <ProofStrip />
         <SignalWorkbench />
         <Work />
-        <Research />
+        <Skills />
         <About />
+        <Community />
         <SideProjects />
         <BlogPreview />
         <Faq />

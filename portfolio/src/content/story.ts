@@ -10,19 +10,19 @@ export const profile = {
   resume: "/Adithya_S_Nair_Resume.pdf",
 };
 
-/* Studio credit — shown in the footer and referenced in structured data. */
+/* Studio credit shown in the footer and referenced in structured data. */
 export const studio = {
   name: "CodrantLabs",
   url: "https://codrantlabs.in",
   domain: "codrantlabs.in",
   tagline: "We build machines that think.",
   description:
-    "Founder-led product and AI engineering studio in Kerala, India — full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
+    "Founder-led product and AI engineering studio in Kerala, India, building full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
 };
 
 export const proofPoints = [
   { value: "2 yrs", label: "shipping production AI" },
-  { value: "3", label: "selected systems with real stakes" },
+  { value: "3", label: "selected systems with real users" },
   { value: "1", label: "peer-reviewed research paper" },
   { value: "200+", label: "people led in tech community" },
 ];
@@ -41,29 +41,29 @@ export type CaseStudy = {
   tech: string[];
   href: string;
   accent: "tomato" | "cobalt" | "lime";
-  visual: "medical" | "school" | "studio";
+  visual: "product" | "school" | "studio";
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
-    kind: "Production medical AI",
-    title: "Doctreen",
-    subtitle: "Clinical signal, engineered for real use.",
+    kind: "Context-aware developer tool",
+    title: "LensAI",
+    subtitle: "Understanding without breaking flow.",
     thesis:
-      "Built and maintained the AI core of a medical reporting platform across providers, clinical workflows, and the less glamorous realities of production.",
+      "A browser extension that turns any selected region of a webpage into a clear, structured explanation without forcing the user into another tab.",
     challenge:
-      "Reliable medical AI is an evaluation problem as much as a modelling problem: outputs need guardrails, measurable quality, and predictable operating costs.",
+      "Developers and researchers lose momentum when a difficult diagram, interface, or code fragment sends them into a separate search workflow.",
     response:
-      "Designed multi-provider LLM and RAG pipelines, DICOM vision workflows, adversarial-input guardrails, parallel benchmarks, CI/CD, and internal data tooling.",
+      "Designed the capture-to-explanation flow, context packaging, model interaction, and browser extension interface as one focused experience.",
     outcome:
-      "A production system that could be tested against radiologist ground truth, monitored for regressions, and improved without treating every model change as guesswork.",
-    metric: "Live",
-    metricLabel: "medical AI system",
-    tech: ["Python", "FastAPI", "RAG", "LLM evaluation", "Docker", "CI/CD"],
-    href: "https://www.doctreen.com/",
+      "A fast path from visual selection to useful explanation that keeps attention on the original work instead of the tooling around it.",
+    metric: "1",
+    metricLabel: "capture-to-answer flow",
+    tech: ["JavaScript", "Browser APIs", "LLM integration", "Claude", "Interaction design"],
+    href: "https://github.com/ADITHYASNAIR2021",
     accent: "tomato",
-    visual: "medical",
+    visual: "product",
   },
   {
     index: "02",
@@ -107,32 +107,12 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export const publication = {
-  venue: "PCCDA 2026 · Springer",
-  title: "SPARE",
-  expanded: "Single-view Parameter-efficient Adapter for Radiology Reporting",
-  summary:
-    "A vision-language framework connecting RAD-DINO to BioGPT through a custom semantic alignment adapter, built for single frontal chest X-rays and constrained hardware.",
-  facts: [
-    { value: "98%", label: "reduction in trainable parameters with LoRA" },
-    { value: "79.0%", label: "BERTScore F1 on MIMIC-CXR" },
-    { value: "0.8%", label: "of the training corpus used" },
-    { value: "93.6%", label: "of state-of-the-art performance retained" },
-  ],
-};
-
 export const smallerBuilds = [
   {
     year: "2026",
     title: "Mitti Mitra",
     description: "Field-ready soil diagnostics that turn vision and multi-source signals into useful crop guidance.",
     tags: ["Computer vision", "Flutter", "Firebase"],
-  },
-  {
-    year: "2026",
-    title: "LensAI",
-    description: "Explain any selected region of a webpage without breaking focus.",
-    tags: ["Browser APIs", "LLMs", "JavaScript"],
   },
   {
     year: "2025",
@@ -147,44 +127,57 @@ export const smallerBuilds = [
     tags: ["NLP", "LLMs", "Data"],
   },
   {
-    year: "2023",
-    title: "SWC from MRI",
-    description: "Graph representations of brain vascular flow generated from MRI data.",
-    tags: ["Medical imaging", "Python", "Graphs"],
+    year: "2024",
+    title: "Inventory Optimisation",
+    description: "A reinforcement learning agent for balancing stockouts, holding cost, and reorder timing.",
+    tags: ["Python", "DQN", "Reinforcement learning"],
   },
 ];
 
 export const experience = [
   {
-    period: "Jun 2025 — May 2026",
+    period: "Jun 2025 to May 2026",
     role: "AI Engineer",
     company: "Doctreen",
     location: "Montpellier · Remote",
-    note: "Owned production AI features, medical vision evaluation, internal tooling, and the infrastructure needed to make model changes observable.",
+    note: "Owned production AI features and the systems around them, from model integration to product delivery.",
+    highlights: [
+      "Integrated multiple model providers with prompt, RAG, and evaluation workflows.",
+      "Designed vision pipelines across 10+ modalities with expert-reviewed ground truth.",
+      "Worked as acting product manager, turning research and user feedback into clear product requirements.",
+      "Built internal data tooling, including token-efficient serialization for production workloads.",
+    ],
   },
   {
-    period: "Jan 2025 — Jun 2025",
+    period: "Jan 2025 to Jun 2025",
     role: "AI Research Intern",
     company: "Doctreen",
     location: "Montpellier · Remote",
-    note: "Helped establish the medical reporting architecture, model benchmarks, and security guardrails during the platform’s foundational stage.",
+    note: "Helped establish the medical reporting architecture during the platform’s foundational stage.",
+    highlights: [
+      "Created benchmarks that compared models across multiple pipeline stages.",
+      "Added input validation and guardrails for prompt injection, adversarial inputs, and compliance risks.",
+      "Supported the first production-ready reporting workflows and evaluation processes.",
+    ],
   },
 ];
 
 export const education = [
   {
-    period: "2026 — Present",
+    period: "2026 to present",
     degree: "MTech · Computer Science",
     focus: "AI & Machine Learning",
     school: "Amrita Vishwa Vidyapeetham",
-    note: "Researching agentic AI, memory, multi-agent systems, and LLM architecture.",
+    note: "Researching agentic AI, memory, multi-agent systems, and dependable LLM architecture.",
+    highlights: ["Advanced study in AI and machine learning", "Current focus on agent evaluation and long-running system memory"],
   },
   {
-    period: "2021 — 2025",
+    period: "2021 to 2025",
     degree: "BTech · Computer Science",
     focus: "AI & Machine Learning · CGPA 8.48",
     school: "Amrita Vishwa Vidyapeetham",
-    note: "Machine learning, deep learning, NLP, computer vision, systems, and the SPARE research work.",
+    note: "Built a broad engineering base while specialising in applied AI and machine learning.",
+    highlights: ["Coursework in ML, deep learning, NLP, computer vision, DSA, DBMS, and operating systems", "Peer-reviewed Springer conference publication, 2026"],
   },
 ];
 
@@ -198,7 +191,7 @@ export const capabilities = [
   {
     number: "II",
     title: "Build the intelligence",
-    detail: "Design LLM, RAG, vision, and agentic workflows around the job—not around whichever model is fashionable this week.",
+    detail: "Design LLM, RAG, vision, and agentic workflows around the job, not around whichever model is fashionable this week.",
     tools: "Python · PyTorch · FastAPI · LangChain · Model APIs",
   },
   {
@@ -207,10 +200,74 @@ export const capabilities = [
     detail: "Add guardrails, benchmarks, observability, tests, and infrastructure so a promising demo becomes dependable software.",
     tools: "Docker · CI/CD · Supabase · Git · Monitoring",
   },
+  {
+    number: "IV",
+    title: "Lead the delivery",
+    detail: "Connect research, user feedback, and engineering decisions so the team can move from an uncertain opportunity to a clear, shipped product.",
+    tools: "Product research · PRDs · Agile delivery · Team leadership",
+  },
+];
+
+export const skillGroups = [
+  {
+    code: "01",
+    label: "AI systems",
+    summary: "Designing reliable intelligence around a real product workflow.",
+    skills: ["LLM integration", "RAG", "Prompt engineering", "Agent memory", "Model evaluation", "Multi-agent systems"],
+  },
+  {
+    code: "02",
+    label: "Engineering",
+    summary: "Building the service, interface, and infrastructure around the model.",
+    skills: ["Python", "FastAPI", "TypeScript", "Next.js", "REST APIs", "Testing"],
+  },
+  {
+    code: "03",
+    label: "Platforms",
+    summary: "Shipping with practical tools that keep systems observable and maintainable.",
+    skills: ["Docker", "Supabase", "MongoDB", "Git", "CI/CD", "Hugging Face"],
+  },
+  {
+    code: "04",
+    label: "Product craft",
+    summary: "Connecting technical choices to user needs, scope, and measurable outcomes.",
+    skills: ["Product discovery", "PRDs", "Architecture", "Agile delivery", "Jira", "Technical leadership"],
+  },
+];
+
+export const communityRoles = [
+  {
+    period: "2022 to present",
+    title: "ACM Student Chapter, Amritapuri",
+    role: "Member, AI Club Mentor, Chairperson, Advisory Council",
+    note: "Led a 200+ member technical community for 1.5 years, organised national-level hackathons and workshops, mentored students, and now advise the next leadership team.",
+    accent: "lime",
+  },
+  {
+    period: "2022 to 2023",
+    title: "ICPC Asia West Regional Finals",
+    role: "Overall Coordinator",
+    note: "Coordinated participant management, event logistics, and on-ground operations for the regional finals hosted on campus.",
+    accent: "cobalt",
+  },
+  {
+    period: "2023 to 2024",
+    title: "Vidyut Multi-Fest",
+    role: "Core Committee and Executive Member",
+    note: "Managed participant accommodation and logistics for one of Kerala's largest student-run multi-fests.",
+    accent: "coral",
+  },
+  {
+    period: "2024",
+    title: "Decoding AI",
+    role: "Student Social Responsibility Project",
+    note: "Ran an introductory AI awareness programme for school students, making core ideas approachable through examples and discussion.",
+    accent: "lime",
+  },
 ];
 
 export type FaqItem = {
-  /** Stable anchor id, e.g. #faq-research — keep persistent for AI citations. */
+  /** Stable anchor id, e.g. #faq-research, kept persistent for AI citations. */
   id: string;
   question: string;
   answer: string;
@@ -222,25 +279,25 @@ export const faq: FaqItem[] = [
     id: "faq-who-is-adithya",
     question: "Who is Adithya S Nair?",
     answer:
-      "Adithya S Nair is an AI engineer and researcher from Kottayam, Kerala, India. He builds production LLM, RAG, agentic, and medical imaging systems, and published the SPARE radiology reporting research at PCCDA 2026 (Springer).",
+      "Adithya S Nair is an AI engineer and researcher from Kottayam, Kerala, India. He builds production LLM, RAG, agentic, and full-stack systems, and has published peer-reviewed research with Springer.",
   },
   {
     id: "faq-specialisation",
     question: "What does Adithya specialise in as an AI engineer?",
     answer:
-      "He specialises in LLM integration, retrieval-augmented generation, agent memory, AI evaluation, and DICOM medical vision. He ships full-stack AI products with Python, FastAPI, PyTorch, and Next.js — from first prototype to monitored production.",
+      "He specialises in LLM integration, retrieval-augmented generation, agent memory, AI evaluation, and full-stack product engineering. He ships products with Python, FastAPI, PyTorch, and Next.js, from first prototype to monitored production.",
   },
   {
     id: "faq-production-systems",
     question: "Which production AI systems has Adithya built?",
     answer:
-      "At Doctreen he built the AI core of a live medical reporting platform. He architected Vidyapath, a multi-school LMS with four role-specific portals, and co-founded CodrantLabs, a product and AI engineering studio.",
+      "Adithya built LensAI, a context-aware browser extension, architected Vidyapath, a multi-school LMS with four role-specific portals, and co-founded CodrantLabs, a product and AI engineering studio.",
   },
   {
     id: "faq-research",
-    question: "What research has Adithya S Nair published?",
+    question: "Has Adithya S Nair published research?",
     answer:
-      "SPARE — Single-view Parameter-efficient Adapter for Radiology Reporting — accepted at PCCDA 2026 (Springer). It cuts trainable parameters by 98% with LoRA and reaches 79.0% BERTScore F1 on MIMIC-CXR using 0.8% of the training corpus.",
+      "Yes. Adithya has peer-reviewed research accepted at PCCDA 2026 and published with Springer. The work explores parameter-efficient multimodal systems designed to achieve strong results within limited compute budgets.",
   },
   {
     id: "faq-availability",
@@ -252,13 +309,6 @@ export const faq: FaqItem[] = [
     id: "faq-location",
     question: "Where is Adithya based, and does he work remotely?",
     answer:
-      "He is based in Kottayam, Kerala, India, and works remotely worldwide. He previously worked remotely as an AI Engineer with Doctreen in Montpellier, France, on production medical AI.",
+      "He is based in Kottayam, Kerala, India, and works remotely worldwide. His experience includes collaborating with international teams and shipping production systems across research, product, and engineering work.",
   },
 ];
-
-export const leadership = {
-  title: "ACM Student Chapter, Amritapuri",
-  path: "Member → AI Club Mentor → Chairperson → Advisory Council",
-  body:
-    "Led a 200+ member technical community for 1.5 years, organised national-level hackathons and workshops, mentored students in machine learning, and now advise the next leadership team.",
-};

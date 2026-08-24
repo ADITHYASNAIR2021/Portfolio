@@ -7,11 +7,11 @@ import { featuredPost } from "@/content/blog";
 export const metadata: Metadata = {
   title: "AI Systems Journal",
   description:
-    "Field notes by Adithya S Nair on agentic AI, memory, evaluation, medical AI, RAG, and building reliable intelligent systems.",
+    "Field notes by Adithya S Nair on agentic AI, memory, evaluation, RAG, and building reliable intelligent systems.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "AI Systems Journal | Adithya S Nair",
-    description: "Field notes on agent memory, evaluation, medical AI, RAG, and systems that hold up.",
+    description: "Field notes on agent memory, evaluation, RAG, and systems that hold up.",
     url: "/blog",
     type: "website",
     images: [{ url: featuredPost.image, alt: featuredPost.imageAlt }],
@@ -24,7 +24,7 @@ const blogSchema = {
   "@id": "https://adithyasnair.vercel.app/blog#blog",
   url: "https://adithyasnair.vercel.app/blog",
   name: "AI Systems Journal by Adithya S Nair",
-  description: "Field notes on agentic AI, memory, evaluation, medical AI, RAG, and reliable intelligent systems.",
+  description: "Field notes on agentic AI, memory, evaluation, RAG, and reliable intelligent systems.",
   author: { "@id": "https://adithyasnair.vercel.app/#person" },
   blogPost: {
     "@type": "BlogPosting",
@@ -47,7 +47,7 @@ export default function BlogPage() {
           <span className="eyebrow">Adithya&apos;s field journal / 2026</span>
           <h1 id="blog-title">Notes from the <em>hard part.</em></h1>
           <p>
-            Clear thinking on AI systems after the demo: memory, evaluation, medical vision, retrieval, agents, and the engineering choices that make them useful.
+            Clear thinking on AI systems after the demo: memory, evaluation, retrieval, agents, and the engineering choices that make them useful.
           </p>
         </section>
 

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Space_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { MotionConfig } from "framer-motion";
-import CursorSignal from "@/components/CursorSignal";
 import "./globals.css";
 
 const body = localFont({
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
     template: "%s | Adithya S Nair",
   },
   description:
-    "Adithya S Nair is an AI engineer and researcher in Kerala, India, building production LLM, RAG, agent memory, and medical imaging systems that hold up in the real world.",
+    "Adithya S Nair is an AI engineer and researcher in Kerala, India, building production LLM, RAG, agentic, and full-stack systems that hold up in the real world.",
   keywords: [
     "Adithya S Nair",
     "Adithya Nair",
@@ -59,10 +58,8 @@ export const metadata: Metadata = {
     "AI Researcher",
     "Agentic AI",
     "AI Agent Memory",
-    "Medical AI",
     "RAG Engineer",
     "LLM Evaluation",
-    "DICOM",
     "FastAPI",
     "Next.js",
     "CodrantLabs",
@@ -71,7 +68,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "Adithya S Nair - AI Engineer & Researcher",
-    description: "Measurable AI systems for medical vision, agents, education, and real-world products.",
+    description: "Measurable AI systems for agents, education, developer tools, and real-world products.",
     url: "/",
     siteName: "Adithya S Nair",
     locale: "en_IN",
@@ -110,10 +107,9 @@ const siteSchema = {
       name: "Adithya S Nair",
       alternateName: ["Adithya Nair", "Adithya S. Nair", "Adithya"],
       url: siteUrl,
-      image: `${siteUrl}/images/adithya-professional-v3.webp`,
       jobTitle: "Full-stack AI Engineer and Researcher",
       description:
-        "AI engineer and researcher building production LLM, RAG, medical imaging, agentic, and full-stack systems.",
+        "AI engineer and researcher building production LLM, RAG, agentic, and full-stack systems.",
       email: "mailto:adithyasnair2021@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -148,8 +144,6 @@ const siteSchema = {
       knowsAbout: [
         "Large language models",
         "Retrieval-augmented generation",
-        "Medical artificial intelligence",
-        "DICOM medical imaging",
         "AI evaluation",
         "Agentic AI",
         "Agent memory",
@@ -174,7 +168,7 @@ const siteSchema = {
       url: "https://codrantlabs.in",
       slogan: "We build machines that think.",
       description:
-        "Founder-led product and AI engineering studio in Kerala, India — full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
+        "Founder-led product and AI engineering studio in Kerala, India, building full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
       founder: { "@id": `${siteUrl}/#person` },
       areaServed: "Worldwide",
       address: {
@@ -182,23 +176,6 @@ const siteSchema = {
         addressRegion: "Kerala",
         addressCountry: "IN",
       },
-    },
-    {
-      "@type": "ScholarlyArticle",
-      "@id": `${siteUrl}/#spare`,
-      headline: "SPARE: Single-view Parameter-efficient Adapter for Radiology Reporting",
-      author: { "@id": `${siteUrl}/#person` },
-      publisher: { "@type": "Organization", name: "Springer" },
-      datePublished: "2026",
-      about: [
-        "Radiology report generation",
-        "Vision-language models",
-        "Parameter-efficient fine-tuning",
-        "LoRA",
-        "Chest X-ray analysis",
-      ],
-      description:
-        "A vision-language framework connecting RAD-DINO to BioGPT through a semantic alignment adapter — 98% fewer trainable parameters, 79.0% BERTScore F1 on MIMIC-CXR using 0.8% of the training corpus. Presented at PCCDA 2026.",
     },
   ],
 };
@@ -214,7 +191,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <MotionConfig reducedMotion="user">
-          <CursorSignal />
           {children}
         </MotionConfig>
       </body>
