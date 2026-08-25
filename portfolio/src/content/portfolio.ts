@@ -1,6 +1,5 @@
 export type IllustrationKey =
   | "vidyapath"
-  | "lensai"
   | "mittiMitra"
   | "namudeYatra"
   | "swcMri"
@@ -90,18 +89,6 @@ export const projects: Project[] = [
     github: "https://github.com/ADITHYASNAIR2021",
     illustration: "vidyapath",
     color: "#8b5cf6",
-    featured: true,
-  },
-  {
-    title: "LensAI",
-    subtitle: "AI-Powered Screen Region Explainer",
-    period: "Feb to Mar 2026",
-    description:
-      "Browser extension that lets users highlight any screen region, including code, diagrams, articles, and UI, and get instant, context-aware explanations powered by LLM integration. No more context-switching friction for developers and researchers.",
-    tech: ["JavaScript", "Browser Extension APIs", "Claude", "Claude Code"],
-    github: "https://github.com/ADITHYASNAIR2021",
-    illustration: "lensai",
-    color: "#00d4ff",
     featured: true,
   },
   {

@@ -1,6 +1,8 @@
 export const profile = {
   name: "Adithya S Nair",
   role: "Full-stack AI engineer & researcher",
+  summary:
+    "Full-stack AI engineer and consultant with around two years of experience building production AI systems. I work across LLM and RAG pipelines, agentic workflows, evaluation, full-stack delivery, and product decisions, turning early research into dependable software for real users.",
   location: "Kottayam, Kerala, India",
   email: "adithyasnair2021@gmail.com",
   phone: "+91 81368 59455",
@@ -41,29 +43,29 @@ export type CaseStudy = {
   tech: string[];
   href: string;
   accent: "tomato" | "cobalt" | "lime";
-  visual: "product" | "school" | "studio";
+  visual: "field" | "school" | "studio";
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
-    kind: "Context-aware developer tool",
-    title: "LensAI",
-    subtitle: "Understanding without breaking flow.",
+    kind: "Founder-led product studio",
+    title: "CodrantLabs",
+    subtitle: "Software shipped, not strategy left in slides.",
     thesis:
-      "A browser extension that turns any selected region of a webpage into a clear, structured explanation without forcing the user into another tab.",
+      "A product and AI engineering studio for teams that need senior thinking, fixed scope, and a direct path from an ambiguous problem to working software.",
     challenge:
-      "Developers and researchers lose momentum when a difficult diagram, interface, or code fragment sends them into a separate search workflow.",
+      "Small teams do not need more ceremony. They need someone who can connect product intent, engineering choices, AI capabilities, and the realities of delivery.",
     response:
-      "Designed the capture-to-explanation flow, context packaging, model interaction, and browser extension interface as one focused experience.",
+      "Co-founded a practice spanning full-stack platforms, AI agents, RAG systems, search visibility, and technical product strategy for global clients.",
     outcome:
-      "A fast path from visual selection to useful explanation that keeps attention on the original work instead of the tooling around it.",
-    metric: "1",
-    metricLabel: "capture-to-answer flow",
-    tech: ["JavaScript", "Browser APIs", "LLM integration", "Claude", "Interaction design"],
-    href: "https://github.com/ADITHYASNAIR2021",
-    accent: "tomato",
-    visual: "product",
+      "A deliberately small studio model with clear ownership, fewer hand-offs, and work designed and engineered as one continuous decision process.",
+    metric: "0",
+    metricLabel: "layers of account management",
+    tech: ["Product strategy", "AI agents", "Full-stack", "RAG", "AEO", "Delivery"],
+    href: "https://codrantlabs.in/",
+    accent: "lime",
+    visual: "studio",
   },
   {
     index: "02",
@@ -87,33 +89,27 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     index: "03",
-    kind: "Founder-led product studio",
-    title: "CodrantLabs",
-    subtitle: "Software shipped, not strategy left in slides.",
+    kind: "Field AI prototype",
+    title: "Mitti Mitra",
+    subtitle: "Useful signals for decisions made in the field.",
     thesis:
-      "A product and AI engineering studio for teams that need senior thinking, fixed scope, and a direct path from an ambiguous problem to working software.",
+      "A mobile soil-health assistant that combines computer vision and multiple data sources to make practical crop guidance more accessible to Indian farmers.",
     challenge:
-      "Small teams do not need more ceremony. They need someone who can connect product intent, engineering choices, AI capabilities, and the realities of delivery.",
+      "A useful field tool has to work with incomplete inputs, communicate uncertainty clearly, and turn model output into an action someone can actually take.",
     response:
-      "Co-founded a practice spanning full-stack platforms, AI agents, RAG systems, search visibility, and technical product strategy for global clients.",
+      "Designed the machine-learning pipeline and connected image analysis with supporting signals inside a lightweight Flutter and Firebase workflow.",
     outcome:
-      "A deliberately small studio model: clear ownership, fewer hand-offs, and work that is designed and engineered as one continuous decision process.",
-    metric: "0",
-    metricLabel: "layers of account management",
-    tech: ["Product strategy", "AI agents", "Full-stack", "RAG", "AEO", "Delivery"],
-    href: "https://codrantlabs.in/",
-    accent: "lime",
-    visual: "studio",
+      "A focused prototype that translates multi-source analysis into a simpler, field-ready decision flow rather than a technical dashboard.",
+    metric: "3",
+    metricLabel: "signals combined",
+    tech: ["Python", "Computer vision", "Flutter", "Firebase", "Data fusion", "Product design"],
+    href: "https://github.com/ADITHYASNAIR2021",
+    accent: "tomato",
+    visual: "field",
   },
 ];
 
 export const smallerBuilds = [
-  {
-    year: "2026",
-    title: "Mitti Mitra",
-    description: "Field-ready soil diagnostics that turn vision and multi-source signals into useful crop guidance.",
-    tags: ["Computer vision", "Flutter", "Firebase"],
-  },
   {
     year: "2025",
     title: "Namude Yatra",
@@ -212,26 +208,26 @@ export const skillGroups = [
   {
     code: "01",
     label: "AI systems",
-    summary: "Designing reliable intelligence around a real product workflow.",
-    skills: ["LLM integration", "RAG", "Prompt engineering", "Agent memory", "Model evaluation", "Multi-agent systems"],
+    summary: "Designing reliable agentic intelligence around a real product workflow.",
+    skills: ["Agent orchestration", "RAG and reranking", "MCP and tool integration", "Agent memory", "Evals and guardrails", "Structured outputs"],
   },
   {
     code: "02",
     label: "Engineering",
-    summary: "Building the service, interface, and infrastructure around the model.",
-    skills: ["Python", "FastAPI", "TypeScript", "Next.js", "REST APIs", "Testing"],
+    summary: "Building the service, interface, data layer, and tests around the model.",
+    skills: ["Python", "FastAPI", "TypeScript", "Next.js", "PyTorch", "PostgreSQL"],
   },
   {
     code: "03",
     label: "Platforms",
-    summary: "Shipping with practical tools that keep systems observable and maintainable.",
-    skills: ["Docker", "Supabase", "MongoDB", "Git", "CI/CD", "Hugging Face"],
+    summary: "Shipping with practical tools that keep AI systems observable and maintainable.",
+    skills: ["Docker", "Supabase", "MongoDB", "Git and CI/CD", "Hugging Face", "Tracing and observability"],
   },
   {
     code: "04",
     label: "Product craft",
-    summary: "Connecting technical choices to user needs, scope, and measurable outcomes.",
-    skills: ["Product discovery", "PRDs", "Architecture", "Agile delivery", "Jira", "Technical leadership"],
+    summary: "Connecting technical choices to user needs, risk, cost, and measurable outcomes.",
+    skills: ["AI product discovery", "PRDs", "Evaluation planning", "Cost and latency tradeoffs", "Security review", "Technical leadership"],
   },
 ];
 
@@ -291,7 +287,7 @@ export const faq: FaqItem[] = [
     id: "faq-production-systems",
     question: "Which production AI systems has Adithya built?",
     answer:
-      "Adithya built LensAI, a context-aware browser extension, architected Vidyapath, a multi-school LMS with four role-specific portals, and co-founded CodrantLabs, a product and AI engineering studio.",
+      "Adithya co-founded CodrantLabs, a product and AI engineering studio, architected Vidyapath, a multi-school LMS with four role-specific portals, and built Mitti Mitra, a field-focused soil intelligence prototype.",
   },
   {
     id: "faq-research",

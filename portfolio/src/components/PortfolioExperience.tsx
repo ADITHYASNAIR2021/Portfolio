@@ -111,7 +111,44 @@ function Navigation() {
   );
 }
 
+const systemsFocusModes = [
+  {
+    label: "Reliability",
+    screen: "Reliability matrix",
+    state: "Stable",
+    signal: [34, 58, 46, 76, 61, 88, 72, 94],
+    researchSignal: [28, 42, 62, 54, 78, 69, 88, 82],
+    route: ["Test", "Trace", "Ship"],
+    footer: ["Evals", "Guardrails", "Observability"],
+  },
+  {
+    label: "Retrieval",
+    screen: "Context quality",
+    state: "Grounded",
+    signal: [52, 68, 42, 82, 74, 91, 64, 86],
+    researchSignal: [36, 57, 48, 72, 65, 84, 76, 92],
+    route: ["Query", "Retrieve", "Answer"],
+    footer: ["RAG", "Reranking", "Citations"],
+  },
+  {
+    label: "Delivery",
+    screen: "Delivery flow",
+    state: "Shipping",
+    signal: [44, 36, 64, 58, 80, 72, 92, 88],
+    researchSignal: [30, 52, 45, 68, 61, 79, 85, 94],
+    route: ["Frame", "Build", "Learn"],
+    footer: ["PRDs", "CI/CD", "Feedback"],
+  },
+];
+
 function Hero() {
+  const [focus, setFocus] = useState(0);
+  const [researchMode, setResearchMode] = useState(true);
+  const [diagnosticRun, setDiagnosticRun] = useState(0);
+  const mode = systemsFocusModes[focus];
+  const baseSignal = researchMode ? mode.researchSignal : mode.signal;
+  const signal = baseSignal.map((height, index) => Math.min(98, height + (diagnosticRun % 2 ? (index % 3) * 2 : 0)));
+
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-grid page-grid">
@@ -134,42 +171,72 @@ function Hero() {
             <a className="button button-quiet" href={profile.resume} target="_blank" rel="noreferrer">Read resume <Arrow /></a>
           </div>
         </div>
-        <div className="hero-workbench" data-parallax aria-hidden="true">
-          <div className="workbench-shell">
+        <div className="hero-workbench" data-parallax aria-label="Interactive systems console">
+          <div className={`workbench-shell ${researchMode ? "research-active" : ""}`}>
             <div className="workbench-topline">
               <span>ASN / SYSTEMS DESK</span>
-              <div><i /> <i /> <i /></div>
+              <div aria-hidden="true"><i /> <i /> <i /></div>
             </div>
-            <div className="workbench-screen">
-              <div className="screen-meta"><span>Production AI core</span><strong>Online</strong></div>
-              <div className="signal-graph">
-                {[34, 58, 46, 76, 61, 88, 72, 94].map((height, index) => (
-                  <i key={index} style={{ height: `${height}%` }} />
+            <div className="workbench-screen" role="status" aria-live="polite">
+              <div className="screen-meta">
+                <span>{researchMode ? `${mode.label} evidence` : mode.screen}</span>
+                <strong>{researchMode ? "Research on" : mode.state}</strong>
+              </div>
+              <div className="signal-graph" aria-hidden="true">
+                {signal.map((height, index) => (
+                  <motion.i
+                    key={`${focus}-${researchMode}-${diagnosticRun}-${index}`}
+                    initial={{ height: "10%", opacity: 0.45 }}
+                    animate={{ height: `${height}%`, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.025, ease }}
+                  />
                 ))}
               </div>
-              <div className="screen-route"><span>Input</span><i /><span>Evaluate</span><i /><span>Ship</span></div>
+              <div className="screen-route" aria-hidden="true">
+                <span>{researchMode ? "Hypothesis" : mode.route[0]}</span><i />
+                <span>{researchMode ? "Compare" : mode.route[1]}</span><i />
+                <span>{researchMode ? "Decide" : mode.route[2]}</span>
+              </div>
             </div>
             <div className="workbench-controls">
-              <div className="control-module">
+              <button
+                className="control-module health-module"
+                type="button"
+                onClick={() => setDiagnosticRun((value) => value + 1)}
+                aria-label="Run a system diagnostic"
+              >
                 <span>Model health</span>
-                <div className="vu-meter"><i /><i /><i /><i /><i /><i /></div>
-                <small>Measured / 96</small>
-              </div>
-              <div className="control-module dial-module">
+                <div className="vu-meter" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
+                <small>{diagnosticRun ? `Verified / ${96 + (diagnosticRun % 3)}` : "Run diagnostic"}</small>
+              </button>
+              <label className="control-module dial-module">
                 <span>System focus</span>
-                <div className="rotary-dial"><i /></div>
-                <small>Reliability</small>
-              </div>
-              <div className="control-module switch-module">
+                <input
+                  type="range"
+                  min="0"
+                  max={systemsFocusModes.length - 1}
+                  step="1"
+                  value={focus}
+                  onChange={(event) => setFocus(Number(event.target.value))}
+                  aria-label="System focus"
+                  aria-valuetext={mode.label}
+                />
+                <div className="rotary-dial" aria-hidden="true"><i style={{ transform: `rotate(${-44 + focus * 44}deg)` }} /></div>
+                <small>{mode.label}</small>
+              </label>
+              <button
+                className="control-module switch-module"
+                type="button"
+                aria-pressed={researchMode}
+                onClick={() => setResearchMode((value) => !value)}
+              >
                 <span>Research mode</span>
-                <div className="toggle-switch"><i /></div>
-                <small>Evidence on</small>
-              </div>
+                <div className={`toggle-switch ${researchMode ? "is-on" : ""}`} aria-hidden="true"><i /></div>
+                <small>Evidence {researchMode ? "on" : "off"}</small>
+              </button>
             </div>
-            <div className="workbench-footer">
-              <span><i /> Production systems</span>
-              <span><i /> LLM + RAG</span>
-              <span><i /> Agent memory</span>
+            <div className="workbench-footer" aria-label={`${mode.label} focus areas`}>
+              {mode.footer.map((item) => <span key={item}><i aria-hidden="true" /> {item}</span>)}
             </div>
           </div>
         </div>
@@ -177,11 +244,12 @@ function Hero() {
       </div>
       <div className="thought-loop" aria-label="Working principles">
         <div className="thought-track">
-          {Array.from({ length: 12 }).map((_, set) => (
+          {Array.from({ length: 8 }).map((_, set) => (
             <span className="thought-set" key={set} aria-hidden={set > 0 ? "true" : undefined}>
-              <span>question assumptions</span><i aria-hidden="true">+</i>
-              <span>prototype the hard part</span><i aria-hidden="true">+</i>
-              <span>measure what matters</span><i aria-hidden="true">+</i>
+              <span>agent systems that recover</span><i aria-hidden="true">+</i>
+              <span>evaluation before scale</span><i aria-hidden="true">+</i>
+              <span>tools with clear boundaries</span><i aria-hidden="true">+</i>
+              <span>product thinking to production</span><i aria-hidden="true">+</i>
             </span>
           ))}
         </div>
@@ -326,7 +394,7 @@ function Work() {
         {caseStudies.map((project) => (
           <article className={`case-study case-${project.accent}`} key={project.title}>
             <div className="case-topline page-grid">
-              <span>{project.index} / 03</span><span>{project.kind}</span><span>Selected case</span>
+              <span>{project.index} / {String(caseStudies.length).padStart(2, "0")}</span><span>{project.kind}</span><span>Selected case</span>
             </div>
             <div className="case-layout page-grid">
               <div className="case-copy" data-reveal>
@@ -474,6 +542,10 @@ function About() {
         <h2 id="about-title" data-reveal>How I get to <em>useful.</em></h2>
         <p data-reveal>I connect product thinking, research, and engineering. I ask the difficult question early, prove the hard part quickly, and stay accountable after launch.</p>
       </div>
+      <div className="about-profile page-grid" data-reveal>
+        <span className="eyebrow">About Adithya</span>
+        <p>{profile.summary}</p>
+      </div>
       <div className="page-grid" data-reveal><CapabilityIndex /></div>
       <div className="story-grid page-grid">
         <div className="timeline-block">
@@ -528,7 +600,7 @@ function SideProjects() {
     <section className="side-projects" aria-labelledby="side-projects-title">
       <div className="side-projects-pin">
         <header className="side-projects-head page-grid" data-reveal>
-          <span className="eyebrow">Selected experiments / 04</span>
+          <span className="eyebrow">Selected experiments / 03</span>
           <h2 id="side-projects-title">Built to <em>learn.</em></h2>
           <p>Compact experiments that sharpened a specific technical or product skill.</p>
         </header>
@@ -665,17 +737,11 @@ export default function PortfolioExperience() {
       });
       gsap.to(".scroll-progress", { scaleX: 1, transformOrigin: "left center", ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.2 } });
 
-      // Marquee: GSAP-driven so scroll velocity can push it.
+      // A deliberately slow continuous loop keeps the principles readable.
       const marqueeTrack = root.current?.querySelector<HTMLElement>(".thought-track");
       if (marqueeTrack) {
         marqueeTrack.style.animation = "none";
-        const marquee = gsap.to(marqueeTrack, { xPercent: -50, ease: "none", duration: 36, repeat: -1 });
-        ScrollTrigger.create({
-          onUpdate: (self) => {
-            const boost = Math.min(Math.abs(self.getVelocity()) / 800, 3.2);
-            gsap.to(marquee, { timeScale: 1 + boost, duration: 0.45, overwrite: true });
-          },
-        });
+        gsap.to(marqueeTrack, { xPercent: -50, ease: "none", duration: 110, repeat: -1 });
       }
 
     },
