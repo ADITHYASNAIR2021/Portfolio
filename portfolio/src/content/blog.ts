@@ -12,6 +12,31 @@ export const featuredPost = {
   imageAlt: "Editorial illustration of an AI memory system moving through evaluation checkpoints",
 };
 
+export const latestPost = {
+  slug: "agents-need-a-runtime",
+  title: "Agents Need a Runtime, Not Just a Loop",
+  shortTitle: "Agents need a runtime.",
+  description:
+    "Why durable state, resumable tasks, idempotent tools, human checkpoints, and evaluation are becoming the real architecture of agentic systems.",
+  published: "2026-08-25",
+  publishedLabel: "August 25, 2026",
+  readingTime: "10 min read",
+  category: "Agent Infrastructure",
+  image: "/images/agent-memory-lab-v1.webp",
+  imageAlt: "Editorial illustration of a durable agent workflow moving through observable checkpoints",
+};
+
+export const posts = [latestPost, featuredPost];
+
+export const runtimeArticleSections = [
+  { id: "loop-is-easy", label: "The loop is the easy part" },
+  { id: "durable-state", label: "State must survive" },
+  { id: "tool-boundaries", label: "Tools need boundaries" },
+  { id: "human-checkpoints", label: "Human checkpoints" },
+  { id: "journey-evaluation", label: "Evaluate the journey" },
+  { id: "production-checklist", label: "Production checklist" },
+];
+
 export const articleSections = [
   { id: "memory-problem", label: "The memory problem" },
   { id: "context-is-not-memory", label: "Context is not memory" },

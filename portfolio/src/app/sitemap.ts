@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { featuredPost } from "@/content/blog";
+import { latestPost, posts } from "@/content/blog";
 
 const baseUrl = "https://adithyasnair.vercel.app";
 
@@ -14,17 +14,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: featuredPost.published,
+      lastModified: latestPost.published,
       changeFrequency: "weekly",
       priority: 0.8,
-      images: [`${baseUrl}${featuredPost.image}`],
+      images: [`${baseUrl}${latestPost.image}`],
     },
-    {
-      url: `${baseUrl}/blog/${featuredPost.slug}`,
-      lastModified: featuredPost.published,
-      changeFrequency: "monthly",
+    ...posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.published,
+      changeFrequency: "monthly" as const,
       priority: 0.9,
-      images: [`${baseUrl}${featuredPost.image}`],
-    },
+      images: [`${baseUrl}${post.image}`],
+    })),
   ];
 }

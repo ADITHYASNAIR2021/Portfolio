@@ -21,8 +21,10 @@ import {
   studio,
   type CaseStudy,
 } from "@/content/story";
+import { latestPost } from "@/content/blog";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const SHOW_SYSTEMS_DECK = false;
 
 function Arrow({ direction = "up-right" }: { direction?: "up-right" | "down" | "right" }) {
   const paths = {
@@ -43,7 +45,7 @@ function Navigation() {
   const links = [
     ["Work", "#work"],
     ["Skills", "#skills"],
-    ["Story", "#about"],
+    ["About", "#about"],
     ["Community", "#community"],
     ["Journal", "/blog"],
   ];
@@ -151,13 +153,9 @@ function Hero() {
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
-      <div className="hero-grid page-grid">
-        <div className="hero-kicker" data-reveal>
-          <span>AI systems / product engineering / research</span>
-          <span>Kottayam, India / working worldwide</span>
-        </div>
+      <div className={`hero-grid page-grid ${SHOW_SYSTEMS_DECK ? "" : "hero-grid-solo"}`}>
         <div className="hero-copy">
-          <p className="hero-overline" data-reveal>Adithya S Nair / full-stack AI engineer</p>
+          <p className="hero-overline" data-reveal>Adithya S Nair / AI engineer</p>
           <h1 id="hero-title">
             <span className="hero-line"><span className="hero-word">Engineering AI</span></span>
             <span className="hero-line"><span className="hero-word hero-serif">that earns</span></span>
@@ -171,7 +169,7 @@ function Hero() {
             <a className="button button-quiet" href={profile.resume} target="_blank" rel="noreferrer">Read resume <Arrow /></a>
           </div>
         </div>
-        <div className="hero-workbench" data-parallax aria-label="Interactive systems console">
+        {SHOW_SYSTEMS_DECK && <div className="hero-workbench" data-parallax aria-label="Interactive systems console">
           <div className={`workbench-shell ${researchMode ? "research-active" : ""}`}>
             <div className="workbench-topline">
               <span>ASN / SYSTEMS DESK</span>
@@ -239,7 +237,7 @@ function Hero() {
               {mode.footer.map((item) => <span key={item}><i aria-hidden="true" /> {item}</span>)}
             </div>
           </div>
-        </div>
+        </div>}
         <a className="scroll-cue" href="#proof" aria-label="Scroll to quick facts"><span>Explore</span><Arrow direction="down" /></a>
       </div>
       <div className="thought-loop" aria-label="Working principles">
@@ -271,94 +269,6 @@ function ProofStrip() {
             <span>0{index + 1}</span><strong>{item.value}</strong><p>{item.label}</p>
           </div>
         ))}
-      </div>
-    </section>
-  );
-}
-
-const labModes = [
-  {
-    label: "Remember",
-    code: "M-01",
-    title: "Keep only useful state.",
-    detail: "Memory should preserve decisions, evidence, and unresolved risk. More context is not the same as better context.",
-    signal: [24, 44, 38, 72, 56, 88],
-    measure: "Retrieval precision",
-  },
-  {
-    label: "Route",
-    code: "R-02",
-    title: "Give each step a reason.",
-    detail: "Agents need explicit tools, boundaries, and hand-off rules. Good routing makes a complex system easier to inspect.",
-    signal: [18, 34, 66, 48, 78, 92],
-    measure: "Decision trace",
-  },
-  {
-    label: "Evaluate",
-    code: "E-03",
-    title: "Test the whole journey.",
-    detail: "A correct final answer can hide a fragile process. I evaluate outcomes, tool choices, recovery, cost, and latency together.",
-    signal: [30, 52, 46, 82, 68, 96],
-    measure: "Task reliability",
-  },
-];
-
-function SignalWorkbench() {
-  const [active, setActive] = useState(0);
-  const mode = labModes[active];
-
-  return (
-    <section className="lab-section page-grid" id="lab" aria-labelledby="lab-title">
-      <header className="lab-heading" data-reveal>
-        <span className="eyebrow">Interactive field lab / 01</span>
-        <h2 id="lab-title">Test the <em>system.</em></h2>
-        <p>Choose a layer. See what I optimise before an AI product reaches real users.</p>
-      </header>
-      <div className="lab-console" data-reveal>
-        <div className="lab-tabs" role="tablist" aria-label="AI system layers">
-          {labModes.map((item, index) => (
-            <button
-              key={item.code}
-              type="button"
-              role="tab"
-              aria-selected={active === index}
-              aria-controls={`lab-panel-${index}`}
-              id={`lab-tab-${index}`}
-              className={active === index ? "active" : ""}
-              onClick={() => setActive(index)}
-            >
-              <span>{item.code}</span>{item.label}
-            </button>
-          ))}
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            className="lab-panel"
-            key={mode.code}
-            role="tabpanel"
-            id={`lab-panel-${active}`}
-            aria-labelledby={`lab-tab-${active}`}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28, ease }}
-          >
-            <div className="lab-copy">
-              <span>Active layer / {mode.code}</span>
-              <h3>{mode.title}</h3>
-              <p>{mode.detail}</p>
-              <small>Primary measure: {mode.measure}</small>
-            </div>
-            <div className="lab-viz" aria-hidden="true">
-              <div className="lab-bars">
-                {mode.signal.map((height, index) => (
-                  <motion.i key={`${mode.code}-${index}`} initial={{ height: 12 }} animate={{ height: `${height}%` }} />
-                ))}
-              </div>
-              <div className="lab-orbit"><i /><i /><i /><strong>{active + 1}</strong></div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );
@@ -537,19 +447,16 @@ function CapabilityIndex() {
 function About() {
   return (
     <section className="about-section" id="about" aria-labelledby="about-title">
-      <div className="about-intro page-grid">
-        <span className="eyebrow" data-reveal>Method / background</span>
-        <h2 id="about-title" data-reveal>How I get to <em>useful.</em></h2>
-        <p data-reveal>I connect product thinking, research, and engineering. I ask the difficult question early, prove the hard part quickly, and stay accountable after launch.</p>
-      </div>
-      <div className="about-profile page-grid" data-reveal>
+      <div className="about-profile about-profile-lead page-grid" data-reveal>
         <span className="eyebrow">About Adithya</span>
-        <p>{profile.summary}</p>
+        <div>
+          <h2 id="about-title">Engineer, product builder, and community leader.</h2>
+          <p>{profile.summary}</p>
+        </div>
       </div>
-      <div className="page-grid" data-reveal><CapabilityIndex /></div>
-      <div className="story-grid page-grid">
+      <div className="story-grid story-grid-priority page-grid">
         <div className="timeline-block">
-          <header data-reveal><span className="eyebrow">Experience</span><h3>Work in the real world.</h3></header>
+          <header data-reveal><span className="eyebrow">Experience</span><h3>Production work, clearly told.</h3></header>
           {experience.map((item) => (
             <article className="timeline-row" key={`${item.role}-${item.period}`} data-reveal>
               <span>{item.period}</span><div><h4>{item.role} / {item.company}</h4><small>{item.location}</small><p>{item.note}</p>
@@ -559,7 +466,7 @@ function About() {
           ))}
         </div>
         <div className="education-block">
-          <header data-reveal><span className="eyebrow">Education</span><h3>Built on research.</h3></header>
+          <header data-reveal><span className="eyebrow">Education</span><h3>Research with an engineering base.</h3></header>
           {education.map((item, index) => (
             <article className="education-row" key={item.degree} data-reveal>
               <div className="education-index">0{index + 1}</div><span>{item.period}</span><h4>{item.degree}</h4>
@@ -569,6 +476,12 @@ function About() {
           ))}
         </div>
       </div>
+      <div className="about-intro about-method page-grid">
+        <span className="eyebrow" data-reveal>How I work</span>
+        <h2 data-reveal>From ambiguity to <em>useful.</em></h2>
+        <p data-reveal>I connect product thinking, research, and engineering. I ask the difficult question early, prove the hard part quickly, and stay accountable after launch.</p>
+      </div>
+      <div className="page-grid" data-reveal><CapabilityIndex /></div>
     </section>
   );
 }
@@ -626,19 +539,19 @@ function BlogPreview() {
     <section className="journal-preview page-grid" aria-labelledby="journal-title">
       <div className="journal-image" data-reveal>
         <Image
-          src="/images/agent-memory-lab-v1.webp"
-          alt="Editorial illustration of an AI memory system moving through evaluation checkpoints"
+          src={latestPost.image}
+          alt={latestPost.imageAlt}
           fill
           sizes="(max-width: 767px) 92vw, 54vw"
         />
-        <span>Field note / 001</span>
+        <span>Field note / 002</span>
       </div>
       <div className="journal-copy" data-reveal>
         <span className="eyebrow">New from the journal</span>
-        <h2 id="journal-title">Memory is not a <em>feature.</em></h2>
-        <p>Why capable agents need selective memory, observable retrieval, and evaluation across the full task journey.</p>
-        <div><span>12 min read</span><span>August 3, 2026</span></div>
-        <Link className="button button-primary" href="/blog/agent-memory-needs-evaluation">Read the field note <Arrow /></Link>
+        <h2 id="journal-title">Agents need a <em>runtime.</em></h2>
+        <p>{latestPost.description}</p>
+        <div><span>{latestPost.readingTime}</span><span>{latestPost.publishedLabel}</span></div>
+        <Link className="button button-primary" href={`/blog/${latestPost.slug}`}>Read the field note <Arrow /></Link>
         <Link className="text-link" href="/blog">Browse all writing <Arrow /></Link>
       </div>
     </section>
@@ -754,11 +667,10 @@ export default function PortfolioExperience() {
       <Navigation />
       <main id="main">
         <Hero />
+        <About />
         <ProofStrip />
-        <SignalWorkbench />
         <Work />
         <Skills />
-        <About />
         <Community />
         <SideProjects />
         <BlogPreview />

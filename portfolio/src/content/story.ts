@@ -2,7 +2,7 @@ export const profile = {
   name: "Adithya S Nair",
   role: "Full-stack AI engineer & researcher",
   summary:
-    "Full-stack AI engineer and consultant with around two years of experience building production AI systems. I work across LLM and RAG pipelines, agentic workflows, evaluation, full-stack delivery, and product decisions, turning early research into dependable software for real users.",
+    "Full-stack AI engineer and consultant with around two years of production experience across LLM pipeline design, RAG workflows, prompt engineering, model evaluation, and FastAPI services. I also led a 200+ member ACM technical community as Chairperson, organised national-level hackathons, and mentored students in machine learning. I am now pursuing an MTech in CSE with AI and Machine Learning while continuing to ship production AI systems and grow into technical leadership.",
   location: "Kottayam, Kerala, India",
   email: "adithyasnair2021@gmail.com",
   phone: "+91 81368 59455",
@@ -136,12 +136,12 @@ export const experience = [
     role: "AI Engineer",
     company: "Doctreen",
     location: "Montpellier · Remote",
-    note: "Owned production AI features and the systems around them, from model integration to product delivery.",
+    note: "Developed and maintained AI features for a medical report-generation platform, connecting model integration, evaluation, and product delivery.",
     highlights: [
-      "Integrated multiple model providers with prompt, RAG, and evaluation workflows.",
-      "Designed vision pipelines across 10+ modalities with expert-reviewed ground truth.",
-      "Worked as acting product manager, turning research and user feedback into clear product requirements.",
-      "Built internal data tooling, including token-efficient serialization for production workloads.",
+      "Integrated OpenAI, Nebius, and OVH model APIs with prompt engineering and retrieval-augmented generation workflows.",
+      "Designed and optimised end-to-end vision analysis pipelines across 10+ imaging modalities, benchmarking model performance against radiologist-derived ground truth.",
+      "Served as acting Product Manager, conducting market research, gathering user feedback, and authoring comprehensive Product Requirements Documents.",
+      "Built internal tooling and data-processing workflows, including a token-efficient serialisation format.",
     ],
   },
   {
@@ -149,31 +149,30 @@ export const experience = [
     role: "AI Research Intern",
     company: "Doctreen",
     location: "Montpellier · Remote",
-    note: "Helped establish the medical reporting architecture during the platform’s foundational stage.",
+    note: "Contributed to the foundational development of an AI-assisted medical report system.",
     highlights: [
-      "Created benchmarks that compared models across multiple pipeline stages.",
-      "Added input validation and guardrails for prompt injection, adversarial inputs, and compliance risks.",
-      "Supported the first production-ready reporting workflows and evaluation processes.",
+      "Implemented security guardrails and input validation for prompt injection, adversarial inputs, and healthcare data compliance.",
+      "Developed a multi-model benchmarking system to evaluate LLM performance across all pipeline stages with parallel execution.",
     ],
   },
 ];
 
 export const education = [
   {
-    period: "2026 to present",
+    period: "Jul 2026 to present",
     degree: "MTech · Computer Science",
-    focus: "AI & Machine Learning",
+    focus: "Artificial Intelligence & Machine Learning",
     school: "Amrita Vishwa Vidyapeetham",
-    note: "Researching agentic AI, memory, multi-agent systems, and dependable LLM architecture.",
-    highlights: ["Advanced study in AI and machine learning", "Current focus on agent evaluation and long-running system memory"],
+    note: "Research focus: agentic AI, memory, multi-agent systems, and LLM architecture.",
+    highlights: ["Advanced study in artificial intelligence and machine learning"],
   },
   {
-    period: "2021 to 2025",
+    period: "Sep 2021 to Aug 2025",
     degree: "BTech · Computer Science",
-    focus: "AI & Machine Learning · CGPA 8.48",
+    focus: "Artificial Intelligence & Machine Learning · CGPA 8.48",
     school: "Amrita Vishwa Vidyapeetham",
-    note: "Built a broad engineering base while specialising in applied AI and machine learning.",
-    highlights: ["Coursework in ML, deep learning, NLP, computer vision, DSA, DBMS, and operating systems", "Peer-reviewed Springer conference publication, 2026"],
+    note: "Built a broad computer science foundation while specialising in applied AI and machine learning.",
+    highlights: ["Coursework in machine learning, deep learning, NLP, computer vision, data structures and algorithms, DBMS, and operating systems", "SPARE research published with Springer at PCCDA 2026"],
   },
 ];
 
