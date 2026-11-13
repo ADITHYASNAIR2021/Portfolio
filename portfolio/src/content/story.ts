@@ -2,7 +2,7 @@ export const profile = {
   name: "Adithya S Nair",
   role: "Full-stack AI engineer & researcher",
   summary:
-    "Full-stack AI engineer and consultant with around two years of production experience across LLM pipeline design, RAG workflows, prompt engineering, model evaluation, and FastAPI services. I also led a 200+ member ACM technical community as Chairperson, organised national-level hackathons, and mentored students in machine learning. I am now pursuing an MTech in CSE with AI and Machine Learning while continuing to ship production AI systems and grow into technical leadership.",
+    "I’m a full-stack AI engineer from Kottayam, Kerala. At Doctreen, I spent a year and a half working on medical AI: LLM pipelines, DICOM imaging, evaluation, and the services around them. I also consult on AI and product engineering at CodrantLabs. These days, I’m pursuing an MTech in AI & ML at Amrita, with a growing interest in computational pathology and agentic systems.",
   location: "Kottayam, Kerala, India",
   email: "adithyasnair2021@gmail.com",
   phone: "+91 81368 59455",
@@ -12,21 +12,18 @@ export const profile = {
   resume: "/Adithya_S_Nair_Resume.pdf",
 };
 
-/* Studio credit shown in the footer and referenced in structured data. */
 export const studio = {
   name: "CodrantLabs",
   url: "https://codrantlabs.in",
   domain: "codrantlabs.in",
-  tagline: "We build machines that think.",
-  description:
-    "Founder-led product and AI engineering studio in Kerala, India, building full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
+  description: "Product and AI engineering studio. Adithya contributes as an AI Consultant, working on technical scoping, architecture, and delivery workflows.",
 };
 
 export const proofPoints = [
-  { value: "2 yrs", label: "shipping production AI" },
-  { value: "3", label: "selected systems with real users" },
-  { value: "1", label: "peer-reviewed research paper" },
-  { value: "200+", label: "people led in tech community" },
+  { value: "~40%", label: "less LLM token usage", context: "Internal serialisation tooling · Doctreen" },
+  { value: "10+", label: "imaging modalities", context: "DICOM vision pipelines · Doctreen" },
+  { value: "98%", label: "fewer trainable parameters", context: "LoRA adaptation · SPARE" },
+  { value: "200+", label: "ACM community members", context: "Chapter leadership · Amritapuri" },
 ];
 
 export type CaseStudy = {
@@ -34,276 +31,250 @@ export type CaseStudy = {
   kind: string;
   title: string;
   subtitle: string;
+  period: string;
+  role: string;
+  status: string;
   thesis: string;
-  challenge: string;
   response: string;
-  outcome: string;
-  metric: string;
-  metricLabel: string;
+  note: string;
   tech: string[];
-  href: string;
+  href?: string;
+  image?: string;
+  imageAlt?: string;
   accent: "tomato" | "cobalt" | "lime";
-  visual: "field" | "school" | "studio";
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
-    kind: "Founder-led product studio",
-    title: "CodrantLabs",
-    subtitle: "Software shipped, not strategy left in slides.",
-    thesis:
-      "A product and AI engineering studio for teams that need senior thinking, fixed scope, and a direct path from an ambiguous problem to working software.",
-    challenge:
-      "Small teams do not need more ceremony. They need someone who can connect product intent, engineering choices, AI capabilities, and the realities of delivery.",
-    response:
-      "Co-founded a practice spanning full-stack platforms, AI agents, RAG systems, search visibility, and technical product strategy for global clients.",
-    outcome:
-      "A deliberately small studio model with clear ownership, fewer hand-offs, and work designed and engineered as one continuous decision process.",
-    metric: "0",
-    metricLabel: "layers of account management",
-    tech: ["Product strategy", "AI agents", "Full-stack", "RAG", "AEO", "Delivery"],
-    href: "https://codrantlabs.in/",
+    kind: "Restaurant operations",
+    title: "Malabar Coast",
+    subtitle: "From the menu to the kitchen.",
+    period: "Via CodrantLabs",
+    role: "Full-stack development",
+    status: "Live website",
+    thesis: "An ordering and operations platform for a UK restaurant, bringing the customer-facing website and the restaurant’s daily workflows together.",
+    response: "Worked on online ordering with Stripe, table reservations, a role-based admin portal with real-time order updates, Sanity CMS, and technical SEO.",
+    note: "The work extends past the order button: payments, reservations, and the team handling the orders all need their own place in the system.",
+    tech: ["TypeScript", "PostgreSQL", "Stripe", "Sanity CMS", "Technical SEO"],
+    href: "https://www.malabarcoast.co.uk/",
+    image: "/images/malabar-coast-preview.png",
+    imageAlt: "Malabar Coast’s live restaurant website, with its coastal cuisine introduction and menu and booking links",
     accent: "lime",
-    visual: "studio",
   },
   {
     index: "02",
-    kind: "Education infrastructure",
+    kind: "Education platform",
     title: "Vidyapath",
-    subtitle: "One school system. Four very different realities.",
-    thesis:
-      "A multi-school LMS for CBSE Classes 10 and 12, shaped around the daily workflows of students, teachers, parents, and administrators.",
-    challenge:
-      "School software often becomes a collection of disconnected forms. The real challenge is making roles, data, permissions, and AI assistance feel like one dependable system.",
-    response:
-      "Architected role-based authentication, multi-school provisioning, assignments, grading, attendance, timetables, audit trails, and a multi-model AI routing layer.",
-    outcome:
-      "A single platform that reduces teacher busywork while keeping generated learning material structured, reviewable, and grounded in the school context.",
-    metric: "4",
-    metricLabel: "role-specific portals",
-    tech: ["Next.js", "Supabase", "RAG", "Groq + Gemini", "Zustand", "Framer Motion"],
-    href: "https://github.com/ADITHYASNAIR2021",
+    subtitle: "A school day has more than one point of view.",
+    period: "Apr 2026 — present",
+    role: "Full-stack development · AI integration",
+    status: "In development · public study tools live",
+    thesis: "A multi-school LMS for CBSE Classes 10 and 12, with separate workflows for teachers, students, parents, and administrators.",
+    response: "Built assignments, grading, attendance, gradebooks, and timetables; added Groq/Gemini routing for assignment generation and question banking, plus role-based authentication and school provisioning on Supabase.",
+    note: "Four portals, one shared school context. Permissions and structured learning material are as much a part of the work as the AI integration.",
+    tech: ["Next.js", "Supabase", "Groq + Gemini", "RAG", "Zustand"],
+    href: "https://sreyas-vidyapath.vercel.app/",
+    image: "/images/vidyapath-preview.png",
+    imageAlt: "Vidyapath’s public CBSE study toolkit, with Class 10 and Class 12 resources and board exam practice",
     accent: "cobalt",
-    visual: "school",
   },
   {
     index: "03",
-    kind: "Field AI prototype",
+    kind: "Agriculture · Android",
     title: "Mitti Mitra",
-    subtitle: "Useful signals for decisions made in the field.",
-    thesis:
-      "A mobile soil-health assistant that combines computer vision and multiple data sources to make practical crop guidance more accessible to Indian farmers.",
-    challenge:
-      "A useful field tool has to work with incomplete inputs, communicate uncertainty clearly, and turn model output into an action someone can actually take.",
-    response:
-      "Designed the machine-learning pipeline and connected image analysis with supporting signals inside a lightweight Flutter and Firebase workflow.",
-    outcome:
-      "A focused prototype that translates multi-source analysis into a simpler, field-ready decision flow rather than a technical dashboard.",
-    metric: "3",
-    metricLabel: "signals combined",
-    tech: ["Python", "Computer vision", "Flutter", "Firebase", "Data fusion", "Product design"],
-    href: "https://github.com/ADITHYASNAIR2021",
+    subtitle: "A soil photo. A more useful next step.",
+    period: "Dec 2025 — Mar 2026",
+    role: "Android development · Multi-model AI pipeline",
+    status: "Prototype",
+    thesis: "A native Android app that uses a soil photo, vision models, and external data to suggest soil types and crop guidance for Indian farmers.",
+    response: "Combined Gemini vision, Hugging Face image models, Groq responses, and external APIs. Added local storage so past scans and results remain accessible without a steady internet connection.",
+    note: "The offline part is deliberately practical: saved results stay available. New AI analysis still depends on the connected services.",
+    tech: ["Android Studio", "Gemini Vision", "Hugging Face", "Groq", "API integration"],
     accent: "tomato",
-    visual: "field",
   },
 ];
+
+export const research = {
+  title: "SPARE",
+  fullTitle: "Single-view Parameter-efficient Adapter for Radiology Reporting",
+  status: "Accepted · PCCDA 2026 · Springer",
+  description: "Can a chest X-ray reporting model fit a smaller compute budget? SPARE connects RAD-DINO to BioGPT through a semantic alignment adapter, using a single frontal view and LoRA fine-tuning.",
+  results: [
+    { value: "98%", label: "fewer trainable parameters with LoRA" },
+    { value: "79.0", label: "BERTScore F1 on MIMIC-CXR" },
+    { value: "0.8%", label: "of the training data used" },
+  ],
+  note: "In this evaluation, the model reached 93.6% of MAIRA-2’s BERTScore. Results are from the MIMIC-CXR report-generation benchmark.",
+};
 
 export const smallerBuilds = [
   {
     year: "2025",
     title: "Namude Yatra",
-    description: "A multi-agent travel planner with maps and conversational replanning.",
+    description: "A travel planner where coordinated agents build day-by-day itineraries, with maps and a chat interface for changing the plan.",
     tags: ["LangChain", "Pydeck", "Streamlit"],
   },
   {
     year: "2024",
     title: "OptiHire",
-    description: "Tailored job outreach, resume gap analysis, and application tracking.",
-    tags: ["NLP", "LLMs", "Data"],
+    description: "Resume gap analysis, tailored cover letters, and application tracking in one place.",
+    tags: ["NLP", "LLMs", "Streamlit"],
   },
   {
     year: "2024",
     title: "Inventory Optimisation",
-    description: "A reinforcement learning agent for balancing stockouts, holding cost, and reorder timing.",
+    description: "A DQN agent learning when and how much to reorder. Compared against an (s,S) policy on simulated demand, with lower costs and fewer stockouts across test scenarios.",
     tags: ["Python", "DQN", "Reinforcement learning"],
   },
 ];
 
 export const experience = [
   {
-    period: "Jun 2025 to May 2026",
-    role: "AI Engineer",
-    company: "Doctreen",
-    location: "Montpellier · Remote",
-    note: "Developed and maintained AI features for a medical report-generation platform, connecting model integration, evaluation, and product delivery.",
+    period: "Jun 2026",
+    role: "AI Consultant",
+    company: "CodrantLabs",
+    location: "Technical consulting · Self-initiated project",
+    note: "Helped shape the technical and delivery side of a product and AI engineering studio.",
     highlights: [
-      "Integrated OpenAI, Nebius, and OVH model APIs with prompt engineering and retrieval-augmented generation workflows.",
-      "Designed and optimised end-to-end vision analysis pipelines across 10+ imaging modalities, benchmarking model performance against radiologist-derived ground truth.",
-      "Served as acting Product Manager, conducting market research, gathering user feedback, and authoring comprehensive Product Requirements Documents.",
-      "Built internal tooling and data-processing workflows, including a token-efficient serialisation format.",
+      "Contributed to fixed-scope project scoping and pricing, the initial tech stack, and delivery workflows.",
+      "Worked on Malabar Coast’s ordering, reservations, admin operations, CMS, and technical SEO.",
     ],
   },
   {
-    period: "Jan 2025 to Jun 2025",
+    period: "Jun 2025 — May 2026",
+    role: "AI Engineer",
+    company: "Doctreen",
+    location: "Montpellier, France · Remote",
+    note: "Built and maintained AI features for a medical report-generation platform.",
+    highlights: [
+      "Integrated OpenAI, Nebius, and OVH APIs with RAG and prompt-engineering workflows.",
+      "Designed DICOM vision pipelines across 10+ imaging modalities and evaluated them against radiologist-derived ground truth.",
+      "Implemented a serialisation format that reduced LLM token usage by nearly 40%.",
+      "Acted as Product Manager for proof-of-concept work: market research, user feedback, and PRDs.",
+    ],
+  },
+  {
+    period: "Jan — Jun 2025",
     role: "AI Research Intern",
     company: "Doctreen",
-    location: "Montpellier · Remote",
-    note: "Contributed to the foundational development of an AI-assisted medical report system.",
+    location: "Montpellier, France · Remote",
+    note: "Contributed to the early development of the medical AI platform.",
     highlights: [
-      "Implemented security guardrails and input validation for prompt injection, adversarial inputs, and healthcare data compliance.",
-      "Developed a multi-model benchmarking system to evaluate LLM performance across all pipeline stages with parallel execution.",
+      "Implemented input validation and guardrails against prompt injection and adversarial inputs.",
+      "Built parallel multi-model benchmarks to evaluate LLM performance across pipeline stages.",
     ],
   },
 ];
 
 export const education = [
   {
-    period: "Jul 2026 to present",
+    period: "Jul 2026 — present",
     degree: "MTech · Computer Science",
     focus: "Artificial Intelligence & Machine Learning",
-    school: "Amrita Vishwa Vidyapeetham",
-    note: "Research focus: agentic AI, memory, multi-agent systems, and LLM architecture.",
-    highlights: ["Advanced study in artificial intelligence and machine learning"],
+    school: "Amrita Vishwa Vidyapeetham · Amritapuri",
+    note: "Research interests: agentic AI, multi-agent systems, LLM architecture, computational pathology, and medical image analysis.",
   },
   {
-    period: "Sep 2021 to Aug 2025",
+    period: "Sep 2021 — Aug 2025",
     degree: "BTech · Computer Science",
     focus: "Artificial Intelligence & Machine Learning · CGPA 8.48",
-    school: "Amrita Vishwa Vidyapeetham",
-    note: "Built a broad computer science foundation while specialising in applied AI and machine learning.",
-    highlights: ["Coursework in machine learning, deep learning, NLP, computer vision, data structures and algorithms, DBMS, and operating systems", "SPARE research published with Springer at PCCDA 2026"],
-  },
-];
-
-export const capabilities = [
-  {
-    number: "I",
-    title: "Frame the system",
-    detail: "Translate an ambiguous product problem into boundaries, risks, data flows, and a buildable first version.",
-    tools: "Architecture · Product thinking · Evaluation design",
-  },
-  {
-    number: "II",
-    title: "Build the intelligence",
-    detail: "Design LLM, RAG, vision, and agentic workflows around the job, not around whichever model is fashionable this week.",
-    tools: "Python · PyTorch · FastAPI · LangChain · Model APIs",
-  },
-  {
-    number: "III",
-    title: "Make it hold up",
-    detail: "Add guardrails, benchmarks, observability, tests, and infrastructure so a promising demo becomes dependable software.",
-    tools: "Docker · CI/CD · Supabase · Git · Monitoring",
-  },
-  {
-    number: "IV",
-    title: "Lead the delivery",
-    detail: "Connect research, user feedback, and engineering decisions so the team can move from an uncertain opportunity to a clear, shipped product.",
-    tools: "Product research · PRDs · Agile delivery · Team leadership",
+    school: "Amrita Vishwa Vidyapeetham · Amritapuri",
+    note: "A computer science foundation in algorithms, databases, and operating systems, alongside machine learning, NLP, and computer vision.",
   },
 ];
 
 export const skillGroups = [
   {
     code: "01",
-    label: "AI systems",
-    summary: "Designing reliable agentic intelligence around a real product workflow.",
-    skills: ["Agent orchestration", "RAG and reranking", "MCP and tool integration", "Agent memory", "Evals and guardrails", "Structured outputs"],
+    label: "AI & research",
+    summary: "From medical imaging experiments to the evaluation of LLM workflows.",
+    skills: ["LLM integration & RAG", "LangGraph & multi-agent systems", "MCP & tool integration", "Evals & guardrails", "Vision-language models", "LoRA & PEFT", "PyTorch & Transformers", "FAISS & Chroma"],
   },
   {
     code: "02",
     label: "Engineering",
-    summary: "Building the service, interface, data layer, and tests around the model.",
-    skills: ["Python", "FastAPI", "TypeScript", "Next.js", "PyTorch", "PostgreSQL"],
+    summary: "The APIs, interfaces, and data layers around a model or a product.",
+    skills: ["Python & FastAPI", "TypeScript & Node.js", "React & Next.js", "PostgreSQL & Supabase", "REST APIs", "Android Studio", "Tailwind CSS", "Stripe integration"],
   },
   {
     code: "03",
-    label: "Platforms",
-    summary: "Shipping with practical tools that keep AI systems observable and maintainable.",
-    skills: ["Docker", "Supabase", "MongoDB", "Git and CI/CD", "Hugging Face", "Tracing and observability"],
+    label: "Tools & delivery",
+    summary: "Tools I use to test, ship, and keep track of the work.",
+    skills: ["Docker", "Git & GitHub Actions", "Vercel & AWS", "PyTest", "MLflow", "MongoDB & Firebase", "n8n automation", "Claude Code & Codex"],
   },
   {
     code: "04",
-    label: "Product craft",
-    summary: "Connecting technical choices to user needs, risk, cost, and measurable outcomes.",
-    skills: ["AI product discovery", "PRDs", "Evaluation planning", "Cost and latency tradeoffs", "Security review", "Technical leadership"],
+    label: "Product & people",
+    summary: "Experience from product work, consulting, and leading a student community.",
+    skills: ["Technical consulting", "Solution architecture", "Discovery & PRDs", "Project scoping & estimation", "Delivery management", "Technical SEO & GEO", "Mentoring", "Community leadership"],
   },
 ];
 
 export const communityRoles = [
   {
-    period: "2022 to present",
-    title: "ACM Student Chapter, Amritapuri",
-    role: "Member, AI Club Mentor, Chairperson, Advisory Council",
-    note: "Led a 200+ member technical community for 1.5 years, organised national-level hackathons and workshops, mentored students, and now advise the next leadership team.",
+    period: "2022 — present",
+    title: "ACM, Amritapuri",
+    role: "Mentor → Chairperson → Advisory Council",
+    note: "Led a 200+ member chapter as Chairperson for 1.5 years. Organised hackathons and workshops, mentored students in ML, and now serve on the Advisory Council.",
     accent: "lime",
   },
   {
-    period: "2022 to 2023",
-    title: "ICPC Asia West Regional Finals",
-    role: "Overall Coordinator",
-    note: "Coordinated participant management, event logistics, and on-ground operations for the regional finals hosted on campus.",
+    period: "Aug 2026",
+    title: "Beyond the Classroom",
+    role: "Resource person · LBSITW ACM-W launch",
+    note: "Spoke at the ACM-W chapter launch in Trivandrum with fellow ACM-Amrita members, covering applied AI/ML, product development, and career and learning roadmaps.",
     accent: "cobalt",
   },
   {
-    period: "2023 to 2024",
-    title: "Vidyut Multi-Fest",
-    role: "Core Committee and Executive Member",
-    note: "Managed participant accommodation and logistics for one of Kerala's largest student-run multi-fests.",
+    period: "2022 — 2023",
+    title: "ICPC Regional Finals",
+    role: "Overall Coordinator",
+    note: "Coordinated participant management, logistics, and on-ground operations for the Asia West Regional Finals hosted on campus.",
     accent: "coral",
   },
   {
-    period: "2024",
-    title: "Decoding AI",
-    role: "Student Social Responsibility Project",
-    note: "Ran an introductory AI awareness programme for school students, making core ideas approachable through examples and discussion.",
+    period: "2023 — 2024",
+    title: "Vidyut & Decoding AI",
+    role: "Event operations · School outreach",
+    note: "Worked on accommodation and logistics for Vidyut. Through Decoding AI, introduced school students at Sreyas Public School, Kottayam, to AI fundamentals.",
     accent: "lime",
   },
 ];
 
-export type FaqItem = {
-  /** Stable anchor id, e.g. #faq-research, kept persistent for AI citations. */
-  id: string;
-  question: string;
-  answer: string;
-};
+export const languages = "Malayalam · native / English · professional / Hindi · working proficiency";
 
-/* Answer-engine ready: natural questions, 30–50 word self-contained answers. */
+export type FaqItem = { id: string; question: string; answer: string };
+
 export const faq: FaqItem[] = [
   {
     id: "faq-who-is-adithya",
     question: "Who is Adithya S Nair?",
-    answer:
-      "Adithya S Nair is an AI engineer and researcher from Kottayam, Kerala, India. He builds production LLM, RAG, agentic, and full-stack systems, and has published peer-reviewed research with Springer.",
+    answer: "I’m a full-stack AI engineer and researcher from Kottayam, Kerala. My work spans medical AI at Doctreen, AI consulting at CodrantLabs, education software, and community leadership. I’m currently pursuing an MTech in AI & ML at Amrita.",
   },
   {
     id: "faq-specialisation",
-    question: "What does Adithya specialise in as an AI engineer?",
-    answer:
-      "He specialises in LLM integration, retrieval-augmented generation, agent memory, AI evaluation, and full-stack product engineering. He ships products with Python, FastAPI, PyTorch, and Next.js, from first prototype to monitored production.",
+    question: "What do you work on?",
+    answer: "LLM integration, RAG, evaluation, medical image analysis, and full-stack applications. I’m also exploring agentic systems and computational pathology through my MTech research. Python, FastAPI, PyTorch, and Next.js appear in a lot of my work.",
   },
   {
     id: "faq-production-systems",
-    question: "Which production AI systems has Adithya built?",
-    answer:
-      "Adithya co-founded CodrantLabs, a product and AI engineering studio, architected Vidyapath, a multi-school LMS with four role-specific portals, and built Mitti Mitra, a field-focused soil intelligence prototype.",
+    question: "Which projects can I look at?",
+    answer: "Malabar Coast is a live UK restaurant website and operations platform I worked on through CodrantLabs. Vidyapath’s public study tools are live, with its school-management platform in development. Mitti Mitra is an Android soil-guidance prototype.",
   },
   {
     id: "faq-research",
-    question: "Has Adithya S Nair published research?",
-    answer:
-      "Yes. Adithya has peer-reviewed research accepted at PCCDA 2026 and published with Springer. The work explores parameter-efficient multimodal systems designed to achieve strong results within limited compute budgets.",
+    question: "What is the status of SPARE?",
+    answer: "SPARE, Single-view Parameter-efficient Adapter for Radiology Reporting, is accepted at PCCDA 2026 (Springer). It connects RAD-DINO to BioGPT using an alignment adapter and LoRA, exploring chest X-ray report generation with limited compute and training data.",
   },
   {
     id: "faq-availability",
-    question: "Is Adithya available for AI engineering roles?",
-    answer:
-      "Yes. Adithya is open to AI engineering roles, research collaborations, and focused product builds with real users. Email adithyasnair2021@gmail.com to start a conversation.",
+    question: "What kinds of opportunities are you open to?",
+    answer: "AI engineering, research collaborations, technical consulting, and product builds. If you have a project, a research question, or a role that connects with my work, email adithyasnair2021@gmail.com.",
   },
   {
     id: "faq-location",
-    question: "Where is Adithya based, and does he work remotely?",
-    answer:
-      "He is based in Kottayam, Kerala, India, and works remotely worldwide. His experience includes collaborating with international teams and shipping production systems across research, product, and engineering work.",
+    question: "Where are you based?",
+    answer: "I’m from Kottayam, Kerala, and study at Amrita’s Amritapuri campus. I’ve worked remotely with the team at Doctreen in Montpellier, France, and am open to remote collaborations.",
   },
 ];

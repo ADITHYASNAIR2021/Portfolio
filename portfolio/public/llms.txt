@@ -1,44 +1,55 @@
 # Adithya S Nair
 
-> Full-stack AI engineer and researcher in Kottayam, Kerala, India. Adithya builds measurable AI systems across medical vision, agent memory, evaluation, RAG, education, and full-stack products. Last updated: 2026-08-03.
+> Full-stack AI engineer and researcher from Kottayam, Kerala, India. Work spans medical AI, full-stack software, research, and community leadership. Updated: 2026-11-13.
 
-## Canonical pages
+## Pages
 
-- [Portfolio](https://adithyasnair.vercel.app/): Profile, selected case studies, published research, experience, education, leadership, FAQ, and contact details.
-- [AI Systems Journal](https://adithyasnair.vercel.app/blog): Field notes on AI systems after the demo.
-- [Agent Memory Needs Evaluation, Not More Context](https://adithyasnair.vercel.app/blog/agent-memory-needs-evaluation): A practical guide to memory architecture, evaluation, failure modes, and build sequence for long-running AI agents.
-- [Resume](https://adithyasnair.vercel.app/Adithya_S_Nair_Resume.pdf): Current professional resume.
+- [Portfolio](https://adithyasnair.vercel.app/): Selected projects, research, experience, education, skills, community, FAQ, and contact.
+- [Journal](https://adithyasnair.vercel.app/blog): Notes on agents, memory, evaluation, and engineering.
+- [Agents Need a Runtime, Not Just a Loop](https://adithyasnair.vercel.app/blog/agents-need-a-runtime)
+- [Agent Memory Needs Evaluation, Not More Context](https://adithyasnair.vercel.app/blog/agent-memory-needs-evaluation)
+- [Resume](https://adithyasnair.vercel.app/Adithya_S_Nair_Resume.pdf)
 
 ## Profile facts
 
-- Name: Adithya S Nair (also written Adithya Nair or Adithya S. Nair)
-- Role: Full-stack AI engineer and researcher
-- Location: Kottayam, Kerala, India; works remotely worldwide
-- Education: MTech in Computer Science, AI and Machine Learning, Amrita Vishwa Vidyapeetham, 2026-present
-- Education: BTech in Computer Science, AI and Machine Learning, Amrita Vishwa Vidyapeetham, 2021-2025, CGPA 8.48
-- Research: SPARE, Single-view Parameter-efficient Adapter for Radiology Reporting, PCCDA 2026, Springer. 98% fewer trainable parameters with LoRA, 79.0% BERTScore F1 on MIMIC-CXR using 0.8% of the training corpus.
-- Core topics: agentic AI, AI agent memory, LLM evaluation, medical AI, DICOM, RAG, FastAPI, Next.js
-- Experience: AI Engineer at Doctreen (Montpellier, France, remote), Jun 2025 - May 2026; AI Research Intern at Doctreen, Jan 2025 - Jun 2025
-- Leadership: Led the 200+ member ACM Student Chapter at Amritapuri as Chairperson for 1.5 years; now on the Advisory Council.
+- AI Consultant, CodrantLabs; technical consulting on project scoping, pricing, initial tech stack, and delivery workflows. Resume date: June 2026. Adithya is represented here as a consultant.
+- AI Engineer, Doctreen, Montpellier, France (remote), June 2025-May 2026.
+- AI Research Intern, Doctreen (remote), January-June 2025.
+- Medical AI work included multi-provider LLM/RAG workflows, DICOM pipelines across 10+ imaging modalities, guardrails, benchmarking, and acting Product Manager responsibilities for proof-of-concept work.
+- Implemented an internal serialisation format that reduced LLM token usage by nearly 40%.
+- MTech, Computer Science with AI and Machine Learning, Amrita Vishwa Vidyapeetham, July 2026-present. This degree is in progress.
+- BTech, Computer Science with AI and Machine Learning, Amrita Vishwa Vidyapeetham, September 2021-August 2025; CGPA 8.48.
+- Research interests: agentic AI, multi-agent systems, LLM architecture, computational pathology, and medical image analysis.
 
-## Selected systems
+## Selected work
 
-- Doctreen: Production medical AI, multi-provider LLM and RAG pipelines, DICOM vision evaluation, guardrails, benchmarks, and CI/CD.
-- Vidyapath: Multi-school education platform with four role-specific portals, structured AI assistance, RAG, and Supabase.
-- CodrantLabs: Founder-led product and AI engineering studio in Kerala, India (https://codrantlabs.in). Full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO. Adithya is a co-founder.
-- Mitti Mitra: Computer-vision soil diagnostics with field-ready crop guidance.
-- LensAI: Browser-region explanations without context switching.
+- [Malabar Coast](https://www.malabarcoast.co.uk/): Live UK restaurant website and operations platform. Adithya worked on ordering with Stripe, reservations, a role-based admin portal with real-time order updates, Sanity CMS, and technical SEO through CodrantLabs.
+- [Vidyapath](https://sreyas-vidyapath.vercel.app/): CBSE Class 10 and 12 education software. Public study tools are live; school-management work includes four role-specific portals, assignments, grading, attendance, and multi-model AI routing.
+- Mitti Mitra: Native Android prototype combining Gemini vision, Hugging Face image models, Groq, and external APIs for soil and crop guidance. Past scans/results are stored locally; new AI analysis uses connected services.
+- Other projects: Namude Yatra (multi-agent travel planner), OptiHire (job application assistant), and Inventory Optimisation using DQN.
 
-## Frequently asked questions
+## Research
 
-- Who is Adithya S Nair? An AI engineer and researcher from Kottayam, Kerala, India, building production LLM, RAG, agentic, and medical imaging systems, with published research at PCCDA 2026 (Springer).
-- Is Adithya available for AI engineering roles? Yes - open to AI engineering roles, research collaborations, and focused product builds. Contact adithyasnair2021@gmail.com.
-- Full FAQ with anchors: https://adithyasnair.vercel.app/#faq
+SPARE: Single-view Parameter-efficient Adapter for Radiology Reporting. Accepted at PCCDA 2026 (Springer). Publication is not claimed here.
+
+RAD-DINO vision encoder connected to BioGPT via a semantic alignment adapter, with LoRA fine-tuning for single-view chest X-ray report generation. Reported results: 98% fewer trainable parameters; BERTScore F1 of 79.0 on MIMIC-CXR using 0.8% of training data, reaching 93.6% of MAIRA-2’s score in this evaluation.
+
+## Community and learning
+
+- ACM Student Chapter, Amritapuri: member, AI Club mentor, Chairperson for 1.5 years, now Advisory Council; 200+ members.
+- Resource person, “Beyond the Classroom: From ACM to Industry,” LBSITW ACM-W chapter launch, Trivandrum, August 2026.
+- Overall Coordinator, ICPC Asia West Regional Finals, 2022-2023.
+- Vidyut event logistics, 2023-2024; Decoding AI school outreach, 2024.
+- McKinsey.org Forward Program certificate.
+- Languages: Malayalam (native), English (professional), Hindi (working proficiency).
 
 ## Contact
 
+Open to engineering roles, research collaborations, technical consulting, and product builds.
+
 - Email: adithyasnair2021@gmail.com
-- GitHub: https://github.com/ADITHYASNAIR2021
-- LinkedIn: https://linkedin.com/in/adithya-s-nair
-- Hugging Face: https://huggingface.co/AdithyaSNair
-- Studio: https://codrantlabs.in
+- [GitHub](https://github.com/ADITHYASNAIR2021)
+- [LinkedIn](https://linkedin.com/in/adithya-s-nair)
+- [Hugging Face](https://huggingface.co/AdithyaSNair)
+- [CodrantLabs](https://codrantlabs.in)
+- [FAQ](https://adithyasnair.vercel.app/#faq)

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Space_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import { MotionConfig } from "framer-motion";
 import "./globals.css";
 
 const body = localFont({
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     template: "%s | Adithya S Nair",
   },
   description:
-    "Adithya S Nair is an AI engineer and researcher in Kerala, India, building production LLM, RAG, agentic, and full-stack systems that hold up in the real world.",
+    "Adithya S Nair is a full-stack AI engineer and researcher from Kerala. Explore his medical AI work, software projects, SPARE research, and community contributions.",
   keywords: [
     "Adithya S Nair",
     "Adithya Nair",
@@ -68,7 +67,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "Adithya S Nair - AI Engineer & Researcher",
-    description: "Measurable AI systems for agents, education, developer tools, and real-world products.",
+    description: "Medical AI, software, research, and community. A few chapters from Adithya’s work so far.",
     url: "/",
     siteName: "Adithya S Nair",
     locale: "en_IN",
@@ -78,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Adithya S Nair - AI Engineer & Researcher",
-    description: "Build AI that earns confidence.",
+    description: "Full-stack AI engineer, researcher, and community person. From Kottayam, Kerala.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -123,13 +122,9 @@ const siteSchema = {
         "@type": "CollegeOrUniversity",
         name: "Amrita Vishwa Vidyapeetham",
       },
-      worksFor: { "@id": "https://codrantlabs.in/#organization" },
+      affiliation: { "@id": "https://codrantlabs.in/#organization" },
+      hasOccupation: { "@type": "Occupation", name: "AI Consultant" },
       hasCredential: [
-        {
-          "@type": "EducationalOccupationalCredential",
-          name: "MTech in Computer Science, AI and Machine Learning",
-          recognizedBy: { "@type": "CollegeOrUniversity", name: "Amrita Vishwa Vidyapeetham" },
-        },
         {
           "@type": "EducationalOccupationalCredential",
           name: "BTech in Computer Science, AI and Machine Learning",
@@ -166,10 +161,8 @@ const siteSchema = {
       "@id": "https://codrantlabs.in/#organization",
       name: "CodrantLabs",
       url: "https://codrantlabs.in",
-      slogan: "We build machines that think.",
       description:
-        "Founder-led product and AI engineering studio in Kerala, India, building full-stack platforms, AI agents, RAG systems, and search visibility across SEO, AEO, and GEO.",
-      founder: { "@id": `${siteUrl}/#person` },
+        "Product and AI engineering studio in Kerala, India. Adithya S Nair contributes as an AI Consultant on technical scoping, architecture, and delivery workflows.",
       areaServed: "Worldwide",
       address: {
         "@type": "PostalAddress",
@@ -182,18 +175,14 @@ const siteSchema = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${body.variable} ${display.variable} ${code.variable} ${serif.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${body.variable} ${display.variable} ${code.variable} ${serif.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema).replace(/</g, "\\u003c") }}
         />
       </head>
-      <body>
-        <MotionConfig reducedMotion="user">
-          {children}
-        </MotionConfig>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

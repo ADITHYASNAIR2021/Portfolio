@@ -45,9 +45,9 @@ export default function BlogPage() {
       <main className="blog-main" id="main">
         <section className="blog-hero page-grid" aria-labelledby="blog-title">
           <span className="eyebrow">Adithya&apos;s field journal / 2026</span>
-          <h1 id="blog-title">Notes from the <em>hard part.</em></h1>
+          <h1 id="blog-title">A place to <em>think out loud.</em></h1>
           <p>
-            Clear thinking on AI systems after the demo: memory, evaluation, retrieval, agents, and the engineering choices that make them useful.
+            Notes on agents, memory, evaluation, and the engineering questions I keep coming back to.
           </p>
         </section>
 
@@ -78,9 +78,9 @@ export default function BlogPage() {
         </section>
 
         <section className="journal-principles page-grid" aria-label="Editorial principles">
-          <div><strong>01 / Evidence</strong><h3>Claims need a trace.</h3><p>Architecture, constraints, and evaluation matter more than impressive vocabulary.</p></div>
-          <div><strong>02 / Practice</strong><h3>Build before certainty.</h3><p>Useful ideas get stronger when they meet real data, tools, latency, and users.</p></div>
-          <div><strong>03 / Clarity</strong><h3>Short words. Deep work.</h3><p>Complex systems deserve precise explanations, not longer headings.</p></div>
+          <div><strong>01 / Questions</strong><h3>What am I trying to understand?</h3><p>Usually something at the intersection of models, software, and how people use them.</p></div>
+          <div><strong>02 / Experiments</strong><h3>What happens when I build it?</h3><p>Implementation tends to raise questions that the first diagram missed.</p></div>
+          <div><strong>03 / Notes</strong><h3>What would I explain differently?</h3><p>This journal is a place to make those ideas clearer and share what I’m learning.</p></div>
         </section>
       </main>
       <JournalFooter />

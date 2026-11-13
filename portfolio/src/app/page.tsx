@@ -8,7 +8,7 @@ export default function Home() {
     "@id": "https://adithyasnair.vercel.app/#profile",
     url: "https://adithyasnair.vercel.app",
     name: "Adithya S Nair - AI Engineer and Researcher",
-    dateModified: "2026-08-25",
+    dateModified: "2026-11-13",
     mainEntity: { "@id": "https://adithyasnair.vercel.app/#person" },
   };
 
@@ -17,7 +17,7 @@ export default function Home() {
     "@type": "FAQPage",
     "@id": "https://adithyasnair.vercel.app/#faq",
     datePublished: "2026-08-03",
-    dateModified: "2026-08-25",
+    dateModified: "2026-11-13",
     mainEntity: faq.map((item) => ({
       "@type": "Question",
       "@id": `https://adithyasnair.vercel.app/#${item.id}`,

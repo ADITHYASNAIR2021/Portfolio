@@ -7,10 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: baseUrl,
-      lastModified: "2026-08-03",
+      lastModified: "2026-11-13",
       changeFrequency: "monthly",
       priority: 1,
-      images: [`${baseUrl}/images/adithya-professional-v3.webp`],
+      images: [`${baseUrl}/images/adithya-headshot-v4.webp`],
     },
     {
       url: `${baseUrl}/blog`,
